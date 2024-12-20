@@ -42,12 +42,6 @@ if (isset($_GET['delete_comment'])) {
 
 }
 
-
-    // use Vimeo\Vimeo;
-    
-    // $client = new Vimeo("credential", "credential", "XXXXXXXXXX2b3f");
-
-    
     if (isset($_POST["video_send"])){
         
         // Vimeo

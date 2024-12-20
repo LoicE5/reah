@@ -83,40 +83,6 @@ if(isset($_POST['code1'])
         
             $stmt->execute();
         }
-    // } else {
-        
-    //     if(isset($_GET['client_email'])){
-    //         $client_email = $_GET['client_email'];
-    //     } else {
-    //         consoleWarn('No email address specified as GET parameters.\nGET parameter : client_email');
-    //     }
-        
-    //     $mail = new PHPMailer();
-    //     $mail->isSMTP();
-    //     $mail->SMTPAuth = true;
-    //     $mail->SMTPSecure = 'ssl';
-    //     $mail->Host = 'credential';
-    //     $mail->Port = 'credential';
-    //     $mail->isHTML();
-    //     $mail->Username = 'credential';
-    //     $mail->Password = 'credential';
-        
-    //     $mail->setFrom('no-reply@reah.fr');
-    //     $mail->Subject = 'SUBJECT';
-    //     $mail->Body = '<h1>A TEST EMAIL</h1>';
-    //     $mail->AddAddress($client_email);
-        
-    //     $mail->send();
-        
-    //     // consoleLog($client_email);
-    //     // consoleLog($mail->Host);
-    //     // consoleLog($mail->Username);
-    //     // consoleLog($mail->Password);
-        
-    
-    
-    
-    // }
     
     $global_wrapper_visibility = true;
 } 

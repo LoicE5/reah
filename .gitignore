@@ -1,10 +1,10 @@
 .DS_Store
-.DS_Store
-
 assets/php/config.php
 assets/php/vimeo_setup.php
-reah.sql
 config.php
 vimeo_setup.php
-reah_new.sql
-.DS_Store
+*.sql
+temp/*
+google*.html
+test.php
+assets/vendor/*
