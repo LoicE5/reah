@@ -1,119 +1,119 @@
-import { notFound } from 'next/navigation';
-import { getCurrentUser } from '@/lib/session';
-import { db } from '@/lib/db';
-import { defis, users, videos } from '@/db/schema';
-import { eq } from 'drizzle-orm';
-import { getLikedVideoIds, getSavedVideoIds } from '@/lib/queries';
-import Nav from '@/components/Nav';
-import Footer from '@/components/Footer';
-import VideoCard from '@/components/VideoCard';
-import CountdownTimer from '@/components/CountdownTimer';
-import VideoUploadForm from './VideoUploadForm';
-import '@/styles/fil_actu.css';
-import '@/styles/defis.css';
-import '@/styles/defi_details.css';
+import { notFound } from 'next/navigation'
+import { getCurrentUser } from '@/lib/session'
+import { db } from '@/lib/db'
+import { defis, users, videos } from '@/db/schema'
+import { eq } from 'drizzle-orm'
+import { getLikedVideoIds, getSavedVideoIds } from '@/lib/queries'
+import Nav from '@/components/Nav'
+import Footer from '@/components/Footer'
+import VideoCard from '@/components/VideoCard'
+import CountdownTimer from '@/components/CountdownTimer'
+import VideoUploadForm from './VideoUploadForm'
+import '@/styles/fil_actu.css'
+import '@/styles/defis.css'
+import '@/styles/defi_details.css'
 
-type PageProps = { params: Promise<{ id: string }> };
+type PageProps = { params: Promise<{ id: string }> }
 
 export default async function ChallengeDetailPage({ params }: PageProps) {
-  const { id } = await params;
-  const defiId = Number(id);
-  if (isNaN(defiId)) notFound();
+    const { id } = await params
+    const defiId = Number(id)
+    if (isNaN(defiId)) notFound()
 
-  const session = await getCurrentUser();
+    const session = await getCurrentUser()
 
-  let profilePic = '';
-  if (session) {
-    const [user] = await db
-      .select({ pic: users.user_profile_picture })
-      .from(users)
-      .where(eq(users.user_id, session.userId))
-      .limit(1);
-    profilePic = user?.pic ?? '';
-  }
+    let profilePic = ''
+    if (session) {
+        const [user] = await db
+            .select({ pic: users.user_profile_picture })
+            .from(users)
+            .where(eq(users.user_id, session.userId))
+            .limit(1)
+        profilePic = user?.pic ?? ''
+    }
 
-  const [defi] = await db.select().from(defis).where(eq(defis.defi_id, defiId)).limit(1);
-  if (!defi) notFound();
+    const [defi] = await db.select().from(defis).where(eq(defis.defi_id, defiId)).limit(1)
+    if (!defi) notFound()
 
-  const defiVideos = await db
-    .select({
-      video_id:             videos.video_id,
-      video_url:            videos.video_url,
-      video_title:          videos.video_title,
-      video_poster:         videos.video_poster,
-      video_like_number:    videos.video_like_number,
-      video_user_id:        videos.video_user_id,
-      user_username:        users.user_username,
-      user_profile_picture: users.user_profile_picture,
-    })
-    .from(videos)
-    .leftJoin(users, eq(users.user_id, videos.video_user_id))
-    .where(eq(videos.video_defi_id, defiId));
+    const defiVideos = await db
+        .select({
+            video_id: videos.video_id,
+            video_url: videos.video_url,
+            video_title: videos.video_title,
+            video_poster: videos.video_poster,
+            video_like_number: videos.video_like_number,
+            video_user_id: videos.video_user_id,
+            user_username: users.user_username,
+            user_profile_picture: users.user_profile_picture,
+        })
+        .from(videos)
+        .leftJoin(users, eq(users.user_id, videos.video_user_id))
+        .where(eq(videos.video_defi_id, defiId))
 
-  const allIds   = defiVideos.map(v => v.video_id);
-  const likedSet = session ? await getLikedVideoIds(session.userId, allIds) : new Set<number>();
-  const savedSet = session ? await getSavedVideoIds(session.userId) : new Set<number>();
+    const allIds = defiVideos.map(v => v.video_id)
+    const likedSet = session ? await getLikedVideoIds(session.userId, allIds) : new Set<number>()
+    const savedSet = session ? await getSavedVideoIds(session.userId) : new Set<number>()
 
-  const enriched = defiVideos.map(v => ({
-    ...v,
-    isLiked:      likedSet.has(v.video_id),
-    isSaved:      savedSet.has(v.video_id),
-    commentCount: 0,
-  }));
+    const enriched = defiVideos.map(v => ({
+        ...v,
+        isLiked: likedSet.has(v.video_id),
+        isSaved: savedSet.has(v.video_id),
+        commentCount: 0,
+    }))
 
-  return (
-    <main className="main_content">
-      <Nav user={session} profilePic={profilePic} />
+    return (
+        <main className="main_content">
+            <Nav user={session} profilePic={profilePic} />
 
-      <div className="defi_category">
-        <h1>{defi.defi_name}</h1>
+            <div className="defi_category">
+                <h1>{defi.defi_name}</h1>
 
-        <div className="defi_container">
-          {/* Left: defi image */}
-          {defi.defi_image ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={`/uploads/defis_img/${defi.defi_image}`}
-              alt={defi.defi_name}
-              className="defi_img"
-              style={{ objectFit: 'cover', borderRadius: 8, maxHeight: 400 }}
-            />
-          ) : (
-            <div style={{ minWidth: 351, background: '#1a1a1a', borderRadius: 8 }} />
-          )}
+                <div className="defi_container">
+                    {/* Left: defi image */}
+                    {defi.defi_image ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                            src={`/uploads/defis_img/${defi.defi_image}`}
+                            alt={defi.defi_name}
+                            className="defi_img"
+                            style={{ objectFit: 'cover', borderRadius: 8, maxHeight: 400 }}
+                        />
+                    ) : (
+                        <div style={{ minWidth: 351, background: '#1a1a1a', borderRadius: 8 }} />
+                    )}
 
-          {/* Right: info */}
-          <div className="defi_information">
-            {defi.defi_date_end && (
-              <p style={{ color: '#D60036', fontWeight: 'bold', marginBottom: 16 }}>
-                <CountdownTimer endDate={defi.defi_date_end} />
-              </p>
-            )}
-            <div className="defi_constraints">
-              {defi.defi_description && <p>{defi.defi_description}</p>}
+                    {/* Right: info */}
+                    <div className="defi_information">
+                        {defi.defi_date_end && (
+                            <p style={{ color: '#D60036', fontWeight: 'bold', marginBottom: 16 }}>
+                                <CountdownTimer endDate={defi.defi_date_end} />
+                            </p>
+                        )}
+                        <div className="defi_constraints">
+                            {defi.defi_description && <p>{defi.defi_description}</p>}
+                        </div>
+                        {session && <VideoUploadForm defiId={defiId} />}
+                    </div>
+                </div>
+
+                {/* Submitted videos */}
+                <div className="second_category">
+                    <h2 style={{ color: 'white', paddingLeft: '5%', marginBottom: 0 }}>
+                        Participations ({enriched.length})
+                    </h2>
+                    <div className="all_video_container">
+                        {enriched.length === 0 ? (
+                            <p style={{ color: '#888', padding: '40px 5%' }}>
+                                Aucune participation pour l&aposinstant. Sois le premier !
+                            </p>
+                        ) : enriched.map(v => (
+                            <VideoCard key={v.video_id} video={v} session={session} />
+                        ))}
+                    </div>
+                </div>
             </div>
-            {session && <VideoUploadForm defiId={defiId} />}
-          </div>
-        </div>
 
-        {/* Submitted videos */}
-        <div className="second_category">
-          <h2 style={{ color: 'white', paddingLeft: '5%', marginBottom: 0 }}>
-            Participations ({enriched.length})
-          </h2>
-          <div className="all_video_container">
-            {enriched.length === 0 ? (
-              <p style={{ color: '#888', padding: '40px 5%' }}>
-                Aucune participation pour l&apos;instant. Sois le premier !
-              </p>
-            ) : enriched.map(v => (
-              <VideoCard key={v.video_id} video={v} session={session} />
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <Footer />
-    </main>
-  );
+            <Footer />
+        </main>
+    )
 }

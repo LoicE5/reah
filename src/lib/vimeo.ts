@@ -1,11 +1,11 @@
 // eslint-disable-next-line @typescript-eslint/no-require-imports
-const Vimeo = require('@vimeo/vimeo');
+const Vimeo = require('@vimeo/vimeo')
 
 const vimeoClient = new Vimeo.Vimeo(
   process.env.VIMEO_CLIENT_ID,
   process.env.VIMEO_CLIENT_SECRET,
   process.env.VIMEO_ACCESS_TOKEN,
-);
+)
 
 /**
  * Uploads a local video file to Vimeo.
@@ -26,8 +26,8 @@ export function uploadToVimeo(
         // Progress — can be streamed via SSE in a future iteration
       },
       (error: string) => reject(new Error(error)),
-    );
-  });
+    )
+  })
 }
 
-export { vimeoClient };
+export { vimeoClient }

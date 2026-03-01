@@ -1,4 +1,4 @@
-import type { Config } from 'drizzle-kit';
+import type { Config } from 'drizzle-kit'
 
 export default {
   schema: './src/db/schema.ts',
@@ -11,4 +11,4 @@ export default {
     password: process.env.DB_PASSWORD ?? 'reah_password',
     database: process.env.DB_NAME ?? 'reah_db',
   },
-} satisfies Config;
+} satisfies Config

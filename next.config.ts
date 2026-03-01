@@ -1,4 +1,4 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
   images: {
@@ -24,12 +24,12 @@ const nextConfig: NextConfig = {
               "frame-src https://player.vimeo.com",
               "connect-src 'self' https://api.vimeo.com https://fresnel.vimeocdn.com",
               "media-src 'self' https://player.vimeo.com",
-            ].join('; '),
+            ].join(' '),
           },
         ],
       },
-    ];
-  },
-};
+    ]
+  }
+}
 
-export default nextConfig;
+export default nextConfig

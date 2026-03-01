@@ -1,17 +1,17 @@
-import { NextResponse } from 'next/server';
-import { db } from '@/lib/db';
-import { videos, users, defis } from '@/db/schema';
-import { like, eq } from 'drizzle-orm';
+import { NextResponse } from 'next/server'
+import { db } from '@/lib/db'
+import { videos, users, defis } from '@/db/schema'
+import { like, eq } from 'drizzle-orm'
 
 export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url);
-  const q = searchParams.get('q')?.trim() ?? '';
+  const { searchParams } = new URL(req.url)
+  const q = searchParams.get('q')?.trim() ?? ''
 
   if (!q) {
-    return NextResponse.json({ videos: [], users: [], defis: [] });
+    return NextResponse.json({ videos: [], users: [], defis: [] })
   }
 
-  const pattern = `%${q}%`;
+  const pattern = `%${q}%`
 
   const [videoResults, userResults, defiResults] = await Promise.all([
     db
@@ -44,11 +44,11 @@ export async function GET(req: Request) {
       .from(defis)
       .where(like(defis.defi_name, pattern))
       .limit(10),
-  ]);
+  ])
 
   return NextResponse.json({
     videos: videoResults,
     users:  userResults,
     defis:  defiResults,
-  });
+  })
 }
