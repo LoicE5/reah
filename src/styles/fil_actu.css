@@ -135,11 +135,6 @@ body {
     text-align: center;
     }
 
-.main_content {
-    display: block;
-    height: unset;
-
-}
 
 ::-webkit-scrollbar {
     background: transparent;

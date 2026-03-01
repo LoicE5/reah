@@ -108,10 +108,7 @@ function LoginForm() {
 export default function LoginPage() {
     return (
         <>
-            <Link href="/feed" className="reah_logo">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img draggable={false} src="/sources/img/dark_reah_logo.png" alt="REAH" />
-            </Link>
+            <Link href="/feed" className="reah_logo" aria-label="REAH" />
             <Suspense fallback={null}>
                 <LoginForm />
             </Suspense>

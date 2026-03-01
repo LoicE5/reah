@@ -1,3 +1,8 @@
+.main_content {
+    display: block;
+    height: unset;
+}
+
 .nav_footer{
     display: flex;
     display: none;

@@ -69,10 +69,7 @@ export default function SignupPage() {
 
     return (
         <>
-            <Link href="/feed" className="reah_logo">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/sources/img/dark_reah_logo.png" alt="REAH" />
-            </Link>
+            <Link href="/feed" className="reah_logo" aria-label="REAH" />
 
             <main className="main_content">
                 {error && <p className="message_false_container">{error}</p>}
