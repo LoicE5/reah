@@ -18,20 +18,34 @@ export default function BurgerMenu({ isAdmin }: BurgerMenuProps) {
   // Expose toggle function globally so the Nav profile photo onclick can call it
   useEffect(() => {
     (window as unknown as Record<string, unknown>).toggleBurgerMenu = toggle;
+
+    function handleClickOutside(e: MouseEvent) {
+      if (openRef.current && menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        close();
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   function toggle() {
+    openRef.current ? close() : open();
+  }
+
+  function open() {
     const el = menuRef.current;
     if (!el) return;
-    if (!openRef.current) {
-      el.classList.add('menu_container_click');
-      el.classList.remove('menu_container_click2');
-      openRef.current = true;
-    } else {
-      el.classList.add('menu_container_click2');
-      el.classList.remove('menu_container_click');
-      openRef.current = false;
-    }
+    el.classList.add('menu_container_click');
+    el.classList.remove('menu_container_click2');
+    openRef.current = true;
+  }
+
+  function close() {
+    const el = menuRef.current;
+    if (!el) return;
+    el.classList.add('menu_container_click2');
+    el.classList.remove('menu_container_click');
+    openRef.current = false;
   }
 
   return (
