@@ -446,12 +446,13 @@ nav,.nav_footer{
 
 .menu_container,
 .category_list_container {
-    /* height: 260px; */
-    width: 200px;
+    max-width: 200px;
+    width: max-content;
+    border-radius: 10px;
     background-color: #d60035;
+    z-index: 5;
     position: fixed;
-    z-index: 100;
-    right: 0;
+    right: 5px;
     top: 60px;
     display: flex;
     justify-content: start;
@@ -463,7 +464,6 @@ nav,.nav_footer{
 }
 
 .category_list_container {
-    /* height: 260px; */
     width: 180px;
     left: 16%;
     transform: translatey(-220px);
@@ -493,6 +493,10 @@ nav,.nav_footer{
 .menu_container_click2 {
     transform: translate(300px);
     transition: ease 0.5s;
+}
+
+.menu_option {
+    padding: 0 10px;
 }
 
 .menu_option,
@@ -530,7 +534,6 @@ nav,.nav_footer{
 .form_search_bar {
     margin: 0;
 }
-
 
 .nav_footer_category{
     display: flex;
