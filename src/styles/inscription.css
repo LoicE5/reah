@@ -1,0 +1,278 @@
+p {
+    margin: 0;
+}
+
+form {
+    display: flex;
+
+}
+
+/* Forms */
+.form_container {
+    min-height: 480px;
+}
+
+.form_container2 {
+    position: relative;
+    display: none;
+}
+
+.form_container3 {
+    display: none;
+    min-height: 300px;
+    /* min-height: 250px; */
+}
+
+/* Animations translate forms */
+.translate_left {
+    animation: translate_left ease 0.4s forwards;
+}
+
+.translate_left2 {
+    animation: translate_left2 ease 0.4s forwards;
+}
+
+.translate_right {
+    animation: translate_right ease 0.4s forwards;
+}
+
+
+.translate_right2 {
+    animation: translate_right2 ease 0.4s forwards;
+}
+
+/* Selects */
+.select_container {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    font-size: 0.9em;
+}
+
+/* General conditions of use*/
+.CGU {
+    color: #D60036;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+
+
+/* Restriction password */
+.restriction_container {
+    position: absolute;
+    overflow: hidden;
+    height: 100px;
+    top: -20px;
+    left: 360px;
+    display: flex;
+    align-items: center;
+    width: 250px;
+}
+
+.restriction {
+    color: #D60036;
+    width: 100%;
+    font-size: 0.8em;
+    text-align: left;
+    background-color: white;
+    transform: translate(-250px);
+    padding: 20px;
+    font-weight: bold;
+}
+
+.restriction_translate {
+    transform: translate(10px);
+    transition: 1s ease;
+}
+
+.restriction_container_border {
+    border-left: white 1px solid;
+
+}
+
+.restriction_message {
+    display: none;
+}
+
+.icon_restriction {
+    position: absolute;
+    left: 330px;
+    top: 20px;
+    display: none;
+}
+
+.rotate {
+    animation: rotate ease 1s forwards;
+}
+
+.input_container{
+    position: relative;
+}
+
+.icon_eye {
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    left: 250px;
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+    background: url(/sources/img/eye_close.svg) center/100% no-repeat;
+}
+
+.icon_eye_open {
+    animation: icon_eye_open ease 0.1s forwards;
+}
+
+/* Arrows */
+line {
+    stroke-dasharray: 27;
+    stroke-dashoffset: 27;
+    animation: dash .25s linear forwards 0.5s;
+}
+
+/* Inputs */
+.input_confirm_container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.input_confirm {
+    width: 20px;
+    font-size: 1.5em;
+    margin: 0;
+    padding: 0;
+}
+
+input:focus {
+    background-color: #d600359c;
+}
+
+/* General condistions of use */
+.CGU_checkbox {
+    height: 15px;
+    width: 15px;
+    cursor: pointer;
+}
+
+.CGU_label {
+    cursor: pointer;
+    font-size: 0.7em;
+    width: 210px;
+    color: white;
+}
+
+.google_btn {
+    background: no-repeat url(/sources/img/google_logo.png) 6%/8%;
+    padding-right: 14%;
+    background-color: white;
+}
+
+/* Animations keyframes */
+
+/* Eye open password */
+@keyframes icon_eye_open {
+    to {
+        background: url(/sources/img/eye_open.svg) center/100% no-repeat;
+    }
+}
+
+/* Restriction icon rotate */
+@keyframes rotate {
+    0% {
+        transform: rotate(30deg);
+    }
+
+    30% {
+        transform: rotate(-20deg);
+    }
+
+    60% {
+        transform: rotate(10deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+/* Animaions translate forms */
+@keyframes translate_left {
+    0% {
+        transform: translate(0px);
+    }
+
+    100% {
+        transform: translate(-250px);
+    }
+}
+
+@keyframes translate_left2 {
+    0% {
+        transform: translate(250px);
+    }
+
+    100% {
+        transform: translate(0px);
+    }
+}
+
+
+@keyframes translate_right {
+    0% {
+        transform: translate(-250px);
+    }
+
+    100% {
+        transform: translate(-0px);
+    }
+}
+
+@keyframes translate_right2 {
+    0% {
+        transform: translate(0px);
+    }
+
+    100% {
+        transform: translate(250px);
+    }
+}
+
+/* Animation arrows */
+@keyframes dash {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* Medias queries */
+@media screen and (max-width: 900px) {
+
+    .restriction_container {
+        width: 300px;
+        top: -300px;
+        left: 3%;
+    }
+
+    .restriction {
+        background-color: #D60036;
+        color: white;
+        padding: 10px;
+        width: 270px;
+        display: block;
+        transform: translate(-300px);
+    }
+
+    .restriction_translate {
+        transform: translate(10px);
+        transition: 1s ease;
+    }
+
+}

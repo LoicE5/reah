@@ -1,0 +1,138 @@
+body{
+    justify-content: start;
+}
+
+.menu_nav{
+    padding-left: 0;
+}
+
+.main_content {
+    /* min-height: 100vh; */
+    height: max-content;
+    background: var(--first_color);
+    /* padding-top: 60px; */
+}
+
+/* nav {
+    position: unset;
+} */
+
+h2{
+    margin-top: 100px;
+}
+.result>iframe {
+    width: 200px;
+    height: auto;
+    float: left;
+    margin-left: 15px;
+    border-radius: 10px !important;
+}
+
+.result h4,.profile_description{
+    /* width: max-content; */
+    height: max-content;
+    margin: 0px;
+    font-weight:600;
+    /* float: right; */
+}
+
+.result {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    border: darkgray 1px solid;
+    height: max-content;
+    margin-bottom: 15px;
+    cursor: pointer;
+    color: var(--text);
+    text-decoration: none;
+}
+
+.result:hover {
+    background-color:var(--red-transparent);
+}
+
+.result>section {
+    height: max-content;
+    /* max-width: 79%; */
+    padding: 15px;
+}
+
+.omg_im_centered {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.horizontal_line {
+    height: 1px;
+    background: darkgray;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.profile_picture {
+    width: 80px;
+    height: 80px;
+    border-radius: 999px;
+    margin: 15px;
+}
+
+.profile_description,.video_synopsis{
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: var(--text-grey)
+}
+
+.result .profile_description {
+    /* max-width: 80%; */
+    word-wrap: break-word;
+}
+.menu_nav{
+    padding-left: 0;
+}
+
+.nav_footer{
+display: none;
+}
+
+.void{
+    text-align: center;
+    padding: 50px;
+}
+
+/* .video_content{
+    width: 200px;
+    min-width: 200px;
+    height: 113px;
+    position: relative;
+    margin-left: 15px;
+}
+iframe{
+    width: 100%;
+    height: 100%;
+} */
+.defi_img{
+    height: 80px;
+    margin: 15px;
+
+}
+@media screen and (max-width:700px) {
+.result {
+flex-wrap:wrap;
+}
+}
+
+
+@media screen and (max-width:450px) {
+.omg_im_centered{
+width: 90%;
+}
+
+.profile_picture{
+height:50px;
+width:50px;
+margin-right:0px;
+}
+
+}

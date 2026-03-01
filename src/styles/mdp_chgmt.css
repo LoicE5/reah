@@ -1,0 +1,61 @@
+.form_container{
+    min-height: 350px;
+    position: relative;
+}
+p{
+    margin: 0;
+}
+
+.icon_restriction {
+    position: absolute;
+    left: 330px;
+    top: 93px;
+    display: none;
+}
+
+.restriction_container {
+    position: absolute;
+    overflow: hidden;
+    height: 60px;
+    top: 76px;
+    left: 360px;
+    display: flex;
+    align-items: center;
+    width: 220px;
+}
+
+
+.icon_eye {
+    position: absolute;
+    right: 10px;
+    top: 96px;
+    left: 260px;
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+    background: url(../img/eye_close.svg) center/100% no-repeat;
+}
+
+@media screen and (max-width: 850px) {
+
+    .restriction_container {
+        width: 300px;
+        top: -110px;
+        left: 3%;
+    }
+
+    .restriction {
+        background-color: #D60036;
+        color: white;
+        padding: 10px;
+        width: 270px;
+        display: block;
+        transform: translate(-300px);
+    }
+
+    .restriction_translate {
+        transform: translate(10px);
+        transition: 1s ease;
+    }
+
+}

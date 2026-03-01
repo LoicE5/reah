@@ -1,0 +1,120 @@
+/* .linkedin_logo,.insta_logo{
+    background-color: #d60035;
+    background-image: url(/sources/img/linkedin_icon.png);
+    background-position: center;
+    background-size: 80%;
+    width: 60px;
+    height: 60px;
+    border-radius: 100px;
+
+}
+
+.insta_logo{
+    background-image: url(/sources/img/insta_icon.png);
+} */
+footer{
+    width: 100%;
+    margin: auto;
+    font-size: 0.8rem;
+    margin-top: 100px;
+    background-color: #141414;
+    padding-top: 40px;
+}
+
+.not_a_link {
+    text-decoration-line: none;
+    color: inherit;
+}
+
+.section1{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    width: 80%;
+    margin: auto;
+    color: white;
+}
+
+.section2{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    color: white;
+}
+
+.section1>div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.social>a{
+    display: flex;
+    align-items: center;
+    margin-bottom: 0px;
+}
+
+footer>div>div>a{
+    text-decoration: none;
+    color: white;
+    margin-bottom: 10px;
+} 
+footer>div>div>a:hover{
+    text-decoration: underline;
+}
+
+
+.footer_reah_logo {
+    width: 150px;
+    height: 150px;
+    align-self: center;
+    background: url(/sources/img/dark_reah_logo.png) center/ auto 100% no-repeat;
+}
+
+
+.linkedin_logo,
+.insta_logo {
+    width: 30px;
+    height: 25px;
+    margin-right: 10px;
+    background: url(/sources/img/dark_linkedin_icon.png) center/ auto 100% no-repeat;
+}
+
+.insta_logo {
+    background: url(/sources/img/dark_insta_icon.png) center/ auto 100% no-repeat;
+}
+
+@media screen and (max-width:1000px) {
+    .footer_reah_logo{
+        display: none;
+    }
+
+}
+
+@media screen and (max-width:700px) {
+    .section1{
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+    .section1>div{
+        min-width: 250px;
+        margin-top: 20px;
+    }
+    .reah_logo_complet{
+        display: block;
+        order: 5;
+        margin-top: 40px;
+    }
+}
+
+@media screen and (max-width:450px) {
+    .footer_reah_logo{
+        display: block;
+    }
+    .section1{
+        flex-direction: column;
+    }
+
+}

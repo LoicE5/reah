@@ -1,0 +1,117 @@
+.nav_footer{
+    display: flex;
+    display: none;
+}
+
+@media screen and (max-width:450px) {
+    .all_video_container{
+        flex-direction: column;
+        align-items: center;
+        padding-left: 0;
+    }
+    .video_container{
+        margin-bottom: 40px;
+        margin-right: 0px;
+        min-width: 100%;
+        padding-right: 0px;
+    }
+
+    .see_more{
+        display: none;
+    }
+
+    .synopsis_title{
+        min-width: 100%;
+    }
+    .video_content{
+        width: 100%;
+        height: 200px;
+        min-width: 100%;
+    }
+    .profile_comment_title{
+        display: none;
+    }
+    .comment_icon{
+        margin-right: 20px;
+        margin-left: 20px;
+    }
+    .reaction_container{
+        justify-content: start; 
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .description_container{
+        width: 90%;
+    }
+
+    .arrow_prev_container,.arrow_next_container{
+        display: none;
+    }
+
+    .all_category_container{
+        display: flex;
+        overflow: auto;
+    }
+    .first_category,.second_category,.third_category{
+        min-width: 100%;
+        margin-top: 80px;
+        align-items: unset;
+        margin-bottom: 0;
+    }
+
+    .second_category,.third_category{
+        display: none;
+    }
+    .nav_footer{
+        display: flex;
+        /* display: none; */
+    }
+
+    .film_container{
+        width: 100%;
+    }
+
+
+
+    .film_container{
+        margin-top: 0;
+    }
+
+ 
+
+    .film_informations_header{
+        height: unset;
+    }
+
+   
+
+    .film_informations_header>div>div,.film_informations_header>div>p{
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+   
+
+    .share_title{
+        display: none;
+    }
+
+    .category_list{
+        display: none;
+    }
+
+    .menu_nav{
+        /* justify-content: flex-end; */
+        padding-left: 0;
+    }
+
+    .section2{
+        padding-bottom: 100px !important;
+    }
+
+    .film {
+        width: unset;
+        height: 55vw;
+    }
+
+    
+}

@@ -1,0 +1,12 @@
+body{
+    justify-content: start;
+}
+
+.menu_nav{
+    padding-left: 0;
+}
+
+.main_content{
+    display: flex;
+    height: 100vh;
+}

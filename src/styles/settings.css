@@ -1,0 +1,417 @@
+.form_search_bar {
+    margin: auto;
+    margin-right: 100px;
+}
+
+.menu_profile {
+    min-width: 200px;
+}
+
+.main_content {
+    width: 100%;
+}
+
+.menu_nav {
+    padding-top: 10px;
+    z-index: 400;
+    background-color: var(--first_color);
+}
+
+.settings_menu {
+    width: 300px;
+    background-color: var(--menu);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 200px;
+    box-shadow: 10px 0px 20px #0a0a0a;
+    position: fixed;
+    z-index: 200;
+}
+
+.settings_menu_option {
+    color: white;
+    height: 60px;
+    width: 100%;
+    text-align: center;
+    line-height: 60px;
+    cursor: pointer;
+}
+
+.settings_menu_option:hover {
+    background-color: #d600354f;
+}
+
+.settings_menu_line {
+    box-shadow: 2px 0px 20px #d60035;
+    border-radius: 0px;
+    width: 4px;
+    height: 60px;
+    transform: translate(296px);
+}
+
+.settings_menu_option_click {
+    font-weight: bold;
+}
+
+.menu_option:hover{
+    text-decoration: none;
+}
+
+.menu_shadow {
+    min-width: 300px;
+    height: 100vh;
+}
+
+.menu_btn {
+    width: 50px;
+    height: 50px;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+    background: url(/sources/img/dark_next_arrow.png) center/60% no-repeat;
+    box-shadow: 5px 0px 20px #0a0a0a;
+    background-color: var(--menu);
+    position: absolute;
+    right: -50px;
+    top: 15%;
+    cursor: pointer;
+    display: none;
+    z-index: 200;
+}
+
+.settings_menu_open {
+    box-shadow: 5px 0px 20px #0a0a0a;
+    transform: translateX(0px);
+    transition: transform 0.5s ease;
+}
+
+.settings_menu_close {
+    transform: translateX(-300px);
+    box-shadow: none;
+    transition: transform 0.5s ease;
+}
+
+
+.settings_profile_container {
+    width: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+
+}
+
+.modify_banner {
+    height: 300px;
+}
+
+.modify_file_container {
+    flex-direction: row;
+}
+
+.modify_file_banner,
+.modify_file_profile_photo {
+    height: 35px;
+}
+
+.modify_file_banner {
+    margin-right: 40px;
+    margin-left: 40px;
+}
+
+.modify_input_container {
+    align-items: flex-end;
+    align-self: center;
+}
+
+.input_container label {
+    flex-direction: row;
+    align-items: center;
+}
+
+.input_container span {
+    font-size: 1rem;
+    color: var(--text);
+    text-align: right;
+}
+
+.input_connexion {
+    margin-left: 50px;
+    border-bottom: var(--text) 1px solid;
+    color: var(--text);
+    min-width: 300px;
+}
+
+.input_bio {
+    width: 300px;
+}
+
+.modify_btn {
+    align-self: center;
+    margin-left: 190px;
+    margin-top: 20px;
+}
+
+.settings_notification_container {
+    display: none;
+    min-width: 700px;
+    margin: auto;
+    margin-top: 60px;
+    margin-bottom: 50px;
+}
+
+.settings_notification_container>div>div>p>span {
+    color: var(--text-grey);
+    font-size: 0.8rem;
+}
+
+.settings_title {
+    display: flex;
+    align-items: center;
+    position: relative;
+    left: -50px;
+}
+
+.settings_title_line {
+    width: 100px;
+    position: unset;
+    margin-right: 20px;
+}
+
+.settings_notification_container>div>div {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.notification_btn {
+    width: 60px;
+    height: 30px;
+    border: 2px solid #d60036;
+    display: flex;
+    align-items: center;
+    position: relative;
+    border-radius: 100px;
+    cursor: pointer;
+    margin-top: 16px;
+}
+
+.notification_btn>div {
+    height: 20px;
+    position: absolute;
+    width: 20px;
+    border-radius: 100px;
+    border: 2px solid var(--text);
+    left: 4px;
+}
+
+.notification_btn_click {
+    animation: notification_btn_click 0.2s ease forwards;
+}
+
+.notification_btn_click2 {
+    animation: notification_btn_click2 0.2s ease forwards;
+}
+
+.settings_account_container,.settings_security_container {
+    display: none;
+    flex-direction: column;
+    margin: auto;
+    text-align: center;
+    width: 60%;
+    margin-top: 60px;
+    margin-bottom: 50px;
+}
+
+.change_mdp_container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 100px;
+}
+
+.all_input_container {
+    align-self: center;
+    align-items: flex-end;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+}
+
+.change_mdp_btn {
+    width: 300px;
+    align-self: center;
+    line-height: unset;
+}
+
+.delete_link {
+    font-weight: bold;
+    color: #d60036;
+    cursor: pointer;
+    margin-top: 40px;
+}
+
+.delete_link:hover {
+    text-decoration: underline;
+}
+
+.delete_link+p>span {
+    color: #d60036;
+}
+
+.settings_security_container{
+    text-align: start;
+}
+
+.settings_security_container>h2{
+    margin-top: 50px;
+}
+
+a{
+    color: #d60035;
+    text-decoration: none;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+.mdp_restriction{
+    margin-left: 200px;
+}
+
+
+
+@keyframes notification_btn_click {
+    0% {
+        background-color: transparent;
+        border: 2px solid var(--text);
+        left: 4px;
+    }
+
+    100% {
+        background-color: #d60036;
+        border: none;
+        left: 33px;
+    }
+}
+
+
+@keyframes notification_btn_click2 {
+    0% {
+        background-color: #d60036;
+        border: none;
+        left: 33px;
+    }
+
+    100% {
+        background-color: transparent;
+        border: 2px solid var(--text);
+        left: 4px;
+    }
+}
+
+
+@media screen and (max-width:1100px) {
+
+    .modify_file_container {
+        flex-direction: column
+    }
+
+    .modify_file_banner {
+        margin: 0;
+    }
+
+    .settings_notification_container,
+    .settings_account_container {
+        min-width: 600px;
+    }
+
+}
+
+@media screen and (max-width:950px) {
+
+    .menu_shadow {
+        display: none;
+    }
+/* 
+    .settings_menu{
+        transform: translateX(-300px);
+        transition: transform 0.5s ease;
+    } */
+    .menu_btn {
+        display: block;
+    }
+
+}
+@media screen and (max-width:650px) {
+
+.settings_notification_container,.settings_account_container{
+    min-width: 80%;
+    width: 80%;
+}
+
+.settings_notification_container>div>div{
+    flex-direction: column;
+}
+
+.notification_btn{
+    margin-bottom: 16px;
+    margin-top: 0px;
+}
+.settings_title{
+    font-size: 1.2rem;
+}
+}
+
+@media screen and (max-width:550px) {
+
+    .input_container label {
+        flex-direction: column;
+    }
+
+    .input_connexion {
+        margin-left: 0;
+    }
+
+    .category_list{
+        display: none;
+    }
+    .menu_nav{
+        justify-content: flex-end;
+        padding-left: 0;
+    }
+    .form_search_bar{
+        margin-right: 20px;
+    }
+    .search_bar{
+        margin-left: 0px;
+    }
+
+    .menu_profile{
+        min-width: 150px;
+    }
+
+    .modify_btn{
+        margin-left: 0;
+    }
+
+    .modify_banner {
+        height: 200px;
+    }
+
+ 
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --text: black;
+        --menu: #141414;
+    }
+}
+
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --menu: black;
+    }
+}
