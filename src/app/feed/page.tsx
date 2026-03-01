@@ -26,26 +26,46 @@ export default async function FeedPage({
 
   // Fetch profile picture for nav
   let profilePic = '';
+  let dbError    = false;
+
   if (session) {
-    const [user] = await db
-      .select({ pic: users.user_profile_picture })
-      .from(users)
-      .where(eq(users.user_id, session.userId))
-      .limit(1);
-    profilePic = user?.pic ?? '';
+    try {
+      const [user] = await db
+        .select({ pic: users.user_profile_picture })
+        .from(users)
+        .where(eq(users.user_id, session.userId))
+        .limit(1);
+      profilePic = user?.pic ?? '';
+    } catch { dbError = true; }
   }
 
   // 3 parallel queries
-  const [feedVideos, currentDefis, exploreVideos] = await Promise.all([
-    session ? getSubscribedFeed(session.userId) : getLatestVideos(),
-    getCurrentDefis(10),
-    getExploreVideos(20),
-  ]);
+  let feedVideos:    Awaited<ReturnType<typeof getLatestVideos>>   = [];
+  let currentDefis:  Awaited<ReturnType<typeof getCurrentDefis>>   = [];
+  let exploreVideos: Awaited<ReturnType<typeof getExploreVideos>>  = [];
 
-  // Liked / saved state for current user
-  const allIds     = [...new Set([...feedVideos, ...exploreVideos].map(v => v.video_id))];
-  const likedSet   = session ? await getLikedVideoIds(session.userId, allIds) : new Set<number>();
-  const savedSet   = session ? await getSavedVideoIds(session.userId) : new Set<number>();
+  if (!dbError) {
+    try {
+      [feedVideos, currentDefis, exploreVideos] = await Promise.all([
+        session ? getSubscribedFeed(session.userId) : getLatestVideos(),
+        getCurrentDefis(10),
+        getExploreVideos(20),
+      ]);
+    } catch { dbError = true; }
+  }
+
+  // Liked / saved state
+  let likedSet = new Set<number>();
+  let savedSet = new Set<number>();
+  if (!dbError && session) {
+    try {
+      const allIds = [...new Set([...feedVideos, ...exploreVideos].map(v => v.video_id))];
+      [likedSet, savedSet] = await Promise.all([
+        getLikedVideoIds(session.userId, allIds),
+        getSavedVideoIds(session.userId),
+      ]);
+    } catch { /* non-critical */ }
+  }
 
   function enrichVideos(vids: typeof feedVideos) {
     return vids.map(v => ({
@@ -57,6 +77,12 @@ export default async function FeedPage({
 
   const enrichedFeed    = enrichVideos(feedVideos);
   const enrichedExplore = enrichVideos(exploreVideos);
+
+  const dbOfflineBanner = dbError ? (
+    <p style={{ textAlign: 'center', color: '#888', padding: '40px 0' }}>
+      La base de données est actuellement hors ligne. Veuillez réessayer dans quelques instants.
+    </p>
+  ) : null;
 
   return (
     <>
@@ -109,20 +135,20 @@ export default async function FeedPage({
           tab1Content={
             <div className="category_container category1">
               <div className="film_container">
-                {enrichedFeed.length === 0 ? (
+                {dbOfflineBanner ?? (enrichedFeed.length === 0 ? (
                   <p style={{ color: '#888', textAlign: 'center', padding: '40px 0' }}>
                     {session ? 'Abonne-toi à des réalisateurs pour voir leurs vidéos ici.' : 'Aucune vidéo pour l\'instant.'}
                   </p>
                 ) : enrichedFeed.map(v => (
                   <VideoCard key={v.video_id} video={v} session={session} />
-                ))}
+                )))}
               </div>
             </div>
           }
           tab2Content={
             <div className="category_container category2">
               <div className="defi_container">
-                {currentDefis.length === 0 ? (
+                {dbOfflineBanner ?? (currentDefis.length === 0 ? (
                   <p style={{ color: '#888', textAlign: 'center', padding: '40px 0' }}>Aucun défi du moment.</p>
                 ) : currentDefis.map(defi => (
                   <a key={defi.defi_id} href={`/challenges/${defi.defi_id}`} className="defi_box" style={{ textDecoration: 'none' }}>
@@ -137,14 +163,14 @@ export default async function FeedPage({
                       )}
                     </div>
                   </a>
-                ))}
+                )))}
               </div>
             </div>
           }
           tab3Content={
             <div className="category_container category3">
               <div className="film_container">
-                {enrichedExplore.map(v => (
+                {dbOfflineBanner ?? enrichedExplore.map(v => (
                   <VideoCard key={v.video_id} video={v} session={session} />
                 ))}
               </div>
