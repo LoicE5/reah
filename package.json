@@ -9,14 +9,24 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@vimeo/vimeo": "^3.0.3",
+    "bcryptjs": "^3.0.3",
+    "drizzle-orm": "^0.45.1",
+    "iron-session": "^8.0.4",
+    "mysql2": "^3.18.2",
     "next": "16.1.6",
+    "nodemailer": "^8.0.1",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^3.0.0",
     "@types/node": "^20.19.35",
+    "@types/nodemailer": "^7.0.11",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "drizzle-kit": "^0.31.9",
     "eslint": "^9.39.3",
     "eslint-config-next": "16.1.6",
     "typescript": "^5.9.3"
