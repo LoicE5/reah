@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="42.48" height="51.744" viewBox="0 0 42.48 51.744">
+  <g id="defi_icon" transform="translate(-1124.5 -386.5)">
+    <path id="Tracé_81" data-name="Tracé 81" d="M1216.4,410.947h-8.985a.108.108,0,0,1-.1-.058l-4.234-8.232a.108.108,0,0,1,.1-.157H1216.4" transform="translate(-66.449 -10.672)" fill="#d60036"/>
+    <path id="Tracé_82" data-name="Tracé 82" d="M1277,410.947h8.985a.107.107,0,0,0,.1-.058l4.234-8.232a.108.108,0,0,0-.1-.157H1277" transform="translate(-131.458 -10.672)" fill="#d60036"/>
+    <path id="Tracé_83" data-name="Tracé 83" d="M1341.739,412.266l-6.457,12.92a.107.107,0,0,1-.178.021,15.077,15.077,0,0,0-7.632-4.876.107.107,0,0,1-.068-.151l8.366-16.733a.108.108,0,0,1,.186-.011l5.776,8.723A.107.107,0,0,1,1341.739,412.266Z" transform="translate(-174.77 -11.452)" fill="#d60036"/>
+    <path id="Tracé_84" data-name="Tracé 84" d="M1158.913,420.339a15.076,15.076,0,0,0-7.632,4.877.107.107,0,0,1-.178-.02l-6.456-12.8a.108.108,0,0,1,.006-.107l5.777-8.842a.108.108,0,0,1,.186.011l8.366,16.732A.107.107,0,0,1,1158.913,420.339Z" transform="translate(-16.068 -11.461)" fill="#d60036"/>
+    <circle id="Ellipse_23" data-name="Ellipse 23" cx="14" cy="14" r="14" transform="translate(1133.936 410.244)" fill="#d60036"/>
+    <g id="Groupe_449" data-name="Groupe 449">
+      <path id="Tracé_85" data-name="Tracé 85" d="M1198.9,399.948h-9.051L1185.5,391.5h13.4" transform="translate(-51.001 -4)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      <path id="Tracé_86" data-name="Tracé 86" d="M1260,399.948h9.051l4.345-8.448H1260" transform="translate(-116.51 -4)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      <path id="Tracé_87" data-name="Tracé 87" d="M1324.421,400.43l-6.558,13.123a15.079,15.079,0,0,0-7.864-5.036l8.508-17.017Z" transform="translate(-158.476 -3)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      <path id="Tracé_88" data-name="Tracé 88" d="M1141.921,408.517a15.078,15.078,0,0,0-7.863,5.036l-6.558-13,5.913-9.051Z" transform="translate(-2 -3)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      <circle id="Ellipse_24" data-name="Ellipse 24" cx="14" cy="14" r="14" transform="translate(1131.936 408.244)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="53.797" height="53.504" viewBox="0 0 53.797 53.504">
+  <g id="Groupe_429" data-name="Groupe 429" transform="translate(-1194.618 -140.805)">
+    <circle id="Ellipse_66" data-name="Ellipse 66" cx="16.879" cy="16.879" r="16.879" transform="translate(1200.181 146.385)" fill="#d60036"/>
+    <g id="Groupe_428" data-name="Groupe 428">
+      <g id="decouvrir" transform="translate(1191.519 138.216)">
+        <g id="Groupe_425" data-name="Groupe 425" transform="translate(4 4.072)">
+          <line id="Ligne_105" data-name="Ligne 105" x1="19.995" y1="19.995" transform="translate(31.486 30.611)" fill="none" stroke="#fff" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/>
+          <path id="Tracé_223" data-name="Tracé 223" d="M820.364,216c-.307,0-.61,0-.913.03s-.6.056-.892.1-.589.1-.866.156-.571.134-.866.216a12.548,12.548,0,0,0-3.557,1.662,12.668,12.668,0,0,0-5.6,9.959,12.5,12.5,0,0,0,1.008,4.441,12.705,12.705,0,0,0,1.056,1.956,12.522,12.522,0,0,0,1.368,1.731" transform="translate(-801.775 -210.405)" fill="none" stroke="#fff" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/>
+          <path id="Tracé_224" data-name="Tracé 224" d="M861,237.306a9.393,9.393,0,0,0,.506-6.237,12.623,12.623,0,0,0-3.129-5.83" transform="translate(-830.538 -215.646)" fill="none" stroke="#fff" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/>
+          <path id="Tracé_225" data-name="Tracé 225" d="M861.821,233.354a12.458,12.458,0,0,0-.312-2.294,12.623,12.623,0,0,0-3.129-5.83" transform="translate(-830.538 -215.64)" fill="none" stroke="#fff" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/>
+        </g>
+      </g>
+      <g id="Ellipse_67" data-name="Ellipse 67" transform="translate(1194.618 140.805)" fill="none" stroke="#fff" stroke-width="2">
+        <circle cx="19" cy="19" r="19" stroke="none"/>
+        <circle cx="19" cy="19" r="18" fill="none"/>
+      </g>
+    </g>
+  </g>
+</svg>

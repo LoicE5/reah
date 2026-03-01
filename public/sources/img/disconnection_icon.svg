@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="43.248" height="49" viewBox="0 0 43.248 49">
+  <g id="disconnection_icon" transform="translate(-1564.844 -267.287)">
+    <path id="Tracé_68" data-name="Tracé 68" d="M4954.015,6794.868v-8.581h-32.171v45h32.171v-8.351" transform="translate(-3355 -6517)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+    <g id="Groupe_323" data-name="Groupe 323" transform="translate(1585.107 285.58)">
+      <line id="Ligne_21" data-name="Ligne 21" x2="20.156" transform="translate(0 6.202)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="4"/>
+      <line id="Ligne_22" data-name="Ligne 22" x2="6.202" y2="6.202" transform="translate(13.954 0)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="4"/>
+      <line id="Ligne_23" data-name="Ligne 23" y1="6.423" x2="6.423" transform="translate(13.733 6.202)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="4"/>
+    </g>
+  </g>
+</svg>
