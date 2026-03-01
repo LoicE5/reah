@@ -14,7 +14,7 @@ export default function AddDefiForm() {
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault()
-        if (!title.trim()) { setError('Titre requis.') return }
+        if (!title.trim()) { setError('Titre requis.'); return }
         setLoading(true)
         setError('')
         const formData = new FormData()

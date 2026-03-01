@@ -1443,7 +1443,6 @@ line-height: unset;
         transition: 0.2s ease;
     }
 
-    .reah_logo,
     .accueil_reah_logo {
         height: 45px;
         width: 45px;
@@ -1453,15 +1452,6 @@ line-height: unset;
         top: unset;
         left: unset;
         position: unset;
-    }
-
-    .accueil_reah_logo {
-        margin-left: 0;
-        height: 100px;
-        width: 100px;
-        position: absolute;
-        top: 20px;
-        left: 20px;
     }
 
     .comment_icon,
@@ -1609,7 +1599,6 @@ line-height: unset;
         transition: 0.2s ease;
     }
 
-    .reah_logo,
     .accueil_reah_logo {
         height: 45px;
         width: 45px;
@@ -1619,15 +1608,6 @@ line-height: unset;
         top: unset;
         left: unset;
         position: unset;
-    }
-
-    .accueil_reah_logo {
-        margin-left: 0;
-        height: 100px;
-        width: 100px;
-        position: absolute;
-        top: 20px;
-        left: 20px;
     }
 
     .comment_icon,
