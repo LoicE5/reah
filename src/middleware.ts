@@ -1,23 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getIronSession } from 'iron-session';
-import type { SessionData } from '@/lib/session';
-import { sessionOptions } from '@/lib/session';
 
-const PROTECTED_ROUTES  = ['/feed', '/saved', '/notifications', '/settings', '/profile', '/challenges', '/admin'];
-const ADMIN_ROUTES      = ['/admin'];
-const AUTH_ONLY_ROUTES  = ['/login', '/signup'];
+const PROTECTED_ROUTES = ['/feed', '/saved', '/notifications', '/settings', '/profile', '/challenges', '/admin'];
+const AUTH_ONLY_ROUTES = ['/login', '/signup'];
 
-export async function middleware(req: NextRequest) {
-  const res = NextResponse.next();
+export function middleware(req: NextRequest) {
+  const path       = req.nextUrl.pathname;
+  const isLoggedIn = req.cookies.has('reah_session');
 
-  // iron-session reads cookies from Request and writes to Response
-  const session = await getIronSession<SessionData>(req.cookies as never, res.cookies as never, sessionOptions);
-
-  const path      = req.nextUrl.pathname;
-  const isLoggedIn = !!session.isLoggedIn;
-  const isAdmin    = !!session.isAdmin;
-
-  // Already logged in — bounce away from auth pages
+  // Already logged in — bounce away from auth-only pages
   if (AUTH_ONLY_ROUTES.some(r => path.startsWith(r)) && isLoggedIn) {
     return NextResponse.redirect(new URL('/feed', req.url));
   }
@@ -27,12 +17,7 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL('/login', req.url));
   }
 
-  // Not admin — bounce away from admin area
-  if (ADMIN_ROUTES.some(r => path.startsWith(r)) && !isAdmin) {
-    return NextResponse.redirect(new URL('/feed', req.url));
-  }
-
-  return res;
+  return NextResponse.next();
 }
 
 export const config = {
