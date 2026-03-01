@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const PROTECTED_ROUTES = ['/feed', '/saved', '/notifications', '/settings', '/profile', '/challenges', '/admin'];
+// Pages that require authentication (guests are redirected to /login)
+const PROTECTED_ROUTES = ['/saved', '/notifications', '/settings', '/admin'];
+// /feed, /challenges, /profile, /search are public — they handle guests internally
 const AUTH_ONLY_ROUTES = ['/login', '/signup'];
 
 export function middleware(req: NextRequest) {
