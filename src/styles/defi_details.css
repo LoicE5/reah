@@ -103,6 +103,7 @@ form {
     display: flex;
     width: 90%;
     margin: auto;
+    gap: 40px;
 }
 
 .defi_container>* {

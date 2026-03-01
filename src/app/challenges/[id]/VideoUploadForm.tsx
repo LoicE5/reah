@@ -23,7 +23,7 @@ export default function VideoUploadForm({ defiId }: VideoUploadFormProps) {
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault()
-        if (!videoFile || !title.trim()) { setError('Titre et fichier vidéo requis.') return }
+        if (!videoFile || !title.trim()) { setError('Titre et fichier vidéo requis.'); return }
         setError('')
         setUploading(true)
         setProgress('Envoi en cours...')
