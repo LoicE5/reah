@@ -11,7 +11,7 @@ const montserrat = Montserrat({
 })
 
 export const metadata: Metadata = {
-    title: 'REAH',
+    title: 'Reah',
     description: 'La plateforme des courts métrages et défis créatifs.',
 }
 

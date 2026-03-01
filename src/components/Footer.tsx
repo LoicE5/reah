@@ -41,7 +41,7 @@ export default function Footer() {
             </div>
 
             <div className="section2">
-                <p>©2026 REAH. Tous droits réservés</p>
+                <p>©2026 Reah. Tous droits réservés</p>
             </div>
         </footer>
     )
