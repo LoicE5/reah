@@ -115,7 +115,7 @@ export default function SettingsForm({ user }: { user: UserData }) {
                 )}
                 <form onSubmit={saveProfile} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
                     <div className="input_container">
-                        <label><span>Nom d&aposaffichage</span>
+                        <label><span>Nom d'affichage</span>
                             <input className="input_connexion" value={name} onChange={e => setName(e.target.value)} />
                         </label>
                     </div>
@@ -173,7 +173,7 @@ export default function SettingsForm({ user }: { user: UserData }) {
                             <input className="input_connexion" type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} required />
                         </label>
                     </div>
-                    <button type="submit" className="btn" disabled={passwordLoading}>{passwordLoading ? '...' : 'Modifier le mot de passe'}</button>
+                    <button type="submit" className="btn change_mdp_btn" disabled={passwordLoading}>{passwordLoading ? '...' : 'Modifier le mot de passe'}</button>
                 </form>
             </section>
 
@@ -181,7 +181,7 @@ export default function SettingsForm({ user }: { user: UserData }) {
             <section>
                 <h2 style={{ color: '#d60036', borderBottom: '1px solid #333', paddingBottom: 10 }}>Zone de danger</h2>
                 {!showDeleteConfirm ? (
-                    <button className="btn" style={{ background: 'transparent', border: '1px solid #d60036' }} onClick={() => setShowDeleteConfirm(true)}>
+                    <button className="btn" style={{ background: 'transparent', border: '1px solid #d60036', width: 'auto', padding: '0 16px' }} onClick={() => setShowDeleteConfirm(true)}>
                         Supprimer mon compte
                     </button>
                 ) : (
