@@ -1,4 +1,5 @@
 .main_content{
+    display: block;
     padding-top: 100px;
     width: 100%;
 }

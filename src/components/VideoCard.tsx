@@ -62,7 +62,7 @@ export default function VideoCard({ video, session }: VideoCardProps) {
                         <div className="synopsis_title_container">
                             <h3 className="synopsis_title">{video.video_title}</h3>
                             <p className="see_more">
-                                Voir plus&nbsp
+                                Voir plus&nbsp;
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img src="/sources/img/see_more_arrow.svg" className="see_more_arrow" alt="" />
                             </p>

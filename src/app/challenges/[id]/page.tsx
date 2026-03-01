@@ -104,7 +104,7 @@ export default async function ChallengeDetailPage({ params }: PageProps) {
                     <div className="all_video_container">
                         {enriched.length === 0 ? (
                             <p style={{ color: '#888', padding: '40px 5%' }}>
-                                Aucune participation pour l&aposinstant. Sois le premier !
+                                Aucune participation pour l&apos;instant. Sois le premier !
                             </p>
                         ) : enriched.map(v => (
                             <VideoCard key={v.video_id} video={v} session={session} />

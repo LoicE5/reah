@@ -63,14 +63,14 @@ export default async function ProfilePage({ params }: PageProps) {
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={`/uploads/banners/${profileUser.user_banner}`} alt="" className="banner" />
                 ) : (
-                    <div className="banner" style={{ background: '#1a1a1a', width: '100%' }} />
+                    <div className="banner" style={{ background: '#1a1a1a', width: '100%', height: '100%' }} />
                 )}
                 <div className="banner_flou_right" />
             </div>
 
             {/* Profile info row */}
             <div className="profile_container">
-                <div className="profile_content1">
+                <div className="profile_content1" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                     {/* Profile picture — positioned with top: -80px to overlap the banner */}
                     <div className="profile_photo">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -79,7 +79,6 @@ export default async function ProfilePage({ params }: PageProps) {
                             alt={profileUser.user_username}
                             className="pp_profile"
                             style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }}
-                            onError={(e) => { (e.target as HTMLImageElement).src = '/sources/img/profile_icon.svg' }}
                         />
                     </div>
                     {isOwnProfile ? (
@@ -127,7 +126,7 @@ export default async function ProfilePage({ params }: PageProps) {
             <div className="all_realisation_container">
                 <div className="realisation_container">
                     {enriched.length === 0 ? (
-                        <p style={{ color: '#888' }}>Aucune vidéo pour l&aposinstant.</p>
+                        <p style={{ color: '#888' }}>Aucune vidéo pour l&apos;instant.</p>
                     ) : enriched.map(v => (
                         <VideoCard key={v.video_id} video={v} session={session} />
                     ))}

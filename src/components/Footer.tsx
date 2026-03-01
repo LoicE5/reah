@@ -16,7 +16,7 @@ export default function Footer() {
                 <div className="nav">
                     <p><b>Navigation</b></p>
                     <Link href="/feed">Accueil</Link>
-                    <Link href="/feed">Fil d&aposactualité</Link>
+                    <Link href="/feed">Fil d&apos;actualité</Link>
                     <Link href="/challenges">Défis</Link>
                     <Link href="/settings">Paramètres</Link>
                     <Link href="/login">Connexion</Link>
