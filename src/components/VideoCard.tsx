@@ -23,36 +23,28 @@ interface VideoCardProps {
   session: SessionData | null;
 }
 
-/**
- * Replaces the video_container PHP HTML block rendered in fil_actu.php, saved.php, profil.php.
- * On click opens the VideoModal (replaces the popupFilm() AJAX pattern).
- */
+/** Mirrors the .video_container HTML from fil_actu.php. Opens VideoModal on click. */
 export default function VideoCard({ video, session }: VideoCardProps) {
   const [modalOpen, setModalOpen] = useState(false);
   const isLoggedIn = !!session;
 
   return (
     <>
-      <div
-        className="video_container"
-        onClick={() => setModalOpen(true)}
-        style={{ cursor: 'pointer' }}
-      >
-        {/* Poster */}
-        <div className="film_poster" style={{ position: 'relative', overflow: 'hidden' }}>
+      <div className="video_container" onClick={() => setModalOpen(true)} style={{ cursor: 'pointer' }}>
+
+        {/* Video area: poster fills the 360×640 box, user chip overlaid top-left */}
+        <div className="video_content">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={`/uploads/videos_posters/${video.video_poster || 'default.jpg'}`}
+            className="video_poster"
             alt={video.video_title ?? ''}
-            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
             onError={e => { (e.target as HTMLImageElement).src = '/sources/img/film_icon.svg'; }}
           />
-        </div>
-
-        {/* Info bar */}
-        <div className="film_info">
-          {/* User */}
-          <div className="user_container" onClick={e => { e.stopPropagation(); window.location.href = `/profile/${video.video_user_id}`; }}>
+          <div
+            className="user_container"
+            onClick={e => { e.stopPropagation(); window.location.href = `/profile/${video.video_user_id}`; }}
+          >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={`/uploads/profile_pictures/${video.user_profile_picture || 'default.svg'}`}
@@ -60,20 +52,35 @@ export default function VideoCard({ video, session }: VideoCardProps) {
               className="pp_profile"
               onError={e => { (e.target as HTMLImageElement).src = '/sources/img/profile_icon.svg'; }}
             />
-            <p className="username_film">@{video.user_username}</p>
+            <p className="pseudo">@{video.user_username}</p>
           </div>
+        </div>
 
-          {/* Title */}
-          <p className="film_title">{video.video_title}</p>
-
-          {/* Reactions */}
-          <div className="film_reactions" onClick={e => e.stopPropagation()}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer' }}>
-              <div className={`popcorn_icon${video.isLiked ? ' liked' : ''}`} />
-              <span className="like_number">{video.video_like_number ?? 0}</span>
+        {/* Info below the video */}
+        <div className="description_container">
+          <div className="fb_jsb">
+            <div className="synopsis_title_container">
+              <h3 className="synopsis_title">{video.video_title}</h3>
+              <p className="see_more">
+                Voir plus&nbsp;
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/sources/img/see_more_arrow.svg" className="see_more_arrow" alt="" />
+              </p>
             </div>
-            <div className="comment_icon" style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-              <span style={{ fontSize: '0.8em', color: '#888' }}>{video.commentCount}</span>
+
+            <div className="reaction_container" onClick={e => e.stopPropagation()}>
+              <div className="like_container fb_jsb">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/sources/img/pop_corn.png"
+                  className={`pop_corn_icon${video.isLiked ? ' pop_corn_icon_click' : ''}`}
+                  alt="like"
+                  onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                />
+                <p className="pop_corn_number">{video.video_like_number ?? 0}</p>
+              </div>
+              <div className="comment_icon" />
+              <p className="pop_corn_number">{video.commentCount}</p>
             </div>
           </div>
         </div>

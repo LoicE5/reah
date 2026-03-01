@@ -133,46 +133,64 @@ export default async function FeedPage({
         <CategoryTabs
           isLoggedIn={!!session}
           tab1Content={
-            <div className="category_container category1">
-              <div className="film_container">
-                {dbOfflineBanner ?? (enrichedFeed.length === 0 ? (
-                  <p style={{ color: '#888', textAlign: 'center', padding: '40px 0' }}>
-                    {session ? 'Abonne-toi à des réalisateurs pour voir leurs vidéos ici.' : 'Aucune vidéo pour l\'instant.'}
-                  </p>
-                ) : enrichedFeed.map(v => (
-                  <VideoCard key={v.video_id} video={v} session={session} />
-                )))}
+            <div className="first_category" id="category">
+              <div className="category_content">
+                <h1 id="title1">
+                  <div className="red_line title_line" />
+                  {session ? "FIL D'ACTUALITÉ" : 'NOUVEAUTÉS'}
+                </h1>
+                <div className="all_video_container" id="all_video_container">
+                  {dbOfflineBanner ?? (enrichedFeed.length === 0 ? (
+                    <p style={{ color: '#888', padding: '40px 20px' }}>
+                      {session ? 'Abonne-toi à des réalisateurs pour voir leurs vidéos ici.' : 'Aucune vidéo pour l\'instant.'}
+                    </p>
+                  ) : enrichedFeed.map(v => (
+                    <VideoCard key={v.video_id} video={v} session={session} />
+                  )))}
+                </div>
               </div>
             </div>
           }
           tab2Content={
-            <div className="category_container category2">
-              <div className="defi_container">
-                {dbOfflineBanner ?? (currentDefis.length === 0 ? (
-                  <p style={{ color: '#888', textAlign: 'center', padding: '40px 0' }}>Aucun défi du moment.</p>
-                ) : currentDefis.map(defi => (
-                  <a key={defi.defi_id} href={`/challenges/${defi.defi_id}`} className="defi_box" style={{ textDecoration: 'none' }}>
-                    {defi.defi_image && (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img src={`/uploads/defis_img/${defi.defi_image}`} alt={defi.defi_name} className="defi_img" />
-                    )}
-                    <div className="defi_info">
-                      <p className="defi_title">{defi.defi_name}</p>
-                      {defi.defi_date_end && (
-                        <CountdownTimer endDate={defi.defi_date_end} className="defi_timer" />
+            <div className="second_category" id="category2">
+              <div className="category_content">
+                <h1 id="title2">
+                  <div className="red_line title_line" />
+                  DÉFIS DU MOMENT
+                </h1>
+                <div className="defi_container">
+                  {dbOfflineBanner ?? (currentDefis.length === 0 ? (
+                    <p style={{ color: '#888', padding: '40px 20px' }}>Aucun défi du moment.</p>
+                  ) : currentDefis.map(defi => (
+                    <a key={defi.defi_id} href={`/challenges/${defi.defi_id}`} className="defi_box" style={{ textDecoration: 'none' }}>
+                      {defi.defi_image && (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={`/uploads/defis_img/${defi.defi_image}`} alt={defi.defi_name} className="defi_img" />
                       )}
-                    </div>
-                  </a>
-                )))}
+                      <div className="defi_info">
+                        <p className="defi_title">{defi.defi_name}</p>
+                        {defi.defi_date_end && (
+                          <CountdownTimer endDate={defi.defi_date_end} className="defi_timer" />
+                        )}
+                      </div>
+                    </a>
+                  )))}
+                </div>
               </div>
             </div>
           }
           tab3Content={
-            <div className="category_container category3">
-              <div className="film_container">
-                {dbOfflineBanner ?? enrichedExplore.map(v => (
-                  <VideoCard key={v.video_id} video={v} session={session} />
-                ))}
+            <div className="third_category" id="category3">
+              <div className="category_content">
+                <h1 id="title3">
+                  <div className="red_line title_line" />
+                  EXPLORER
+                </h1>
+                <div className="all_video_container">
+                  {dbOfflineBanner ?? enrichedExplore.map(v => (
+                    <VideoCard key={v.video_id} video={v} session={session} />
+                  ))}
+                </div>
               </div>
             </div>
           }
