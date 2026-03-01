@@ -20,6 +20,16 @@ body {
     align-items: center
 }
 
+.accueil_reah_logo {
+    height: 100px;
+    width: 100px;
+    min-width: 100px;
+    margin-left: 0;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
 .accueil_img {
     width: 500px;
     margin-right: 50px;
@@ -1415,14 +1425,7 @@ line-height: unset;
     }
 
     .accueil_reah_logo {
-        height: 45px;
-        width: 45px;
-        min-width: 45px;
         background: url(/sources/img/light_reah_logo.png) center/ auto 100% no-repeat;
-        margin-left: 20px;
-        top: unset;
-        left: unset;
-        position: unset;
     }
 
     .comment_icon,
@@ -1497,14 +1500,7 @@ line-height: unset;
     }
 
     .accueil_reah_logo {
-        height: 45px;
-        width: 45px;
-        min-width: 45px;
         background: url(/sources/img/dark_reah_logo.png) center/ auto 100% no-repeat;
-        margin-left: 20px;
-        top: unset;
-        left: unset;
-        position: unset;
     }
 
     .comment_icon,
