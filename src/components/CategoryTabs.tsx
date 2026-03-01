@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 interface CategoryTabsProps {
   isLoggedIn:   boolean;
+  initialTab?:  1 | 2 | 3;
   tab1Content:  React.ReactNode;
   tab2Content:  React.ReactNode;
   tab3Content:  React.ReactNode;
@@ -13,8 +14,8 @@ interface CategoryTabsProps {
  * Three-tab category switcher for the feed page.
  * Replaces the jQuery category_title click handler from fil_actu.js.
  */
-export default function CategoryTabs({ isLoggedIn, tab1Content, tab2Content, tab3Content }: CategoryTabsProps) {
-  const [active, setActive] = useState(1);
+export default function CategoryTabs({ isLoggedIn, initialTab = 1, tab1Content, tab2Content, tab3Content }: CategoryTabsProps) {
+  const [active, setActive] = useState(initialTab);
 
   const tabs = [
     { id: 1, label: isLoggedIn ? "Fil d'actualité" : 'Nouveautés' },

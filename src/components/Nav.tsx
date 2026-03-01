@@ -29,7 +29,7 @@ export default function Nav({ user, profilePic, activeCategory = 1 }: NavProps) 
             <Link href="/challenges" className={`category_title category_title2${activeCategory === 2 ? ' category_title_click' : ''}`}>
               Défis du moment
             </Link>
-            <Link href="/feed" className={`category_title category_title3${activeCategory === 3 ? ' category_title_click' : ''}`}>
+            <Link href="/feed?tab=3" className={`category_title category_title3${activeCategory === 3 ? ' category_title_click' : ''}`}>
               Explorer
             </Link>
             <div className="red_line underline" />
@@ -57,7 +57,7 @@ export default function Nav({ user, profilePic, activeCategory = 1 }: NavProps) 
           {user ? "Fil d'actualité" : 'Nouveautés'}
         </Link>
         <Link href="/challenges" className="category_list_category category_list_category2">Défis du moment</Link>
-        <Link href="/feed" className="category_list_category category_list_category3">Explorer</Link>
+        <Link href="/feed?tab=3" className="category_list_category category_list_category3">Explorer</Link>
       </div>
 
       <BurgerMenu isAdmin={user?.isAdmin ?? false} />

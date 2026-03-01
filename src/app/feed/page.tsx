@@ -18,11 +18,12 @@ import '@/styles/defis.css';
 export default async function FeedPage({
   searchParams,
 }: {
-  searchParams: Promise<{ accueil?: string }>;
+  searchParams: Promise<{ accueil?: string; tab?: string }>;
 }) {
   const session    = await getCurrentUser();
   const sp         = await searchParams;
   const showLanding = !session && !sp.accueil;
+  const initialTab  = (sp.tab === '2' ? 2 : sp.tab === '3' ? 3 : 1) as 1 | 2 | 3;
 
   // Fetch profile picture for nav
   let profilePic = '';
@@ -131,7 +132,9 @@ export default async function FeedPage({
         </div>
 
         <CategoryTabs
+          key={initialTab}
           isLoggedIn={!!session}
+          initialTab={initialTab}
           tab1Content={
             <div className="first_category" id="category">
               <div className="category_content">
