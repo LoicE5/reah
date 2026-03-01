@@ -1,0 +1,75 @@
+import { NextResponse } from 'next/server';
+import { writeFile, unlink, mkdir } from 'fs/promises';
+import { join } from 'path';
+import { randomUUID } from 'crypto';
+import { db } from '@/lib/db';
+import { videos } from '@/db/schema';
+import { getCurrentUser } from '@/lib/session';
+import { uploadToVimeo } from '@/lib/vimeo';
+
+// Allow up to 5 minutes for large video uploads
+export const maxDuration = 300;
+
+export async function POST(req: Request) {
+  const session = await getCurrentUser();
+  if (!session) return NextResponse.json({ error: 'Non authentifié.' }, { status: 401 });
+
+  const formData = await req.formData();
+
+  const videoFile = formData.get('video') as File | null;
+  const posterFile = formData.get('poster') as File | null;
+  const title      = formData.get('title') as string | null;
+  const synopsis   = formData.get('synopsis') as string | null;
+  const genre      = formData.get('genre') as string | null;
+  const defiId     = formData.get('defi_id') as string | null;
+
+  if (!videoFile || !title) {
+    return NextResponse.json({ error: 'Fichier vidéo et titre requis.' }, { status: 400 });
+  }
+
+  // Write video to temp file
+  const tmpPath = join('/tmp', `reah_upload_${randomUUID()}.mp4`);
+  try {
+    const buf = await videoFile.arrayBuffer();
+    await writeFile(tmpPath, Buffer.from(buf));
+  } catch {
+    return NextResponse.json({ error: 'Erreur d\'enregistrement du fichier.' }, { status: 500 });
+  }
+
+  // Upload poster if provided
+  let posterFilename = '';
+  if (posterFile && posterFile.size > 0) {
+    const ext = posterFile.name.split('.').pop() ?? 'jpg';
+    posterFilename = `${randomUUID()}.${ext}`;
+    const posterPath = join(process.cwd(), 'public/uploads/videos_posters', posterFilename);
+    await mkdir(join(process.cwd(), 'public/uploads/videos_posters'), { recursive: true });
+    await writeFile(posterPath, Buffer.from(await posterFile.arrayBuffer()));
+  }
+
+  // Upload to Vimeo
+  let vimeoUri = '';
+  try {
+    vimeoUri = await uploadToVimeo(tmpPath, title, synopsis ?? '');
+  } catch (err) {
+    await unlink(tmpPath).catch(() => {});
+    console.error('[videos/upload] Vimeo error:', err);
+    return NextResponse.json({ error: 'Erreur lors de l\'upload Vimeo.' }, { status: 500 });
+  } finally {
+    await unlink(tmpPath).catch(() => {});
+  }
+
+  const vimeoId = vimeoUri.split('/videos/')[1] ?? vimeoUri;
+
+  await db.insert(videos).values({
+    video_url:     vimeoId,
+    video_vimeo_id: vimeoUri,
+    video_title:   title,
+    video_synopsis: synopsis ?? '',
+    video_poster:  posterFilename,
+    video_genre:   genre ?? '',
+    video_user_id: session.userId,
+    video_defi_id: defiId ? Number(defiId) : null,
+  });
+
+  return NextResponse.json({ ok: true, vimeoId });
+}
