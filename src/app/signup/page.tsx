@@ -68,7 +68,7 @@ export default function SignupPage() {
   }
 
   return (
-    <body style={{ background: 'black' }}>
+    <>
       <Link href="/feed" className="reah_logo">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/sources/img/dark_reah_logo.png" alt="REAH" />
@@ -198,6 +198,6 @@ export default function SignupPage() {
           </form>
         )}
       </main>
-    </body>
+    </>
   );
 }

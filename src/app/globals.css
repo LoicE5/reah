@@ -11,7 +11,7 @@ textarea:focus {
 
 body {
     margin: 0;
-    /* background-color:; */
+    background-color: black;
     color: white;
     font-family: 'Montserrat', sans-serif;
     font-size: 1em;
