@@ -30,8 +30,8 @@ export default function SettingsForm({ user }: { user: UserData }) {
     const [profileLoading, setProfileLoading] = useState(false)
     const [passwordLoading, setPasswordLoading] = useState(false)
     const [deleteLoading, setDeleteLoading] = useState(false)
-    const [profileMsg, setProfileMsg] = useState<{ ok: boolean text: string } | null>(null)
-    const [passwordMsg, setPasswordMsg] = useState<{ ok: boolean text: string } | null>(null)
+    const [profileMsg, setProfileMsg] = useState<{ ok: boolean, text: string } | null>(null)
+    const [passwordMsg, setPasswordMsg] = useState<{ ok: boolean, text: string } | null>(null)
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
 
     async function saveProfile(e: React.FormEvent) {
@@ -78,7 +78,9 @@ export default function SettingsForm({ user }: { user: UserData }) {
             const d = await res.json()
             if (res.ok) {
                 setPasswordMsg({ ok: true, text: 'Mot de passe modifié !' })
-                setPrevPassword('') setNewPassword('') setConfirmPassword('')
+                setPrevPassword('')
+                setNewPassword('')
+                setConfirmPassword('')
             } else {
                 setPasswordMsg({ ok: false, text: d.error ?? 'Erreur.' })
             }

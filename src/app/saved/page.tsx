@@ -35,7 +35,7 @@ export default async function SavedPage() {
                 <h1 style={{ color: 'white' }}>Enregistrés</h1>
                 <div className="film_container" style={{ display: 'flex', flexWrap: 'wrap', gap: 16, marginTop: 20 }}>
                     {enriched.length === 0 ? (
-                        <p style={{ color: '#888' }}>Tu n&aposas pas encore enregistré de vidéo.</p>
+                        <p style={{ color: '#888' }}>Tu n&apos;as pas encore enregistré de vidéo.</p>
                     ) : enriched.map(v => (
                         <VideoCard key={v.video_id} video={v} session={session} />
                     ))}

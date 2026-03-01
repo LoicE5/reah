@@ -7,6 +7,6 @@ body{
 }
 
 .main_content{
-    display: flex;
-    height: 100vh;
+    display: block;
+    min-height: 100vh;
 }
