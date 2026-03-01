@@ -140,7 +140,7 @@ export default function SignupPage() {
 
         {/* Step 2 */}
         {step === 2 && (
-          <form className="form_container2 fadeOut1" onSubmit={handleSubmit}>
+          <form className="form_container" onSubmit={handleSubmit}>
             <button type="button" className="btn_prev" style={{ background: 'none', border: 'none', cursor: 'pointer' }}
               onClick={() => setStep(1)}>
               <svg xmlns="http://www.w3.org/2000/svg" width="31.621" height="25.241" viewBox="0 0 31.621 25.241">
