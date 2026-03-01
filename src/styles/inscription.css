@@ -36,7 +36,6 @@ form {
     animation: translate_right ease 0.4s forwards;
 }
 
-
 .translate_right2 {
     animation: translate_right2 ease 0.4s forwards;
 }
@@ -61,8 +60,6 @@ form {
     cursor: pointer;
     text-decoration: none;
 }
-
-
 
 /* Restriction password */
 .restriction_container {
@@ -223,7 +220,6 @@ input:focus {
         transform: translate(0px);
     }
 }
-
 
 @keyframes translate_right {
     0% {

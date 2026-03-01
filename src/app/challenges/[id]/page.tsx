@@ -9,7 +9,6 @@ import Footer from '@/components/Footer'
 import VideoCard from '@/components/VideoCard'
 import CountdownTimer from '@/components/CountdownTimer'
 import VideoUploadForm from './VideoUploadForm'
-import '@/styles/fil_actu.css'
 import '@/styles/defis.css'
 import '@/styles/defi_details.css'
 

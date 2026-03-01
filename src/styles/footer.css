@@ -64,14 +64,12 @@ footer>div>div>a:hover{
     text-decoration: underline;
 }
 
-
 .footer_reah_logo {
     width: 150px;
     height: 150px;
     align-self: center;
     background: url(/sources/img/dark_reah_logo.png) center/ auto 100% no-repeat;
 }
-
 
 .linkedin_logo,
 .insta_logo {

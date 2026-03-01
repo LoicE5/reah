@@ -92,7 +92,6 @@
     transition: transform 0.5s ease;
 }
 
-
 .settings_profile_container {
     width: 100%;
     align-items: center;
@@ -280,8 +279,6 @@ a:hover{
     margin-left: 200px;
 }
 
-
-
 @keyframes notification_btn_click {
     0% {
         background-color: transparent;
@@ -296,7 +293,6 @@ a:hover{
     }
 }
 
-
 @keyframes notification_btn_click2 {
     0% {
         background-color: #d60036;
@@ -310,7 +306,6 @@ a:hover{
         left: 4px;
     }
 }
-
 
 @media screen and (max-width:1100px) {
 
@@ -409,7 +404,6 @@ a:hover{
         --menu: #141414;
     }
 }
-
 
 @media (prefers-color-scheme: dark) {
     :root {

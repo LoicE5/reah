@@ -42,7 +42,6 @@
     }
 }
 
-
 .menu_category {
     min-width: 350px;
 }
@@ -145,7 +144,6 @@ form {
     margin-top: 80px;
 }
 
-
 .third_category {
     height: auto;
     justify-content: center;
@@ -160,7 +158,6 @@ form {
     height: 500px;
     align-self: flex-start;
 }
-
 
 .classement_content>.video_container {
     margin-right: 0;
@@ -201,7 +198,6 @@ form {
     justify-content: space-between;
 }
 
-
 .input_container {
     margin-bottom: 20px;
     align-items: center;
@@ -227,8 +223,6 @@ form {
     color: var(--text);
 }
 
-
-
 .upload_video {
     display: flex;
     flex-direction: column;
@@ -251,7 +245,6 @@ form {
 .btn_send {
     margin-top: 40px;
 }
-
 
 .file_video,
 .file_poster {
@@ -298,7 +291,6 @@ form {
     display: none;
 }
 
-
 .nav_footer_category .defi_icon {
     margin-right: 0;
 }
@@ -325,7 +317,6 @@ form {
     .menu_nav {
         padding-left: 10%;
     }
-
 
     .category_list_container {
         display: flex;
@@ -418,7 +409,6 @@ form {
         transform: translateX(-270px);
         transition: 0.5s ease;
     }
-
 
     .category_list_container {
         left: 15%;
@@ -513,7 +503,6 @@ form {
     }
 
 }
-
 
 @media screen and (max-width:550px) {
 
@@ -674,8 +663,6 @@ form {
         display: none;
     }
 
-
-
     .upload_container {
         width: 100%;
         height: unset;
@@ -733,7 +720,6 @@ form {
             background: url(/sources/img/dark_bronze_medal.png) center/auto 100% no-repeat;
         }
     }
-
 
 }
 

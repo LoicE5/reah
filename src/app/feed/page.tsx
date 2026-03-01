@@ -11,7 +11,6 @@ import Footer from '@/components/Footer'
 import VideoCard from '@/components/VideoCard'
 import CategoryTabs from '@/components/CategoryTabs'
 import CountdownTimer from '@/components/CountdownTimer'
-import '@/styles/fil_actu.css'
 import '@/styles/fil_actu2.css'
 import '@/styles/defis.css'
 

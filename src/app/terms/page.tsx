@@ -4,7 +4,6 @@ import { users } from '@/db/schema'
 import { eq } from 'drizzle-orm'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
-import '@/styles/fil_actu.css'
 import '@/styles/cgu.css'
 
 export default async function TermsPage() {

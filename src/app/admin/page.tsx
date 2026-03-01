@@ -4,7 +4,6 @@ import { users, videos, defis, comments } from '@/db/schema'
 import { eq } from 'drizzle-orm'
 import Nav from '@/components/Nav'
 import AdminDashboard from './AdminDashboard'
-import '@/styles/fil_actu.css'
 import '@/styles/admin.css'
 
 export default async function AdminPage() {

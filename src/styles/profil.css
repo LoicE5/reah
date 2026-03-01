@@ -124,8 +124,6 @@ nav {
     cursor: pointer;
 }
 
-
-
 .profile_subscription_content>p {
     margin: 0;
 }
@@ -140,7 +138,6 @@ nav {
     font-weight: bold;
     text-align: center;
 }
-
 
 .subscribe_btn {
     margin-top: 30px;
@@ -262,7 +259,6 @@ nav {
     min-height: 50vh;
 }
 
-
 .video_container {
     margin-right: 0;
     margin-bottom: 50px;
@@ -371,10 +367,6 @@ nav {
     justify-content: space-between;
     margin-top: 20px;
 }
-
-
-
-
 
 .modify_input_container {
     padding: 50px;
@@ -533,7 +525,6 @@ nav {
     margin-right: 20px;
 }
 
-
 .subscription_username {
     color: var(--text);
 }
@@ -550,7 +541,6 @@ nav {
     line-height: 30px;
     text-decoration: none;
 }
-
 
 .user_settings {
     display: flex;
@@ -611,7 +601,6 @@ nav {
 .unfollow_btn {
     display: block;
 }
-
 
 @keyframes subscriber_click {
     0% {
@@ -732,7 +721,6 @@ nav {
     }
 }
 
-
 @media screen and (max-width:1000px) {
 
     .profile_container {
@@ -823,7 +811,6 @@ nav {
         margin-left: 0;
     }
 }
-
 
 @media screen and (max-width:750px) {
 
@@ -1060,13 +1047,11 @@ nav {
     }
 }
 
-
 @media (prefers-color-scheme: light) {
     :root {
         --nav-color: #f5f5f59d;
     }
 }
-
 
 @media (prefers-color-scheme: dark) {
     :root {

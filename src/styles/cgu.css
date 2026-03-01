@@ -19,7 +19,6 @@ main{
     margin-bottom: 50px;
 }
 
-
 h1{
     margin-top: 80px;
     margin-bottom: 50px;
@@ -46,7 +45,6 @@ a:hover{
 li{
     margin-bottom: 10px;
 }
-
 
 @media screen and (max-width:850px) {
     h1{

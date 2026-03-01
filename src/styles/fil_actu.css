@@ -33,12 +33,10 @@ body {
     padding: 0;
 }
 
-
 .accueil_text>.btn_container>a {
     width: 150px;
     text-align: center;
 }
-
 
 .accueil_text {
     width: 45%;
@@ -78,7 +76,6 @@ body {
     color: #d60035;
 }
 
-
 .accueil>.line {
     left: 50%;
     height: 50px;
@@ -92,8 +89,6 @@ body {
     margin-left: 0;
 }
 
-
-
 .scroll_arrow {
     position: absolute;
     width: 60px;
@@ -102,7 +97,6 @@ body {
     width: 50px;
     animation: scroll_arrow_translate ease 1.5s infinite, scroll_arrow_opacity ease 1.5s infinite;
 }
-
 
 @keyframes scroll_arrow_translate {
     0% {
@@ -166,7 +160,6 @@ body {
     background: transparent;
 }
 
-
 .underline {
     width: 100px;
     top: 52px;
@@ -202,7 +195,6 @@ body {
     opacity: 1;
 
 } */
-
 
 .first_category,
 .second_category,
@@ -278,7 +270,6 @@ box-shadow: 0px 2px 15px #d60035a9;
     z-index: 1;
     padding-left: 8px;
 }
-
 
 .category_content {
     display: flex;
@@ -518,7 +509,6 @@ video:focus {
     width: 600px;
 }
 
-
 .modify_film_input_container{
     padding: 50px;
     padding-top: 0;
@@ -554,8 +544,6 @@ font-family: 'Montserrat', sans-serif;
 line-height: unset;
 }
 
-
-
 @keyframes information_arrow_hover {
     0% {
         opacity: 0;
@@ -566,7 +554,6 @@ line-height: unset;
         transform: translateX(0px);
     }
 }
-
 
 @keyframes user_container_hover {
     0% {
@@ -1053,7 +1040,6 @@ line-height: unset;
     width: 4px;
 }
 
-
 .pop_corn_icon_click {
     animation: pop_corn_icon_click 0.5s ease forwards;
 }
@@ -1067,7 +1053,6 @@ line-height: unset;
     border-radius: 5px;
     width: 250px;
 }
-
 
 .modify_file_banner:hover,
 .modify_file_profile_photo:hover {
@@ -1086,7 +1071,6 @@ line-height: unset;
     cursor: pointer;
 }
 
-
 .modify_btn_profile_photo,
 .modify_btn_banner {
     height: 30px;
@@ -1098,7 +1082,6 @@ line-height: unset;
 .input_container label {
     height:unset;
 }
-
 
 @keyframes comment_space_container_open {
     0% {
@@ -1157,7 +1140,6 @@ line-height: unset;
     }  
 }
 
-
 @media screen and (max-width:800px) {
     .main_content {
         background: url(/sources/img/dark_background2.png) 0 0/cover;
@@ -1212,8 +1194,6 @@ line-height: unset;
         width: 100%;
     }
 
-
-
     .film_title {
         font-size: 1.5rem;
     }
@@ -1245,7 +1225,6 @@ line-height: unset;
     .film_informations_header {
         height: unset;
     }
-
 
     .film_informations_header>div:first-child {
         justify-content: start;
@@ -1300,7 +1279,6 @@ line-height: unset;
         left: -250px;
     top: 20px;
     }
-
 
 }
 
@@ -1382,7 +1360,6 @@ line-height: unset;
 
 @media screen and (max-width:400px) {
 
-
     .accueil_text>h1 {
         font-size: 2rem;
         margin-bottom: 10px;
@@ -1402,7 +1379,6 @@ line-height: unset;
         overflow-x: hidden;
     }
 }
-
 
 @media (prefers-color-scheme: light) {
     :root {
@@ -1467,14 +1443,11 @@ line-height: unset;
         background: url(/sources/img/light_share_icon.svg) center/auto 100% no-repeat;
     }
 
-
     .pop_corn_icon {
         margin-right: 5px;
         background: none;
         width: unset;
     }
-
-
 
     .defi_icon,
     .fil_actu_icon,
@@ -1490,7 +1463,6 @@ line-height: unset;
     .fil_actu_icon {
         background: url(/sources/img/light_fil_actu_icon.svg) center/auto 100% no-repeat;
     }
-
 
     .menu_pp_icon {
         display: block;
@@ -1652,7 +1624,6 @@ line-height: unset;
     .defi_icon {
         background: url(/sources/img/dark_defi_icon.svg) center/auto 100% no-repeat;
     }
-
 
     .nav_footer {
         position: fixed;

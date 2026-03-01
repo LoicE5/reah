@@ -53,8 +53,6 @@
     margin-bottom: 50px;
 }
 
-
-
 .second_category,
 .third_category {
     min-height: 400px;
@@ -204,13 +202,11 @@
     float: right;
 }
 
-
 .send_btn{
     line-height: unset;
     margin: auto;
     margin-bottom: 30px;
 }
-
 
 @keyframes defi_img_hover {
     0% {
@@ -365,7 +361,6 @@
     .defi_title{
         font-size: 6vw;
     }
-
 
 }
 
