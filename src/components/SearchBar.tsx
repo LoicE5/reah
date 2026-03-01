@@ -96,7 +96,7 @@ export default function SearchBar() {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={`/uploads/profile_pictures/${u.user_profile_picture || 'default.svg'}`}
+                src={u.user_profile_picture ? `/uploads/profile_pictures/${u.user_profile_picture}` : '/sources/img/profile_icon.svg'}
                 alt=""
                 style={{ height: 30, width: 30, borderRadius: '50%', marginRight: 8, objectFit: 'cover' }}
                 onError={e => { (e.target as HTMLImageElement).src = '/sources/img/profile_icon.svg'; }}

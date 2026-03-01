@@ -47,7 +47,7 @@ export default function VideoCard({ video, session }: VideoCardProps) {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={`/uploads/profile_pictures/${video.user_profile_picture || 'default.svg'}`}
+              src={video.user_profile_picture ? `/uploads/profile_pictures/${video.user_profile_picture}` : '/sources/img/profile_icon.svg'}
               alt={video.user_username ?? ''}
               className="pp_profile"
               onError={e => { (e.target as HTMLImageElement).src = '/sources/img/profile_icon.svg'; }}
@@ -68,8 +68,8 @@ export default function VideoCard({ video, session }: VideoCardProps) {
               </p>
             </div>
 
-            <div className="reaction_container" onClick={e => e.stopPropagation()}>
-              <div className="like_container fb_jsb">
+            <div className="reaction_container" onClick={e => e.stopPropagation()} style={{ justifyContent: 'flex-end', gap: 12 }}>
+              <div className="like_container" style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={video.isLiked ? '/sources/img/pop_corn.png' : '/sources/img/pop_corn_icon.svg'}
@@ -79,8 +79,10 @@ export default function VideoCard({ video, session }: VideoCardProps) {
                 />
                 <p className="pop_corn_number">{video.video_like_number ?? 0}</p>
               </div>
-              <div className="comment_icon" />
-              <p className="pop_corn_number">{video.commentCount}</p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                <div className="comment_icon" />
+                <p className="pop_corn_number">{video.commentCount}</p>
+              </div>
             </div>
           </div>
         </div>

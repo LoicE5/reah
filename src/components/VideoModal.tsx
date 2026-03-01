@@ -99,7 +99,7 @@ export default function VideoModal({ videoId, currentUserId, isAdmin, isLoggedIn
             <a href={`/profile/${video.video_user_id}`} style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', marginBottom: 12 }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={`/uploads/profile_pictures/${video.user_profile_picture || 'default.svg'}`}
+                src={video.user_profile_picture ? `/uploads/profile_pictures/${video.user_profile_picture}` : '/sources/img/profile_icon.svg'}
                 alt={video.user_username ?? ''}
                 style={{ height: 36, width: 36, borderRadius: '50%', objectFit: 'cover' }}
                 onError={e => { (e.target as HTMLImageElement).src = '/sources/img/profile_icon.svg'; }}

@@ -72,7 +72,7 @@ export default async function SearchPage({ searchParams }: PageProps) {
                 <a key={u.user_id} href={`/profile/${u.user_id}`} style={{ textDecoration: 'none', textAlign: 'center', width: 120 }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={`/uploads/profile_pictures/${u.user_profile_picture || 'default.svg'}`}
+                    src={u.user_profile_picture ? `/uploads/profile_pictures/${u.user_profile_picture}` : '/sources/img/profile_icon.svg'}
                     alt={u.user_username}
                     style={{ height: 64, width: 64, borderRadius: '50%', objectFit: 'cover', display: 'block', margin: '0 auto 8px' }}
                   />

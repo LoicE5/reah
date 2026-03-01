@@ -73,7 +73,7 @@ export default async function ProfilePage({ params }: PageProps) {
           <div className="pp_container">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={`/uploads/profile_pictures/${profileUser.user_profile_picture || 'default.svg'}`}
+              src={profileUser.user_profile_picture ? `/uploads/profile_pictures/${profileUser.user_profile_picture}` : '/sources/img/profile_icon.svg'}
               alt={profileUser.user_username}
               className="pp_profile profil_pp"
               onError={undefined}

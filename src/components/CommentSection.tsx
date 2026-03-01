@@ -85,7 +85,7 @@ export default function CommentSection({ videoId, currentUserId, isAdmin }: Comm
             <div key={comment.comment_id} className="comment_container" style={{ display: 'flex', gap: 10, marginBottom: 12 }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={`/uploads/profile_pictures/${comment.user_profile_picture || 'default.svg'}`}
+                src={comment.user_profile_picture ? `/uploads/profile_pictures/${comment.user_profile_picture}` : '/sources/img/profile_icon.svg'}
                 alt={comment.user_username ?? ''}
                 style={{ height: 32, width: 32, borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
                 onError={e => { (e.target as HTMLImageElement).src = '/sources/img/profile_icon.svg'; }}
