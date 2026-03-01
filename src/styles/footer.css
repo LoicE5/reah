@@ -74,13 +74,22 @@ footer>div>div>a:hover{
 .linkedin_logo,
 .insta_logo {
     width: 30px;
-    height: 25px;
+    height: 30px;
     margin-right: 10px;
     background: url(/sources/img/dark_linkedin_icon.png) center/ auto 100% no-repeat;
 }
 
 .insta_logo {
     background: url(/sources/img/dark_insta_icon.png) center/ auto 100% no-repeat;
+}
+
+@media (prefers-color-scheme: light) {
+    .linkedin_logo {
+        background-image: url(/sources/img/light_linkedin_icon.png);
+    }
+    .insta_logo {
+        background-image: url(/sources/img/light_insta_icon.png);
+    }
 }
 
 @media screen and (max-width:1000px) {
