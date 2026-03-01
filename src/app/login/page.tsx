@@ -50,7 +50,7 @@ function LoginForm() {
             </video>
 
             <form className="form_container" onSubmit={handleSubmit}>
-                <div className="btn google_btn">Se connecter avec Google</div>
+                <div className="btn google_btn" onClick={() => alert('La connexion avec Google n\'est pas encore disponible.')}>Se connecter avec Google</div>
 
                 <div className="ou_section">
                     <div className="line" />

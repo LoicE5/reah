@@ -85,7 +85,7 @@ export default function SignupPage() {
                 {/* Step 1 */}
                 {step === 1 && (
                     <div className="form_container">
-                        <div className="btn google_btn">S&apos;inscrire avec Google</div>
+                        <div className="btn google_btn" onClick={() => alert('L\'inscription avec Google n\'est pas encore disponible.')}>S&apos;inscrire avec Google</div>
                         <div className="ou_section">
                             <div className="line" />
                             <p>OU</p>
