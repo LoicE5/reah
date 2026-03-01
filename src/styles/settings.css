@@ -1,21 +1,6 @@
-.form_search_bar {
-    margin: auto;
-    margin-right: 100px;
-}
-
-.menu_profile {
-    min-width: 200px;
-}
-
 .main_content {
     display: block;
     width: 100%;
-}
-
-.menu_nav {
-    padding-top: 10px;
-    z-index: 400;
-    background-color: var(--first_color);
 }
 
 .settings_menu {
@@ -367,24 +352,6 @@ a:hover{
 
     .input_connexion {
         margin-left: 0;
-    }
-
-    .category_list{
-        display: none;
-    }
-    .menu_nav{
-        justify-content: flex-end;
-        padding-left: 0;
-    }
-    .form_search_bar{
-        margin-right: 20px;
-    }
-    .search_bar{
-        margin-left: 0px;
-    }
-
-    .menu_profile{
-        min-width: 150px;
     }
 
     .modify_btn{

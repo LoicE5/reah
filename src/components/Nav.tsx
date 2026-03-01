@@ -3,22 +3,25 @@ import Link from 'next/link'
 import SearchBar from './SearchBar'
 import BurgerMenu from './BurgerMenu'
 import NavProfileButton from './NavProfileButton'
+import './Nav.css'
 
 interface NavProps {
     user: SessionData | null
     /** Profile picture filename from the DB, e.g. "abc123.jpg". */
     profilePic?: string
     activeCategory?: 1 | 2 | 3
+    /** Semi-transparent background — used on the profile page where the banner shows through. */
+    transparent?: boolean
 }
 
 /**
  * Top navigation bar — mirrors the <nav> HTML from fil_actu.php.
  * SearchBar and NavProfileButton are Client Components the rest is Server-rendered.
  */
-export default function Nav({ user, profilePic, activeCategory = 1 }: NavProps) {
+export default function Nav({ user, profilePic, activeCategory = 1, transparent = false }: NavProps) {
     return (
         <>
-            <nav>
+            <nav className={transparent ? 'nav--transparent' : undefined}>
                 <Link className="reah_logo" href="/feed" aria-label="REAH" />
 
                 <div className="menu_nav">

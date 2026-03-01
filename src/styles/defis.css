@@ -271,61 +271,7 @@
     }
 }
 
-@media screen and (max-width:1130px) {
-
-    .category_title,
-    .underline {
-        display: none;
-    }
-
-    .category_list {
-        display: flex;
-    }
-
-    .menu_category {
-        min-width: 120px;
-    }
-
-    .category_list_container {
-        display: flex;
-    }
-
-    .menu_nav{
-        padding-left: 15%;
-    
-        }
-}
-
 @media screen and (max-width:750px) {
-    .menu_profile {
-        min-width: 100px;
-    }
-
-    .search_bar_focus {
-        width: 250px;
-        border-radius: 100px;
-        /* box-shadow: 0px 0px 15px #000000; */
-        color: black;
-        padding: 5px;
-        padding-left: 40px;
-        background: url(/sources/img/loupe_icon.svg) no-repeat 3%;
-        background-color: white;
-        transform: translateX(-270px);
-        transition: 0.5s ease;
-    }
-
-    .form_search_bar {
-        width: 25px;
-    }
-
-    .category_list_container {
-        left: 16%;
-    }
-
-    .menu_profile {
-        min-width: 100px;
-    }
-
     .add_defi_btn_container{
         flex-direction: column;
         min-height: 100px;
@@ -365,19 +311,6 @@
 }
 
 @media screen and (max-width:550px) {
-    .category_list{
-        display: none;
-    }
-    .menu_nav{
-        justify-content: flex-end;
-        padding-left: 0;
-    }
-    .form_search_bar{
-        margin-right: 20px;
-    }
-    .search_bar{
-        margin-left: 0px;
-    }
     h1{
         align-self: center;
         margin-left: 0;

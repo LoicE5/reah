@@ -54,7 +54,7 @@ export default async function ProfilePage({ params }: PageProps) {
 
     return (
         <main className="main_content">
-            <Nav user={session} profilePic={navProfilePic} />
+            <Nav user={session} profilePic={navProfilePic} transparent />
 
             {/* Banner */}
             <div className="banner_container">
