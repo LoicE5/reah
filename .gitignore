@@ -34,6 +34,9 @@ yarn-error.log*
 .env*
 !.env.example
 
+# Misc
+seed.prod.ts
+
 # vercel
 .vercel
 
