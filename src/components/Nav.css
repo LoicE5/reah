@@ -32,6 +32,10 @@ nav,
     height: 60px;
 }
 
+.nav_footer {
+    display: none;
+}
+
 nav.nav--transparent {
     background-color: var(--nav-color);
 }
