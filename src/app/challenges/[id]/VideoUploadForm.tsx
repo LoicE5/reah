@@ -47,7 +47,8 @@ export default function VideoUploadForm({ defiId }: VideoUploadFormProps) {
             } else {
                 setError(data.error ?? 'Erreur lors de l\'upload.')
             }
-        } catch {
+        } catch (error: unknown) {
+            console.error(error)
             setError('Erreur réseau ou timeout. Réessaie.')
         } finally {
             setUploading(false)
@@ -93,7 +94,7 @@ export default function VideoUploadForm({ defiId }: VideoUploadFormProps) {
                                 <span>Genre</span>
                                 <select id="genre_select" value={genre} onChange={e => setGenre(e.target.value)}>
                                     <option value="">Sélectionner un genre</option>
-                                    {GENRES.map(g => <option key={g} value={g}>{g}</option>)}
+                                    {GENRES.map(genre => <option key={genre} value={genre}>{genre}</option>)}
                                 </select>
                             </div>
 

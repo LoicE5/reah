@@ -60,7 +60,8 @@ export default function SignupPage() {
             } else {
                 router.push(`/verify-email?email=${encodeURIComponent(email)}`)
             }
-        } catch {
+        } catch (error: unknown) {
+            console.error(error)
             setError('Erreur réseau. Réessaie.')
         } finally {
             setLoading(false)
@@ -111,15 +112,15 @@ export default function SignupPage() {
                         <div className="select_container">
                             <select value={birthDay} onChange={e => setBirthDay(e.target.value)} required>
                                 <option value="" disabled>JJ</option>
-                                {DAYS.map(d => <option key={d} value={d}>{String(d).padStart(2, '0')}</option>)}
+                                {DAYS.map(day => <option key={day} value={day}>{String(day).padStart(2, '0')}</option>)}
                             </select>
                             <select value={birthMonth} onChange={e => setBirthMonth(e.target.value)} required>
                                 <option value="" disabled>MM</option>
-                                {MONTHS.map(m => <option key={m} value={m}>{String(m).padStart(2, '0')}</option>)}
+                                {MONTHS.map(month => <option key={month} value={month}>{String(month).padStart(2, '0')}</option>)}
                             </select>
                             <select value={birthYear} onChange={e => setBirthYear(e.target.value)} required>
                                 <option value="" disabled>AAAA</option>
-                                {YEARS.map(y => <option key={y} value={y}>{y}</option>)}
+                                {YEARS.map(year => <option key={year} value={year}>{year}</option>)}
                             </select>
                         </div>
 

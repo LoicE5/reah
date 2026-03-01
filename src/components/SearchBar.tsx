@@ -35,9 +35,7 @@ export default function SearchBar() {
                     setResults(data)
                     setOpen(true)
                 }
-            } catch {
-                // fail silently
-            }
+            } catch (error: unknown) { console.error(error) }
         }, 300)
     }, [])
 
@@ -87,31 +85,31 @@ export default function SearchBar() {
                             <span>{v.video_title}</span>
                         </a>
                     ))}
-                    {results.users.map(u => (
+                    {results.users.map(user => (
                         <a
-                            key={u.user_id}
+                            key={user.user_id}
                             className="search_list_result"
-                            href={`/profile/${u.user_id}`}
+                            href={`/profile/${user.user_id}`}
                             onClick={() => setOpen(false)}
                         >
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
-                                src={u.user_profile_picture ? `/uploads/profile_pictures/${u.user_profile_picture}` : '/sources/img/profile_icon.svg'}
+                                src={user.user_profile_picture ? `/uploads/profile_pictures/${user.user_profile_picture}` : '/sources/img/profile_icon.svg'}
                                 alt=""
                                 style={{ height: 30, width: 30, borderRadius: '50%', marginRight: 8, objectFit: 'cover' }}
                                 onError={e => { (e.target as HTMLImageElement).src = '/sources/img/profile_icon.svg' }}
                             />
-                            <span>@{u.user_username}</span>
+                            <span>@{user.user_username}</span>
                         </a>
                     ))}
-                    {results.defis.map(d => (
+                    {results.defis.map(defi => (
                         <a
-                            key={d.defi_id}
+                            key={defi.defi_id}
                             className="search_list_result"
-                            href={`/challenges/${d.defi_id}`}
+                            href={`/challenges/${defi.defi_id}`}
                             onClick={() => setOpen(false)}
                         >
-                            <span>🎬 {d.defi_name}</span>
+                            <span>🎬 {defi.defi_name}</span>
                         </a>
                     ))}
                     {results.videos.length === 0 && results.users.length === 0 && results.defis.length === 0 && (

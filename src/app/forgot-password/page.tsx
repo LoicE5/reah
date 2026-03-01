@@ -6,26 +6,26 @@ import '@/styles/mdp_oublie.css'
 export default function ForgotPasswordPage() {
     const [email, setEmail] = useState('')
     const [loading, setLoading] = useState(false)
-    const [msg, setMsg] = useState<{ ok: boolean text: string } | null>(null)
+    const [message, setMessage] = useState<{ ok: boolean; text: string } | null>(null)
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault()
         setLoading(true)
-        setMsg(null)
+        setMessage(null)
         try {
             const res = await fetch('/api/auth/forgot-password', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email }),
             })
-            const d = await res.json()
+            const data = await res.json()
             if (res.ok) {
-                setMsg({ ok: true, text: `Un mail a été envoyé à ${email}` })
+                setMessage({ ok: true, text: `Un mail a été envoyé à ${email}` })
             } else {
-                setMsg({ ok: false, text: d.error ?? 'Erreur.' })
+                setMessage({ ok: false, text: data.error ?? 'Erreur.' })
             }
-        } catch {
-            setMsg({ ok: false, text: 'Erreur réseau.' })
+        } catch (error: unknown) {
+            setMessage({ ok: false, text: 'Erreur réseau.' })
         } finally {
             setLoading(false)
         }
@@ -33,9 +33,9 @@ export default function ForgotPasswordPage() {
 
     return (
         <main className="main_content">
-            {msg && (
-                <p className={msg.ok ? 'message_true_container' : 'message_false_container'}>
-                    {msg.text}
+            {message && (
+                <p className={message.ok ? 'message_true_container' : 'message_false_container'}>
+                    {message.text}
                 </p>
             )}
 

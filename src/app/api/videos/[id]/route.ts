@@ -88,7 +88,7 @@ export async function GET(_req: Request, { params }: RouteParams) {
 
 const patchSchema = z.object({
   title:    z.string().min(1).optional(),
-  synopsis: z.string().optional(),
+  synopsis: z.string().optional()
 })
 
 export async function PATCH(req: Request, { params }: RouteParams) {
@@ -143,7 +143,7 @@ export async function DELETE(_req: Request, { params }: RouteParams) {
   if (video.video_poster) {
     try {
       await unlink(join(process.cwd(), 'public/uploads/videos_posters', video.video_poster))
-    } catch { /* file may not exist */ }
+    } catch (error: unknown) { console.error('[videos/delete] Could not delete poster file:', error) }
   }
 
   return NextResponse.json({ ok: true })

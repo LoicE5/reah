@@ -32,7 +32,8 @@ function LoginForm() {
             } else {
                 router.push('/feed')
             }
-        } catch {
+        } catch (error: unknown) {
+            console.error(error)
             setError('Erreur réseau. Réessaie.')
         } finally {
             setLoading(false)

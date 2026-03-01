@@ -6,7 +6,7 @@ import { eq } from 'drizzle-orm'
 import { sendPasswordResetEmail } from '@/lib/email'
 
 const schema = z.object({
-  email: z.string().email('Adresse e-mail invalide'),
+  email: z.string().email('Adresse e-mail invalide')
 })
 
 export async function POST(req: Request) {
@@ -30,14 +30,14 @@ export async function POST(req: Request) {
       const resetLink = `${process.env.NEXT_PUBLIC_BASE_URL}/change-password?email=${encodeURIComponent(email)}`
       try {
         await sendPasswordResetEmail(email, resetLink)
-      } catch (emailErr) {
-        console.error('[auth/forgot-password] email send failed:', emailErr)
+      } catch (emailError: unknown) {
+        console.error('[auth/forgot-password] email send failed:', emailError)
       }
     }
 
     return NextResponse.json({ ok: true })
-  } catch (err) {
-    console.error('[auth/forgot-password]', err)
+  } catch (error: unknown) {
+    console.error('[auth/forgot-password]', error)
     return NextResponse.json({ error: 'Erreur serveur.' }, { status: 500 })
   }
 }

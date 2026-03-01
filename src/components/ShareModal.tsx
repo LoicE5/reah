@@ -17,14 +17,14 @@ export default function ShareModal({ videoId, title, onClose }: ShareModalProps)
             await navigator.clipboard.writeText(url)
             setCopied(true)
             setTimeout(() => setCopied(false), 2000)
-        } catch {
+        } catch (error: unknown) {
             // Fallback
-            const el = document.createElement('textarea')
-            el.value = url
-            document.body.appendChild(el)
-            el.select()
+            const textareaElement = document.createElement('textarea')
+            textareaElement.value = url
+            document.body.appendChild(textareaElement)
+            textareaElement.select()
             document.execCommand('copy')
-            document.body.removeChild(el)
+            document.body.removeChild(textareaElement)
             setCopied(true)
         }
     }
@@ -36,7 +36,7 @@ export default function ShareModal({ videoId, title, onClose }: ShareModalProps)
         { label: 'Facebook', href: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`, cls: 'facebook_logo' },
         { label: 'Twitter', href: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`, cls: 'twitter_logo' },
         { label: 'LinkedIn', href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`, cls: 'linkedin_logo' },
-        { label: 'Mail', href: `mailto:?subject=${encodedTitle}&body=${encodedUrl}`, cls: 'mail_logo' },
+        { label: 'Mail', href: `mailto:?subject=${encodedTitle}&body=${encodedUrl}`, cls: 'mail_logo' }
     ]
 
     return (
@@ -49,10 +49,10 @@ export default function ShareModal({ videoId, title, onClose }: ShareModalProps)
                 </div>
 
                 <div className="logo_container" style={{ padding: '0 30px' }}>
-                    {socials.map(s => (
-                        <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" style={{ textAlign: 'center', color: 'var(--text)', textDecoration: 'none' }}>
-                            <div className={`share_logo ${s.cls}`} />
-                            <p style={{ margin: '4px 0', fontSize: '0.8em' }}>{s.label}</p>
+                    {socials.map(social => (
+                        <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer" style={{ textAlign: 'center', color: 'var(--text)', textDecoration: 'none' }}>
+                            <div className={`share_logo ${social.cls}`} />
+                            <p style={{ margin: '4px 0', fontSize: '0.8em' }}>{social.label}</p>
                         </a>
                     ))}
                 </div>

@@ -21,7 +21,8 @@ export default function SubscriptionButton({ userId, initialSubscribed }: Subscr
                 method: prev ? 'DELETE' : 'POST',
             })
             if (!res.ok) setSubscribed(prev)
-        } catch {
+        } catch (error: unknown) {
+            console.error(error)
             setSubscribed(prev)
         } finally {
             setLoading(false)

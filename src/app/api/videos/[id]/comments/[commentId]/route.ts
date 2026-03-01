@@ -4,7 +4,7 @@ import { comments } from '@/db/schema'
 import { eq } from 'drizzle-orm'
 import { getCurrentUser } from '@/lib/session'
 
-type RouteParams = { params: Promise<{ id: string commentId: string }> }
+type RouteParams = { params: Promise<{ id: string; commentId: string }> }
 
 export async function DELETE(_req: Request, { params }: RouteParams) {
   const { commentId } = await params

@@ -8,7 +8,7 @@ import { getSession } from '@/lib/session'
 
 const loginSchema = z.object({
   credential: z.string().min(1, 'Identifiant requis'),
-  password:   z.string().min(1, 'Mot de passe requis'),
+  password:   z.string().min(1, 'Mot de passe requis')
 })
 
 export async function POST(req: Request) {
@@ -35,14 +35,14 @@ export async function POST(req: Request) {
     if (user.user_status === 0) {
       return NextResponse.json(
         { error: 'Ton compte n\'est pas encore vérifié. Vérifie ta boîte mail.' },
-        { status: 403 },
+        { status: 403 }
       )
     }
 
     if (user.user_suspended === 1) {
       return NextResponse.json(
         { error: 'Ton compte a été suspendu. Contacte l\'administration.' },
-        { status: 403 },
+        { status: 403 }
       )
     }
 
@@ -59,8 +59,8 @@ export async function POST(req: Request) {
     await session.save()
 
     return NextResponse.json({ ok: true, username: user.user_username })
-  } catch (err) {
-    console.error('[auth/login]', err)
+  } catch (error: unknown) {
+    console.error('[auth/login]', error)
     return NextResponse.json({ error: 'Erreur serveur.' }, { status: 500 })
   }
 }

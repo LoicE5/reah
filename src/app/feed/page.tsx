@@ -20,9 +20,9 @@ export default async function FeedPage({
         searchParams: Promise<{ accueil?: string, tab?: string }>
 }) {
     const session = await getCurrentUser()
-    const sp = await searchParams
-    const showLanding = !session && !sp.accueil
-    const initialTab = (sp.tab === '2' ? 2 : sp.tab === '3' ? 3 : 1) as 1 | 2 | 3
+    const resolvedParams = await searchParams
+    const showLanding = !session && !resolvedParams.accueil
+    const initialTab = (resolvedParams.tab === '2' ? 2 : resolvedParams.tab === '3' ? 3 : 1) as 1 | 2 | 3
 
     // Fetch profile picture for nav
     let profilePic = ''
@@ -36,7 +36,7 @@ export default async function FeedPage({
                 .where(eq(users.user_id, session.userId))
                 .limit(1)
             profilePic = user?.pic ?? ''
-        } catch { dbError = true }
+        } catch (error: unknown) { dbError = true }
     }
 
     // 3 parallel queries
@@ -51,7 +51,7 @@ export default async function FeedPage({
                 getCurrentDefis(10),
                 getExploreVideos(20),
             ])
-        } catch { dbError = true }
+        } catch (error: unknown) { dbError = true }
     }
 
     // Liked / saved state
@@ -59,19 +59,19 @@ export default async function FeedPage({
     let savedSet = new Set<number>()
     if (!dbError && session) {
         try {
-            const allIds = [...new Set([...feedVideos, ...exploreVideos].map(v => v.video_id))]
+            const allIds = [...new Set([...feedVideos, ...exploreVideos].map(video => video.video_id))];
             [likedSet, savedSet] = await Promise.all([
                 getLikedVideoIds(session.userId, allIds),
                 getSavedVideoIds(session.userId),
             ])
-        } catch { /* non-critical */ }
+        } catch (error: unknown) { console.error(error) }
     }
 
     function enrichVideos(vids: typeof feedVideos) {
-        return vids.map(v => ({
-            ...v,
-            isLiked: likedSet.has(v.video_id),
-            isSaved: savedSet.has(v.video_id),
+        return vids.map(video => ({
+            ...video,
+            isLiked: likedSet.has(video.video_id),
+            isSaved: savedSet.has(video.video_id),
         }))
     }
 
@@ -146,8 +146,8 @@ export default async function FeedPage({
                                         <p style={{ color: '#888', padding: '40px 20px' }}>
                                             {session ? 'Abonne-toi à des réalisateurs pour voir leurs vidéos ici.' : 'Aucune vidéo pour l\'instant.'}
                                         </p>
-                                    ) : enrichedFeed.map(v => (
-                                        <VideoCard key={v.video_id} video={v} session={session} />
+                                    ) : enrichedFeed.map(video => (
+                                        <VideoCard key={video.video_id} video={video} session={session} />
                                     )))}
                                 </div>
                             </div>
@@ -189,8 +189,8 @@ export default async function FeedPage({
                                     EXPLORER
                                 </h1>
                                 <div className="all_video_container">
-                                    {dbOfflineBanner ?? enrichedExplore.map(v => (
-                                        <VideoCard key={v.video_id} video={v} session={session} />
+                                    {dbOfflineBanner ?? enrichedExplore.map(video => (
+                                        <VideoCard key={video.video_id} video={video} session={session} />
                                     ))}
                                 </div>
                             </div>

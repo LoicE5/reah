@@ -13,7 +13,7 @@ function ChangePasswordForm() {
     const [newPassword, setNewPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [loading, setLoading] = useState(false)
-    const [msg, setMsg] = useState<{ ok: boolean text: string } | null>(null)
+    const [message, setMessage] = useState<{ ok: boolean; text: string } | null>(null)
 
     if (!email) {
         return (
@@ -26,26 +26,26 @@ function ChangePasswordForm() {
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault()
         if (newPassword !== confirmPassword) {
-            setMsg({ ok: false, text: 'Les mots de passe ne correspondent pas.' })
+            setMessage({ ok: false, text: 'Les mots de passe ne correspondent pas.' })
             return
         }
         setLoading(true)
-        setMsg(null)
+        setMessage(null)
         try {
             const res = await fetch('/api/auth/change-password', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ mode: 'reset', email, newPassword }),
             })
-            const d = await res.json()
+            const data = await res.json()
             if (res.ok) {
-                setMsg({ ok: true, text: 'Mot de passe modifié ! Redirection...' })
+                setMessage({ ok: true, text: 'Mot de passe modifié ! Redirection...' })
                 setTimeout(() => router.push('/login'), 1500)
             } else {
-                setMsg({ ok: false, text: d.error ?? 'Erreur.' })
+                setMessage({ ok: false, text: data.error ?? 'Erreur.' })
             }
-        } catch {
-            setMsg({ ok: false, text: 'Erreur réseau.' })
+        } catch (error: unknown) {
+            setMessage({ ok: false, text: 'Erreur réseau.' })
         } finally {
             setLoading(false)
         }
@@ -64,10 +64,10 @@ function ChangePasswordForm() {
                 </svg>
             </a>
 
-            {msg && (
-                <p className={msg.ok ? 'message_true_container' : 'message_false_container'}
+            {message && (
+                <p className={message.ok ? 'message_true_container' : 'message_false_container'}
                     style={{ position: 'static', animation: 'none', marginBottom: 16 }}>
-                    {msg.text}
+                    {message.text}
                 </p>
             )}
 

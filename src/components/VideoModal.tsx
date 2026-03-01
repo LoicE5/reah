@@ -46,9 +46,9 @@ export default function VideoModal({ videoId, currentUserId, isAdmin, isLoggedIn
 
     useEffect(() => {
         fetch(`/api/videos/${videoId}`)
-            .then(r => r.json())
+            .then(response => response.json())
             .then(data => setVideo(data))
-            .catch(() => { })
+            .catch((error: unknown) => { console.error(error) })
             .finally(() => setLoading(false))
     }, [videoId])
 
@@ -122,9 +122,9 @@ export default function VideoModal({ videoId, currentUserId, isAdmin, isLoggedIn
                             <div style={{ marginBottom: 16 }}>
                                 <p style={{ color: '#aaa', fontSize: '0.85em', margin: '0 0 6px' }}>Distribution :</p>
                                 <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                                    {video.distributors.map((d, i) => d.user_id && (
-                                        <a key={i} href={`/profile/${d.user_id}`} style={{ color: '#d60036', fontSize: '0.85em' }}>
-                                            @{d.user_username}
+                                    {video.distributors.map((distributor, index) => distributor.user_id && (
+                                        <a key={index} href={`/profile/${distributor.user_id}`} style={{ color: '#d60036', fontSize: '0.85em' }}>
+                                            @{distributor.user_username}
                                         </a>
                                     ))}
                                 </div>
@@ -152,7 +152,7 @@ export default function VideoModal({ videoId, currentUserId, isAdmin, isLoggedIn
                                 <div className="share_icon" />
                             </button>
                             <button
-                                onClick={() => setShowComments(v => !v)}
+                                onClick={() => setShowComments(prev => !prev)}
                                 style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4 }}
                             >
                                 <div className="comment_icon" />

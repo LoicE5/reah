@@ -27,7 +27,8 @@ export default function SaveButton({ videoId, initialSaved, isLoggedIn, onLoginR
                 method: prev ? 'DELETE' : 'POST',
             })
             if (!res.ok) setSaved(prev)
-        } catch {
+        } catch (error: unknown) {
+            console.error(error)
             setSaved(prev)
         } finally {
             setLoading(false)

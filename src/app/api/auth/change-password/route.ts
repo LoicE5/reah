@@ -9,13 +9,13 @@ import { getCurrentUser } from '@/lib/session'
 const resetSchema = z.object({
   mode:        z.literal('reset'),
   email:       z.string().email(),
-  newPassword: z.string().min(8),
+  newPassword: z.string().min(8)
 })
 
 const changeSchema = z.object({
   mode:        z.literal('change'),
   prevPassword: z.string().min(1),
-  newPassword:  z.string().min(8),
+  newPassword:  z.string().min(8)
 })
 
 const schema = z.discriminatedUnion('mode', [resetSchema, changeSchema])
@@ -31,7 +31,7 @@ export async function POST(req: Request) {
     if (!isValidPassword(parsed.data.newPassword)) {
       return NextResponse.json(
         { error: 'Le mot de passe doit contenir au moins 8 caractères, une majuscule et une minuscule.' },
-        { status: 400 },
+        { status: 400 }
       )
     }
 
@@ -68,8 +68,8 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json({ ok: true })
-  } catch (err) {
-    console.error('[auth/change-password]', err)
+  } catch (error: unknown) {
+    console.error('[auth/change-password]', error)
     return NextResponse.json({ error: 'Erreur serveur.' }, { status: 500 })
   }
 }

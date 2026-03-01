@@ -6,7 +6,7 @@ import { eq } from 'drizzle-orm'
 
 const schema = z.object({
   email: z.string().email(),
-  code:  z.string().length(6),
+  code:  z.string().length(6)
 })
 
 export async function POST(req: Request) {
@@ -43,8 +43,8 @@ export async function POST(req: Request) {
       .where(eq(users.user_id, user.id))
 
     return NextResponse.json({ ok: true })
-  } catch (err) {
-    console.error('[auth/verify-email]', err)
+  } catch (error: unknown) {
+    console.error('[auth/verify-email]', error)
     return NextResponse.json({ error: 'Erreur serveur.' }, { status: 500 })
   }
 }

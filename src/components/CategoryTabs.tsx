@@ -17,10 +17,10 @@ interface CategoryTabsProps {
 export default function CategoryTabs({ isLoggedIn, initialTab = 1, tab1Content, tab2Content, tab3Content }: CategoryTabsProps) {
     const [active, setActive] = useState(initialTab)
 
-    const tabs = [
+    const tabs: { id: 1 | 2 | 3; label: string }[] = [
         { id: 1, label: isLoggedIn ? "Fil d'actualité" : 'Nouveautés' },
         { id: 2, label: 'Défis du moment' },
-        { id: 3, label: 'Explorer' },
+        { id: 3, label: 'Explorer' }
     ]
 
     return (

@@ -37,7 +37,7 @@ export async function PATCH(req: Request) {
     // Delete old avatar
     const [current] = await db.select({ pic: users.user_profile_picture }).from(users).where(eq(users.user_id, session.userId)).limit(1)
     if (current?.pic) {
-      await unlink(join(dir, current.pic)).catch(() => {})
+      await unlink(join(dir, current.pic)).catch((error: unknown) => { console.error('[users/me] Could not delete old avatar:', error) })
     }
   }
 
@@ -53,7 +53,7 @@ export async function PATCH(req: Request) {
     // Delete old banner
     const [current] = await db.select({ banner: users.user_banner }).from(users).where(eq(users.user_id, session.userId)).limit(1)
     if (current?.banner) {
-      await unlink(join(dir, current.banner)).catch(() => {})
+      await unlink(join(dir, current.banner)).catch((error: unknown) => { console.error('[users/me] Could not delete old banner:', error) })
     }
   }
 
@@ -73,8 +73,8 @@ export async function DELETE() {
   await db.delete(users).where(eq(users.user_id, session.userId))
 
   // Destroy session
-  const s = await getSession()
-  s.destroy()
+  const userSession = await getSession()
+  userSession.destroy()
 
   return NextResponse.json({ ok: true })
 }

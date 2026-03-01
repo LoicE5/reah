@@ -27,24 +27,24 @@ const videoSelect = {
   video_like_number: videos.video_like_number,
   video_user_id:     videos.video_user_id,
   user_username:     users.user_username,
-  user_profile_picture: users.user_profile_picture,
+  user_profile_picture: users.user_profile_picture
 }
 
 type VideoRowRaw = Omit<VideoRow, 'commentCount' | 'video_like_number'> & { video_like_number: number | null }
 
 async function withCommentCounts(rows: VideoRowRaw[]): Promise<VideoRow[]> {
   if (rows.length === 0) return []
-  const ids = rows.map(v => v.video_id)
+  const ids = rows.map(video => video.video_id)
   const counts = await db
     .select({ video_id: comments.comment_video_id, cnt: count() })
     .from(comments)
     .where(inArray(comments.comment_video_id, ids))
     .groupBy(comments.comment_video_id)
-  const countMap = Object.fromEntries(counts.map(c => [c.video_id!, c.cnt]))
-  return rows.map(v => ({
-    ...v,
-    video_like_number: v.video_like_number ?? 0,
-    commentCount: countMap[v.video_id] ?? 0,
+  const countMap = Object.fromEntries(counts.map(countRow => [countRow.video_id!, countRow.cnt]))
+  return rows.map(video => ({
+    ...video,
+    video_like_number: video.video_like_number ?? 0,
+    commentCount: countMap[video.video_id] ?? 0,
   }))
 }
 
@@ -113,7 +113,7 @@ export async function getLikedVideoIds(userId: number, videoIds: number[]): Prom
     .select({ id: liked.liked_video_id })
     .from(liked)
     .where(eq(liked.liked_user_id, userId))
-  const userSet = new Set(all.map(r => r.id))
+  const userSet = new Set(all.map(row => row.id))
   return userSet
 }
 
@@ -123,14 +123,14 @@ export async function getSavedVideoIds(userId: number): Promise<Set<number>> {
     .select({ id: saved.saved_video_id })
     .from(saved)
     .where(eq(saved.saved_user_id, userId))
-  return new Set(rows.map(r => r.id))
+  return new Set(rows.map(row => row.id))
 }
 
 /** Videos saved by a user (for the saved page). */
 export async function getSavedVideos(userId: number): Promise<VideoRow[]> {
   const rows = await db
     .select({
-      ...videoSelect,
+      ...videoSelect
     })
     .from(saved)
     .innerJoin(videos, eq(videos.video_id, saved.saved_video_id))

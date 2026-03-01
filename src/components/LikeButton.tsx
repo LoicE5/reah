@@ -27,7 +27,7 @@ export default function LikeButton({ videoId, initialLikes, initialLiked, isLogg
         const prev = liked
         // Optimistic update
         setLiked(!prev)
-        setLikes(l => prev ? l - 1 : l + 1)
+        setLikes(count => prev ? count - 1 : count + 1)
 
         try {
             const res = await fetch(`/api/videos/${videoId}/like`, {
@@ -39,11 +39,12 @@ export default function LikeButton({ videoId, initialLikes, initialLiked, isLogg
             } else {
                 // Revert on error
                 setLiked(prev)
-                setLikes(l => prev ? l + 1 : l - 1)
+                setLikes(count => prev ? count + 1 : count - 1)
             }
-        } catch {
+        } catch (error: unknown) {
+            console.error(error)
             setLiked(prev)
-            setLikes(l => prev ? l + 1 : l - 1)
+            setLikes(count => prev ? count + 1 : count - 1)
         } finally {
             setLoading(false)
         }

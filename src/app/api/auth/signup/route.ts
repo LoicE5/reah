@@ -13,7 +13,7 @@ const signupSchema = z.object({
   email:     z.string().email('Adresse e-mail invalide'),
   password:  z.string().min(8, 'Mot de passe trop court'),
   birthday:  z.string().min(1, 'Date de naissance requise'),
-  cgu:       z.boolean().refine(v => v === true, 'Tu dois accepter les CGU'),
+  cgu:       z.boolean().refine(v => v === true, 'Tu dois accepter les CGU')
 })
 
 export async function POST(req: Request) {
@@ -29,7 +29,7 @@ export async function POST(req: Request) {
     if (!isValidPassword(password)) {
       return NextResponse.json(
         { error: 'Le mot de passe doit contenir au moins 8 caractères, une majuscule et une minuscule.' },
-        { status: 400 },
+        { status: 400 }
       )
     }
 
@@ -65,19 +65,19 @@ export async function POST(req: Request) {
       user_birthday:     birthday,
       user_cgu:          cgu ? 1 : 0,
       user_status:       0,              // unverified
-      user_email_verify: verificationCode,
+      user_email_verify: verificationCode
     })
 
     // Send verification email (non-blocking on failure — don't block signup)
     try {
       await sendVerificationEmail(email, verificationCode)
-    } catch (emailErr) {
-      console.error('[auth/signup] email send failed:', emailErr)
+    } catch (emailError: unknown) {
+      console.error('[auth/signup] email send failed:', emailError)
     }
 
     return NextResponse.json({ ok: true, email })
-  } catch (err) {
-    console.error('[auth/signup]', err)
+  } catch (error: unknown) {
+    console.error('[auth/signup]', error)
     return NextResponse.json({ error: 'Erreur serveur.' }, { status: 500 })
   }
 }

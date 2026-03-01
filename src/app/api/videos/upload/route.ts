@@ -32,7 +32,8 @@ export async function POST(req: Request) {
   try {
     const buf = await videoFile.arrayBuffer()
     await writeFile(tmpPath, Buffer.from(buf))
-  } catch {
+  } catch (error: unknown) {
+    console.error('[videos/upload] Could not write temp file:', error)
     return NextResponse.json({ error: 'Erreur d\'enregistrement du fichier.' }, { status: 500 })
   }
 
@@ -50,12 +51,12 @@ export async function POST(req: Request) {
   let vimeoUri = ''
   try {
     vimeoUri = await uploadToVimeo(tmpPath, title, synopsis ?? '')
-  } catch (err) {
-    await unlink(tmpPath).catch(() => {})
-    console.error('[videos/upload] Vimeo error:', err)
+  } catch (error: unknown) {
+    await unlink(tmpPath).catch((unlinkError: unknown) => { console.error('[videos/upload] Could not delete temp file:', unlinkError) })
+    console.error('[videos/upload] Vimeo error:', error)
     return NextResponse.json({ error: 'Erreur lors de l\'upload Vimeo.' }, { status: 500 })
   } finally {
-    await unlink(tmpPath).catch(() => {})
+    await unlink(tmpPath).catch((unlinkError: unknown) => { console.error('[videos/upload] Could not delete temp file:', unlinkError) })
   }
 
   const vimeoId = vimeoUri.split('/videos/')[1] ?? vimeoUri
@@ -68,7 +69,7 @@ export async function POST(req: Request) {
     video_poster:  posterFilename,
     video_genre:   genre ?? '',
     video_user_id: session.userId,
-    video_defi_id: defiId ? Number(defiId) : null,
+    video_defi_id: defiId ? Number(defiId) : null
   })
 
   return NextResponse.json({ ok: true, vimeoId })

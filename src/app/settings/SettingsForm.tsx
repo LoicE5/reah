@@ -30,32 +30,32 @@ export default function SettingsForm({ user }: { user: UserData }) {
     const [profileLoading, setProfileLoading] = useState(false)
     const [passwordLoading, setPasswordLoading] = useState(false)
     const [deleteLoading, setDeleteLoading] = useState(false)
-    const [profileMsg, setProfileMsg] = useState<{ ok: boolean, text: string } | null>(null)
-    const [passwordMsg, setPasswordMsg] = useState<{ ok: boolean, text: string } | null>(null)
+    const [profileMessage, setProfileMessage] = useState<{ ok: boolean; text: string } | null>(null)
+    const [passwordMessage, setPasswordMessage] = useState<{ ok: boolean; text: string } | null>(null)
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
 
     async function saveProfile(e: React.FormEvent) {
         e.preventDefault()
         setProfileLoading(true)
-        setProfileMsg(null)
-        const fd = new FormData()
-        fd.set('name', name)
-        fd.set('username', username)
-        fd.set('bio', bio)
-        fd.set('website', website)
-        if (avatar) fd.set('avatar', avatar)
-        if (banner) fd.set('banner', banner)
+        setProfileMessage(null)
+        const formData = new FormData()
+        formData.set('name', name)
+        formData.set('username', username)
+        formData.set('bio', bio)
+        formData.set('website', website)
+        if (avatar) formData.set('avatar', avatar)
+        if (banner) formData.set('banner', banner)
         try {
-            const res = await fetch('/api/users/me', { method: 'PATCH', body: fd })
+            const res = await fetch('/api/users/me', { method: 'PATCH', body: formData })
             if (res.ok) {
-                setProfileMsg({ ok: true, text: 'Profil mis à jour !' })
+                setProfileMessage({ ok: true, text: 'Profil mis à jour !' })
                 router.refresh()
             } else {
-                const d = await res.json()
-                setProfileMsg({ ok: false, text: d.error ?? 'Erreur.' })
+                const data = await res.json()
+                setProfileMessage({ ok: false, text: data.error ?? 'Erreur.' })
             }
-        } catch {
-            setProfileMsg({ ok: false, text: 'Erreur réseau.' })
+        } catch (error: unknown) {
+            setProfileMessage({ ok: false, text: 'Erreur réseau.' })
         } finally {
             setProfileLoading(false)
         }
@@ -64,28 +64,28 @@ export default function SettingsForm({ user }: { user: UserData }) {
     async function changePassword(e: React.FormEvent) {
         e.preventDefault()
         if (newPassword !== confirmPassword) {
-            setPasswordMsg({ ok: false, text: 'Les mots de passe ne correspondent pas.' })
+            setPasswordMessage({ ok: false, text: 'Les mots de passe ne correspondent pas.' })
             return
         }
         setPasswordLoading(true)
-        setPasswordMsg(null)
+        setPasswordMessage(null)
         try {
             const res = await fetch('/api/auth/change-password', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ mode: 'change', prevPassword, newPassword }),
             })
-            const d = await res.json()
+            const data = await res.json()
             if (res.ok) {
-                setPasswordMsg({ ok: true, text: 'Mot de passe modifié !' })
+                setPasswordMessage({ ok: true, text: 'Mot de passe modifié !' })
                 setPrevPassword('')
                 setNewPassword('')
                 setConfirmPassword('')
             } else {
-                setPasswordMsg({ ok: false, text: d.error ?? 'Erreur.' })
+                setPasswordMessage({ ok: false, text: data.error ?? 'Erreur.' })
             }
-        } catch {
-            setPasswordMsg({ ok: false, text: 'Erreur réseau.' })
+        } catch (error: unknown) {
+            setPasswordMessage({ ok: false, text: 'Erreur réseau.' })
         } finally {
             setPasswordLoading(false)
         }
@@ -98,7 +98,7 @@ export default function SettingsForm({ user }: { user: UserData }) {
             if (res.ok) {
                 router.push('/feed?delete_account=true')
             }
-        } catch { /* fail silently */ }
+        } catch (error: unknown) { console.error(error) }
         finally { setDeleteLoading(false) }
     }
 
@@ -107,10 +107,10 @@ export default function SettingsForm({ user }: { user: UserData }) {
             {/* Profile section */}
             <section>
                 <h2 style={{ color: '#d60036', borderBottom: '1px solid #333', paddingBottom: 10 }}>Profil</h2>
-                {profileMsg && (
-                    <p className={profileMsg.ok ? 'message_true_container' : 'message_false_container'}
+                {profileMessage && (
+                    <p className={profileMessage.ok ? 'message_true_container' : 'message_false_container'}
                         style={{ position: 'static', animation: 'none', marginBottom: 16 }}>
-                        {profileMsg.text}
+                        {profileMessage.text}
                     </p>
                 )}
                 <form onSubmit={saveProfile} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
@@ -150,10 +150,10 @@ export default function SettingsForm({ user }: { user: UserData }) {
             {/* Password section */}
             <section>
                 <h2 style={{ color: '#d60036', borderBottom: '1px solid #333', paddingBottom: 10 }}>Mot de passe</h2>
-                {passwordMsg && (
-                    <p className={passwordMsg.ok ? 'message_true_container' : 'message_false_container'}
+                {passwordMessage && (
+                    <p className={passwordMessage.ok ? 'message_true_container' : 'message_false_container'}
                         style={{ position: 'static', animation: 'none', marginBottom: 16 }}>
-                        {passwordMsg.text}
+                        {passwordMessage.text}
                     </p>
                 )}
                 <form onSubmit={changePassword} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>

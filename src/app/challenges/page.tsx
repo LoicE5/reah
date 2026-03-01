@@ -15,7 +15,7 @@ export default async function ChallengesPage({
     searchParams: Promise<{ success?: string }>
 }) {
     const session = await getCurrentUser()
-    const sp = await searchParams
+    const resolvedParams = await searchParams
 
     let profilePic = ''
     if (session) {
@@ -29,14 +29,14 @@ export default async function ChallengesPage({
 
     const [currentDefis, allDefis] = await Promise.all([
         getCurrentDefis(20),
-        getVerifiedDefis(50),
+        getVerifiedDefis(50)
     ])
 
     return (
         <main className="main_content">
             <Nav user={session} profilePic={profilePic} activeCategory={2} />
 
-            {sp.success && <p className="message_true_container">Ton défi a été soumis et est en attente de validation.</p>}
+            {resolvedParams.success && <p className="message_true_container">Ton défi a été soumis et est en attente de validation.</p>}
 
             {/* Section 1: Défis du moment */}
             <div className="first_category">

@@ -31,7 +31,8 @@ export default function AddDefiForm() {
                 const data = await res.json()
                 setError(data.error ?? 'Erreur.')
             }
-        } catch {
+        } catch (error: unknown) {
+            console.error(error)
             setError('Erreur réseau.')
         } finally {
             setLoading(false)

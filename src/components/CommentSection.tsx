@@ -26,9 +26,9 @@ export default function CommentSection({ videoId, currentUserId, isAdmin }: Comm
     useEffect(() => {
         setLoading(true)
         fetch(`/api/videos/${videoId}/comments`)
-            .then(r => r.json())
+            .then(response => response.json())
             .then(data => setCommentList(data))
-            .catch(() => { })
+            .catch((error: unknown) => { console.error(error) })
             .finally(() => setLoading(false))
     }, [videoId])
 
@@ -45,16 +45,16 @@ export default function CommentSection({ videoId, currentUserId, isAdmin }: Comm
             if (res.ok) {
                 setContent('')
                 // Reload comments
-                const updated = await fetch(`/api/videos/${videoId}/comments`).then(r => r.json())
+                const updated = await fetch(`/api/videos/${videoId}/comments`).then(response => response.json())
                 setCommentList(updated)
             }
-        } catch { /* fail silently */ }
+        } catch (error: unknown) { console.error(error) }
         finally { setPosting(false) }
     }
 
     async function deleteComment(commentId: number) {
         await fetch(`/api/videos/${videoId}/comments/${commentId}`, { method: 'DELETE' })
-        setCommentList(prev => prev.filter(c => c.comment_id !== commentId))
+        setCommentList(prev => prev.filter(comment => comment.comment_id !== commentId))
     }
 
     return (

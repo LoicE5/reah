@@ -22,8 +22,8 @@ export default async function ProfilePage({ params }: PageProps) {
 
     let navProfilePic = ''
     if (session) {
-        const [u] = await db.select({ pic: users.user_profile_picture }).from(users).where(eq(users.user_id, session.userId)).limit(1)
-        navProfilePic = u?.pic ?? ''
+        const [navUser] = await db.select({ pic: users.user_profile_picture }).from(users).where(eq(users.user_id, session.userId)).limit(1)
+        navProfilePic = navUser?.pic ?? ''
     }
 
     const [profileUser] = await db.select().from(users).where(eq(users.user_id, targetId)).limit(1)
@@ -33,11 +33,11 @@ export default async function ProfilePage({ params }: PageProps) {
     const [{ followingCount }] = await db.select({ followingCount: count() }).from(subscription).where(eq(subscription.subscription_subscriber_id, targetId))
 
     const profileVideos = await getUserVideos(targetId)
-    const allIds = profileVideos.map(v => v.video_id)
+    const allIds = profileVideos.map(video => video.video_id)
     const likedSet = session ? await getLikedVideoIds(session.userId, allIds) : new Set<number>()
     const savedSet = session ? await getSavedVideoIds(session.userId) : new Set<number>()
 
-    const enriched = profileVideos.map(v => ({ ...v, isLiked: likedSet.has(v.video_id), isSaved: savedSet.has(v.video_id) }))
+    const enriched = profileVideos.map(video => ({ ...video, isLiked: likedSet.has(video.video_id), isSaved: savedSet.has(video.video_id) }))
 
     const isOwnProfile = session?.userId === targetId
 
@@ -128,8 +128,8 @@ export default async function ProfilePage({ params }: PageProps) {
                 <div className="realisation_container">
                     {enriched.length === 0 ? (
                         <p style={{ color: '#888' }}>Aucune vidéo pour l&apos;instant.</p>
-                    ) : enriched.map(v => (
-                        <VideoCard key={v.video_id} video={v} session={session} />
+                    ) : enriched.map(video => (
+                        <VideoCard key={video.video_id} video={video} session={session} />
                     ))}
                 </div>
             </div>

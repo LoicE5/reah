@@ -31,7 +31,8 @@ export default function VerifyEmailPage() {
                 setSuccess('Ton compte est vérifié ! Redirection...')
                 setTimeout(() => router.push('/login?signup=true'), 2000)
             }
-        } catch {
+        } catch (error: unknown) {
+            console.error(error)
             setError('Erreur réseau.')
         } finally {
             setLoading(false)
@@ -46,7 +47,8 @@ export default function VerifyEmailPage() {
                 body: JSON.stringify({ email }),
             })
             setSuccess('Un nouveau code a été envoyé.')
-        } catch {
+        } catch (error: unknown) {
+            console.error(error)
             setError('Impossible d\'envoyer le code.')
         }
     }
