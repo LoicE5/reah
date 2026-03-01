@@ -99,7 +99,7 @@ function LoginForm() {
                     {loading ? 'Connexion...' : 'Se connecter'}
                 </button>
 
-                <Link href="/signup" className="link">S&aposinscrire</Link>
+                <Link href="/signup" className="link">S&apos;inscrire</Link>
             </form>
         </main>
     )

@@ -88,7 +88,7 @@ export default function SignupPage() {
                 {/* Step 1 */}
                 {step === 1 && (
                     <div className="form_container">
-                        <div className="btn google_btn">S&aposinscrire avec Google</div>
+                        <div className="btn google_btn">S&apos;inscrire avec Google</div>
                         <div className="ou_section">
                             <div className="line" />
                             <p>OU</p>
@@ -134,7 +134,7 @@ export default function SignupPage() {
                             Suivant
                         </button>
 
-                        <Link href="/login" className="link">J&aposai déjà un compte !</Link>
+                        <Link href="/login" className="link">J&apos;ai déjà un compte !</Link>
                     </div>
                 )}
 
@@ -188,7 +188,7 @@ export default function SignupPage() {
                         <div className="checkbox_container">
                             <input id="cgu" type="checkbox" className="checkbox" checked={cgu} onChange={e => setCgu(e.target.checked)} required />
                             <label htmlFor="cgu" className="checkbox_label">
-                                J&aposaccepte les <Link href="/terms" className="link" target="_blank">CGU</Link>
+                                J&apos;accepte les <Link href="/terms" className="link" target="_blank">CGU</Link>
                             </label>
                         </div>
 

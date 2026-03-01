@@ -1,11 +1,14 @@
+'use client'
+
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 interface SideMenuProps {
     isAdmin: boolean
+    onClose: () => void
 }
 
-/** Server Component — the static content of the burger menu. */
-export default function SideMenu({ isAdmin }: SideMenuProps) {
+export default function SideMenu({ isAdmin, onClose }: SideMenuProps) {
     return (
         <div id="side_menu">
             <Link href="/profile/me" className="menu_option profil">
@@ -38,32 +41,25 @@ export default function SideMenu({ isAdmin }: SideMenuProps) {
                 </Link>
             )}
 
-            <LogoutButton />
+            <LogoutItem onClose={onClose} />
         </div>
     )
 }
 
-/** Tiny Client Component just for the logout POST action. */
-function LogoutButton() {
+function LogoutItem({ onClose }: { onClose: () => void }) {
+    const router = useRouter()
+
+    async function handleLogout() {
+        onClose()
+        await fetch('/api/auth/logout', { method: 'POST' })
+        router.push('/feed')
+    }
+
     return (
-        <form action="/api/auth/logout" method="POST" style={{ width: '100%' }}>
-            <button
-                type="submit"
-                className="disconnection menu_option"
-                style={{
-                    background: 'none',
-                    border: 'none',
-                    width: '100%',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}
-            >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/sources/img/disconnection_icon.svg" alt="" style={{ height: 20 }} />
-                <p className="menu_option_title">Déconnexion</p>
-            </button>
-        </form>
+        // eslint-disable-next-line @next/next/no-img-element
+        <div className="disconnection menu_option" onClick={handleLogout} style={{ cursor: 'pointer' }}>
+            <img src="/sources/img/disconnection_icon.svg" alt="" style={{ height: 20 }} />
+            <p className="menu_option_title">Déconnexion</p>
+        </div>
     )
 }

@@ -103,7 +103,7 @@ export default async function FeedPage({
                         </p>
                         <div className="btn_container">
                             <a href="/login" className="btn btn_connexion">Se connecter</a>
-                            <a href="/signup" className="btn btn_connexion">S&aposinscrire</a>
+                            <a href="/signup" className="btn btn_connexion">S&apos;inscrire</a>
                         </div>
                     </div>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
