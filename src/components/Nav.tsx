@@ -23,15 +23,15 @@ export default function Nav({ user, profilePic, activeCategory = 1 }: NavProps) 
 
         <div className="menu_nav">
           <div className="menu_category">
-            <p className={`category_title category_title1${activeCategory === 1 ? ' category_title_click' : ''}`}>
+            <Link href="/feed" className={`category_title category_title1${activeCategory === 1 ? ' category_title_click' : ''}`}>
               {user ? "Fil d'actualité" : 'Nouveautés'}
-            </p>
-            <p className={`category_title category_title2${activeCategory === 2 ? ' category_title_click' : ''}`}>
+            </Link>
+            <Link href="/challenges" className={`category_title category_title2${activeCategory === 2 ? ' category_title_click' : ''}`}>
               Défis du moment
-            </p>
-            <p className={`category_title category_title3${activeCategory === 3 ? ' category_title_click' : ''}`}>
+            </Link>
+            <Link href="/feed" className={`category_title category_title3${activeCategory === 3 ? ' category_title_click' : ''}`}>
               Explorer
-            </p>
+            </Link>
             <div className="red_line underline" />
             <div className="fb_jsb ai-c category_list">
               <p className="category_list_title">Catégories</p>
@@ -53,11 +53,11 @@ export default function Nav({ user, profilePic, activeCategory = 1 }: NavProps) 
       </nav>
 
       <div className="category_list_container">
-        <p className="category_list_category category_list_category1">
+        <Link href="/feed" className="category_list_category category_list_category1">
           {user ? "Fil d'actualité" : 'Nouveautés'}
-        </p>
-        <p className="category_list_category category_list_category2">Défis du moment</p>
-        <p className="category_list_category category_list_category3">Explorer</p>
+        </Link>
+        <Link href="/challenges" className="category_list_category category_list_category2">Défis du moment</Link>
+        <Link href="/feed" className="category_list_category category_list_category3">Explorer</Link>
       </div>
 
       <BurgerMenu isAdmin={user?.isAdmin ?? false} />

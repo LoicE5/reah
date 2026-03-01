@@ -7,7 +7,7 @@ interface SideMenuProps {
 /** Server Component — the static content of the burger menu. */
 export default function SideMenu({ isAdmin }: SideMenuProps) {
   return (
-    <div className="menu_container" id="side_menu">
+    <div id="side_menu">
       <Link href="/profile/me" className="menu_option profil">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/sources/img/profile_icon.svg" alt="" />

@@ -56,71 +56,76 @@ export default async function ProfilePage({ params }: PageProps) {
     <main className="main_content">
       <Nav user={session} profilePic={navProfilePic} />
 
-      <div className="profil_container">
-        {/* Banner */}
-        <div className="banner_container">
-          {profileUser.user_banner ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={`/uploads/banners/${profileUser.user_banner}`} alt="" className="banner_img" />
-          ) : (
-            <div className="banner_img" style={{ background: '#1a1a1a' }} />
-          )}
-        </div>
+      {/* Banner */}
+      <div className="banner_container">
+        <div className="banner_flou_left" />
+        {profileUser.user_banner ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={`/uploads/banners/${profileUser.user_banner}`} alt="" className="banner" />
+        ) : (
+          <div className="banner" style={{ background: '#1a1a1a', width: '100%' }} />
+        )}
+        <div className="banner_flou_right" />
+      </div>
 
-        {/* Profile info */}
-        <div className="profil_info">
-          {/* Profile picture */}
-          <div className="pp_container">
+      {/* Profile info row */}
+      <div className="profile_container">
+        <div className="profile_content1">
+          {/* Profile picture — positioned with top: -80px to overlap the banner */}
+          <div className="profile_photo">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={profileUser.user_profile_picture ? `/uploads/profile_pictures/${profileUser.user_profile_picture}` : '/sources/img/profile_icon.svg'}
               alt={profileUser.user_username}
-              className="pp_profile profil_pp"
-              onError={undefined}
+              className="pp_profile"
+              style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }}
+              onError={(e) => { (e.target as HTMLImageElement).src = '/sources/img/profile_icon.svg'; }}
             />
           </div>
-
-          {/* Name and username */}
-          <div className="profil_text">
-            <h1 className="profil_name">{profileUser.user_name || profileUser.user_username}</h1>
-            <p className="profil_username">@{profileUser.user_username}</p>
-            {profileUser.user_bio && <p className="profil_bio">{profileUser.user_bio}</p>}
-            {profileUser.user_website && (
-              <a href={profileUser.user_website} target="_blank" rel="noopener noreferrer" className="link profil_website">
-                {profileUser.user_website}
-              </a>
-            )}
-          </div>
-
-          {/* Stats */}
-          <div className="profil_stats">
-            <div className="stat_item">
-              <span className="stat_number">{profileVideos.length}</span>
-              <span className="stat_label">Vidéos</span>
-            </div>
-            <div className="stat_item">
-              <span className="stat_number">{followerCount}</span>
-              <span className="stat_label">Abonnés</span>
-            </div>
-            <div className="stat_item">
-              <span className="stat_number">{followingCount}</span>
-              <span className="stat_label">Abonnements</span>
-            </div>
-          </div>
-
-          {/* Action buttons */}
-          <div className="profil_actions">
-            {isOwnProfile ? (
-              <a href="/settings" className="btn">Modifier le profil</a>
-            ) : session ? (
-              <SubscriptionButton userId={targetId} initialSubscribed={isSubscribed} />
-            ) : null}
-          </div>
+          {isOwnProfile ? (
+            <a href="/settings" className="btn subscribe_btn">Modifier le profil</a>
+          ) : session ? (
+            <SubscriptionButton userId={targetId} initialSubscribed={isSubscribed} />
+          ) : null}
         </div>
 
-        {/* Videos grid */}
-        <h2 style={{ color: 'white', padding: '20px 0 10px' }}>Vidéos</h2>
-        <div className="film_container" style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
+        <div className="profile_content2 profile_bio_container">
+          <p className="profile_name">{profileUser.user_name || profileUser.user_username}</p>
+          <p className="profile_username">@{profileUser.user_username}</p>
+          {profileUser.user_bio && <p>{profileUser.user_bio}</p>}
+          {profileUser.user_website && (
+            <a href={profileUser.user_website} target="_blank" rel="noopener noreferrer" className="profile_website">
+              {profileUser.user_website}
+            </a>
+          )}
+        </div>
+
+        <div className="profile_subscription_container">
+          <div className="profile_subscription_content">
+            <p className="profile_subscription_number">{profileVideos.length}</p>
+            <p className="profile_subscription_title">Vidéos</p>
+          </div>
+          <div className="profile_subscription_content">
+            <p className="profile_subscription_number">{followerCount}</p>
+            <p className="profile_subscription_title">Abonnés</p>
+          </div>
+          <div className="profile_subscription_content">
+            <p className="profile_subscription_number">{followingCount}</p>
+            <p className="profile_subscription_title">Abonnements</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Videos */}
+      <div className="realisation_number_container">
+        <div className="realisation_number_content">
+          <p className="realisation_number_content_title realisation_number_content_title1">Réalisations</p>
+          <div className="red_line realisation_number_content_line realisation_number_content_line1" />
+        </div>
+      </div>
+
+      <div className="all_realisation_container">
+        <div className="realisation_container">
           {enriched.length === 0 ? (
             <p style={{ color: '#888' }}>Aucune vidéo pour l&apos;instant.</p>
           ) : enriched.map(v => (

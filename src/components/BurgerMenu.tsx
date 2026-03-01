@@ -35,7 +35,7 @@ export default function BurgerMenu({ isAdmin }: BurgerMenuProps) {
   }
 
   return (
-    <div ref={menuRef}>
+    <div ref={menuRef} className="menu_container">
       <SideMenu isAdmin={isAdmin} />
     </div>
   );
