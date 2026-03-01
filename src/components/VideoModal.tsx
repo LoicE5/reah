@@ -146,19 +146,17 @@ export default function VideoModal({ videoId, currentUserId, isAdmin, isLoggedIn
               />
               <button
                 onClick={() => setShowShare(true)}
-                style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#888' }}
+                style={{ background: 'none', border: 'none', cursor: 'pointer' }}
                 title="Partager"
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/sources/img/share_icon.svg" alt="Partager" style={{ height: 20 }} />
+                <div className="share_icon" />
               </button>
               <button
                 onClick={() => setShowComments(v => !v)}
-                style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#888', display: 'flex', alignItems: 'center', gap: 4 }}
+                style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4 }}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/sources/img/comment_icon.svg" alt="" style={{ height: 20 }} />
-                <span style={{ fontSize: '0.85em' }}>{video.commentCount}</span>
+                <div className="comment_icon" />
+                <span style={{ fontSize: '0.85em', color: '#888' }}>{video.commentCount}</span>
               </button>
             </div>
 

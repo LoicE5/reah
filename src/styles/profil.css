@@ -342,7 +342,7 @@ nav {
 .modify_banner {
     width: 100%;
     height: 200px;
-    background: url(../../../database/profile_picture/minmin.jpg);
+    background: #1a1a1a;
 }
 
 .modify_profile_photo_container {

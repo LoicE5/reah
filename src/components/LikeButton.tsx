@@ -56,8 +56,13 @@ export default function LikeButton({ videoId, initialLikes, initialLiked, isLogg
       style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6 }}
       title={liked ? 'Je n\'aime plus' : 'J\'aime'}
     >
-      <div className={`popcorn_icon${liked ? ' popcorn_click' : ''}`} />
-      <span className="like_number">{likes}</span>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={liked ? '/sources/img/pop_corn.png' : '/sources/img/pop_corn_icon.svg'}
+        className="pop_corn_icon"
+        alt="like"
+      />
+      <span className="pop_corn_number">{likes}</span>
     </div>
   );
 }

@@ -35,8 +35,11 @@ export default function SaveButton({ videoId, initialSaved, isLoggedIn, onLoginR
   }
 
   return (
-    <div
-      className={`save_icon${saved ? ' saved' : ''}`}
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={saved ? '/sources/img/film_saved_icon_click.svg' : '/sources/img/film_saved_icon.svg'}
+      className="film_saved_icon"
+      alt={saved ? 'Retirer des enregistrés' : 'Enregistrer'}
       onClick={toggle}
       style={{ cursor: 'pointer' }}
       title={saved ? 'Retirer des enregistrés' : 'Enregistrer'}

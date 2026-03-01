@@ -39,7 +39,7 @@ export default function VideoCard({ video, session }: VideoCardProps) {
             src={`/uploads/videos_posters/${video.video_poster || 'default.jpg'}`}
             className="video_poster"
             alt={video.video_title ?? ''}
-            onError={e => { (e.target as HTMLImageElement).src = '/sources/img/film_icon.svg'; }}
+            onError={e => { (e.target as HTMLImageElement).src = '/sources/img/dark_film_icon.svg'; }}
           />
           <div
             className="user_container"
@@ -72,8 +72,8 @@ export default function VideoCard({ video, session }: VideoCardProps) {
               <div className="like_container fb_jsb">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/sources/img/pop_corn.png"
-                  className={`pop_corn_icon${video.isLiked ? ' pop_corn_icon_click' : ''}`}
+                  src={video.isLiked ? '/sources/img/pop_corn.png' : '/sources/img/pop_corn_icon.svg'}
+                  className="pop_corn_icon"
                   alt="like"
                   onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
                 />
