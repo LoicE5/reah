@@ -353,6 +353,11 @@ nav,.nav_footer{
     color: var(--text-grey);
 }
 
+.category_title {
+    text-decoration: none;
+    color: var(--text-grey);
+}
+
 .category_title_click {
     color: var(--text) !important;
     font-weight: bold;
@@ -420,8 +425,9 @@ nav,.nav_footer{
 
 .menu_profile {
     display: flex;
-    min-width: 120px;
-    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    justify-content: flex-end;
 }
 
 

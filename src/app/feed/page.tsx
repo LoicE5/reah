@@ -113,7 +113,7 @@ export default async function FeedPage({
       )}
 
       <main className="main_content">
-        <Nav user={session} profilePic={profilePic} />
+        <Nav user={session} profilePic={profilePic} activeCategory={initialTab} />
 
         {/* Mobile footer nav */}
         <div className="nav_footer">
