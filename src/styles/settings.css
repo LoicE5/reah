@@ -12,7 +12,7 @@
     padding-top: 200px;
     box-shadow: 10px 0px 20px #0a0a0a;
     position: fixed;
-    z-index: 200;
+    z-index: 6;
 }
 
 .settings_menu_option {
@@ -62,7 +62,7 @@
     top: 15%;
     cursor: pointer;
     display: none;
-    z-index: 200;
+    z-index: 6;
 }
 
 .settings_menu_open {

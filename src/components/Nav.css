@@ -26,7 +26,7 @@ nav,
     align-items: center;
     justify-content: space-between;
     min-width: 100%;
-    z-index: 101;
+    z-index: 5;
     background-color: var(--first_color);
     padding: 5px;
     height: 60px;
@@ -142,7 +142,7 @@ nav.nav--transparent {
     background: var(--first_color);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    z-index: 999;
+    z-index: 7;
     border-right: 2px solid #141414;
     border-left: 2px solid #141414;
     border-bottom: 2px solid #141414;
@@ -212,7 +212,7 @@ nav.nav--transparent {
     width: max-content;
     border-radius: 10px;
     background-color: #d60035;
-    z-index: 5;
+    z-index: 14;
     position: fixed;
     right: 5px;
     top: 60px;

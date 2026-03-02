@@ -83,7 +83,7 @@ body {
     min-height: 100%;
     width: auto;
     height: auto;
-    z-index: -100;
+    z-index: -1;
     background: cover;
 }
 
@@ -295,7 +295,7 @@ select {
 /* Popups / modals */
 .pop_up_container {
     position: absolute;
-    z-index: 200;
+    z-index: 9;
     flex-direction: column;
     box-shadow: black 0px 0px 20px;
     align-self: center;
@@ -336,7 +336,7 @@ select {
     display: none;
     min-height: 400px;
     width: 640px;
-    z-index: 500;
+    z-index: 13;
 }
 
 .connexion_close_icon,
@@ -375,7 +375,7 @@ select {
 .delete_account_container,
 .suspend_account_container {
     width: 400px;
-    z-index: 400;
+    z-index: 12;
     line-height: 25px;
     display: none;
 }
@@ -390,7 +390,7 @@ select {
 
 .share_film_container {
     width: 600px;
-    z-index: 300;
+    z-index: 11;
 }
 
 .logo_container {
@@ -436,7 +436,7 @@ select {
     width: 100%;
     position: absolute;
     top: -40px;
-    z-index: 500;
+    z-index: 13;
     text-align: center;
     padding: 10px;
     animation: message 5s forwards;
