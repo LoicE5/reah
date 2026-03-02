@@ -72,8 +72,8 @@ export default async function ChallengeDetailPage({ params }: PageProps) {
                     {defi.defi_image ? (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img
-                            draggable={false}
                             src={`/uploads/defis_img/${defi.defi_image}`}
+                            draggable={false}
                             alt={defi.defi_name}
                             className="defi_img"
                             style={{ objectFit: 'cover', borderRadius: 8, maxHeight: 400 }}

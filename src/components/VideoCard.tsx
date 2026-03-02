@@ -37,6 +37,7 @@ export default function VideoCard({ video, session }: VideoCardProps) {
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                         src={`/uploads/videos_posters/${video.video_poster || 'default.jpg'}`}
+                        draggable={false}
                         className="video_poster"
                         alt={video.video_title ?? ''}
                         onError={event => { (event.target as HTMLImageElement).src = '/sources/img/dark_film_icon.svg' }}
@@ -48,6 +49,7 @@ export default function VideoCard({ video, session }: VideoCardProps) {
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                             src={video.user_profile_picture ? `/uploads/profile_pictures/${video.user_profile_picture}` : '/sources/img/profile_icon.svg'}
+                            draggable={false}
                             alt={video.user_username ?? ''}
                             className="pp_profile"
                             onError={event => { (event.target as HTMLImageElement).src = '/sources/img/profile_icon.svg' }}
@@ -64,7 +66,7 @@ export default function VideoCard({ video, session }: VideoCardProps) {
                             <p className="see_more">
                                 Voir plus&nbsp;
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img src="/sources/img/see_more_arrow.svg" className="see_more_arrow" alt="" />
+                                <img src="/sources/img/see_more_arrow.svg" draggable={false} className="see_more_arrow" alt="" />
                             </p>
                         </div>
 
@@ -73,6 +75,7 @@ export default function VideoCard({ video, session }: VideoCardProps) {
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img
                                     src={video.isLiked ? '/sources/img/pop_corn.png' : '/sources/img/pop_corn_icon.svg'}
+                                    draggable={false}
                                     className="pop_corn_icon"
                                     alt="like"
                                     onError={event => { (event.target as HTMLImageElement).style.display = 'none' }}

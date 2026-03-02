@@ -60,6 +60,7 @@ export default function LikeButton({ videoId, initialLikes, initialLiked, isLogg
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
                 src={liked ? '/sources/img/pop_corn.png' : '/sources/img/pop_corn_icon.svg'}
+                draggable={false}
                 className="pop_corn_icon"
                 alt="like"
             />

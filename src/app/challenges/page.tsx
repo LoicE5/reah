@@ -58,8 +58,8 @@ export default async function ChallengesPage({
                                 {defi.defi_image ? (
                                     // eslint-disable-next-line @next/next/no-img-element
                                     <img
-                                        draggable={false}
                                         src={`/uploads/defis_img/${defi.defi_image}`}
+                                        draggable={false}
                                         alt={defi.defi_name}
                                         className="defi_img"
                                     />
@@ -85,8 +85,8 @@ export default async function ChallengesPage({
                             {defi.defi_image ? (
                                 // eslint-disable-next-line @next/next/no-img-element
                                 <img
-                                    draggable={false}
                                     src={`/uploads/defis_img/${defi.defi_image}`}
+                                    draggable={false}
                                     alt={defi.defi_name}
                                     className="defi_pop_img"
                                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}

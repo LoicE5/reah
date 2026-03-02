@@ -9,6 +9,7 @@ export default function NavProfileButton({ profilePic }: NavProfileButtonProps) 
         // eslint-disable-next-line @next/next/no-img-element
         <img
             src={profilePic ? `/uploads/profile_pictures/${profilePic}` : '/sources/img/profile_icon.svg'}
+            draggable={false}
             className="menu_pp"
             alt="Mon profil"
             onClick={() => (window as unknown as Record<string, () => void>).toggleBurgerMenu?.()}

@@ -55,7 +55,7 @@ export default async function SearchPage({ searchParams }: PageProps) {
                 <a key={defi.defi_id} href={`/challenges/${defi.defi_id}`} className="defi_box" style={{ textDecoration: 'none', width: 200 }}>
                   {defi.defi_image && (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={`/uploads/defis_img/${defi.defi_image}`} alt={defi.defi_name} style={{ width: '100%', height: 120, objectFit: 'cover' }} />
+                    <img src={`/uploads/defis_img/${defi.defi_image}`} draggable={false} alt={defi.defi_name} style={{ width: '100%', height: 120, objectFit: 'cover' }} />
                   )}
                   <p style={{ color: 'white', padding: '8px 0', margin: 0 }}>{defi.defi_name}</p>
                 </a>
@@ -73,6 +73,7 @@ export default async function SearchPage({ searchParams }: PageProps) {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={user.user_profile_picture ? `/uploads/profile_pictures/${user.user_profile_picture}` : '/sources/img/profile_icon.svg'}
+                    draggable={false}
                     alt={user.user_username}
                     style={{ height: 64, width: 64, borderRadius: '50%', objectFit: 'cover', display: 'block', margin: '0 auto 8px' }}
                   />
@@ -92,6 +93,7 @@ export default async function SearchPage({ searchParams }: PageProps) {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={`/uploads/videos_posters/${video.video_poster || 'default.jpg'}`}
+                    draggable={false}
                     alt={video.video_title ?? ''}
                     style={{ width: '100%', height: 120, objectFit: 'cover' }}
                   />

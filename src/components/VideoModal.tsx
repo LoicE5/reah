@@ -75,6 +75,7 @@ export default function VideoModal({ videoId, currentUserId, isAdmin, isLoggedIn
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                             src="/sources/img/close_icon.svg"
+                            draggable={false}
                             alt="Fermer"
                             className="connexion_close_icon"
                             onClick={onClose}
@@ -100,6 +101,7 @@ export default function VideoModal({ videoId, currentUserId, isAdmin, isLoggedIn
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
                                 src={video.user_profile_picture ? `/uploads/profile_pictures/${video.user_profile_picture}` : '/sources/img/profile_icon.svg'}
+                                draggable={false}
                                 alt={video.user_username ?? ''}
                                 style={{ height: 36, width: 36, borderRadius: '50%', objectFit: 'cover' }}
                                 onError={event => { (event.target as HTMLImageElement).src = '/sources/img/profile_icon.svg' }}

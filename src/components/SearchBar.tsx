@@ -78,6 +78,7 @@ export default function SearchBar() {
                             {video.video_poster && (
                                 <img
                                     src={`/uploads/videos_posters/${video.video_poster}`}
+                                    draggable={false}
                                     alt=""
                                     style={{ height: 30, width: 40, objectFit: 'cover', marginRight: 8 }}
                                 />
@@ -95,6 +96,7 @@ export default function SearchBar() {
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
                                 src={user.user_profile_picture ? `/uploads/profile_pictures/${user.user_profile_picture}` : '/sources/img/profile_icon.svg'}
+                                draggable={false}
                                 alt=""
                                 style={{ height: 30, width: 30, borderRadius: '50%', marginRight: 8, objectFit: 'cover' }}
                                 onError={event => { (event.target as HTMLImageElement).src = '/sources/img/profile_icon.svg' }}

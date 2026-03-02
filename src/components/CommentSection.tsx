@@ -86,6 +86,7 @@ export default function CommentSection({ videoId, currentUserId, isAdmin }: Comm
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
                                 src={comment.user_profile_picture ? `/uploads/profile_pictures/${comment.user_profile_picture}` : '/sources/img/profile_icon.svg'}
+                                draggable={false}
                                 alt={comment.user_username ?? ''}
                                 style={{ height: 32, width: 32, borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
                                 onError={event => { (event.target as HTMLImageElement).src = '/sources/img/profile_icon.svg' }}

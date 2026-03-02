@@ -13,25 +13,25 @@ export default function SideMenu({ isAdmin, onClose }: SideMenuProps) {
         <div id="side_menu">
             <Link href="/profile/me" className="menu_option profil">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/sources/img/profile_icon.svg" alt="" />
+                <img src="/sources/img/profile_icon.svg" draggable={false} alt="" />
                 <p className="menu_option_title">Profil</p>
             </Link>
 
             <Link href="/notifications" className="menu_option notifications">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/sources/img/notifications_icon.svg" alt="" />
+                <img src="/sources/img/notifications_icon.svg" draggable={false} alt="" />
                 <p className="menu_option_title">Notifications</p>
             </Link>
 
             <Link href="/saved" className="registered menu_option">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/sources/img/saved_icon.svg" alt="" />
+                <img src="/sources/img/saved_icon.svg" draggable={false} alt="" />
                 <p className="menu_option_title">Enregistrés</p>
             </Link>
 
             <Link href="/settings" className="settings menu_option">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/sources/img/settings_icon.svg" alt="" />
+                <img src="/sources/img/settings_icon.svg" draggable={false} alt="" />
                 <p className="menu_option_title">Paramètres</p>
             </Link>
 
@@ -58,7 +58,7 @@ function LogoutItem({ onClose }: { onClose: () => void }) {
     return (
         // eslint-disable-next-line @next/next/no-img-element
         <div className="disconnection menu_option" onClick={handleLogout} style={{ cursor: 'pointer' }}>
-            <img src="/sources/img/disconnection_icon.svg" alt="" style={{ height: 20 }} />
+            <img src="/sources/img/disconnection_icon.svg" draggable={false} alt="" style={{ height: 20 }} />
             <p className="menu_option_title">Déconnexion</p>
         </div>
     )

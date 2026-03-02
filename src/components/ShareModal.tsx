@@ -45,7 +45,7 @@ export default function ShareModal({ videoId, title, onClose }: ShareModalProps)
                 <div className="pop_up_header">
                     <h2>Partager</h2>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src="/sources/img/close_icon.svg" alt="Fermer" className="share_close_icon" onClick={onClose} />
+                    <img src="/sources/img/close_icon.svg" draggable={false} alt="Fermer" className="share_close_icon" onClick={onClose} />
                 </div>
 
                 <div className="logo_container" style={{ padding: '0 30px' }}>

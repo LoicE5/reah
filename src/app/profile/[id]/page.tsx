@@ -61,7 +61,7 @@ export default async function ProfilePage({ params }: PageProps) {
                 <div className="banner_flou_left" />
                 {profileUser.user_banner ? (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img draggable={false} src={`/uploads/banners/${profileUser.user_banner}`} alt="" className="banner" />
+                    <img src={`/uploads/banners/${profileUser.user_banner}`} draggable={false} alt="" className="banner" />
                 ) : (
                     <div className="banner" style={{ background: '#1a1a1a', width: '100%', height: '100%' }} />
                 )}
@@ -75,8 +75,8 @@ export default async function ProfilePage({ params }: PageProps) {
                     <div className="profile_photo">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
-                            draggable={false}
                             src={profileUser.user_profile_picture ? `/uploads/profile_pictures/${profileUser.user_profile_picture}` : '/sources/img/profile_icon.svg'}
+                            draggable={false}
                             alt={profileUser.user_username}
                             className="pp_profile"
                             style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }}

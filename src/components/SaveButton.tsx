@@ -39,6 +39,7 @@ export default function SaveButton({ videoId, initialSaved, isLoggedIn, onLoginR
         // eslint-disable-next-line @next/next/no-img-element
         <img
             src={saved ? '/sources/img/film_saved_icon_click.svg' : '/sources/img/film_saved_icon.svg'}
+            draggable={false}
             className="film_saved_icon"
             alt={saved ? 'Retirer des enregistrés' : 'Enregistrer'}
             onClick={toggle}

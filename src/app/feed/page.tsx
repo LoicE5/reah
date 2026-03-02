@@ -91,7 +91,7 @@ export default async function FeedPage({
                 <section className="accueil" id="accueil">
                     <a className="accueil_reah_logo" href="/feed" />
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img draggable={false} src="/sources/img/accueil_img.png" className="accueil_img" alt="" />
+                    <img src="/sources/img/accueil_img.png" draggable={false} className="accueil_img" alt="" />
                     <div className="accueil_text">
                         <p className="h1"><span>R</span>EAH</p>
                         <p>
@@ -107,7 +107,7 @@ export default async function FeedPage({
                         </div>
                     </div>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img draggable={false} src="/sources/img/accueil_arrow.svg" className="scroll_arrow" alt="" />
+                    <img src="/sources/img/accueil_arrow.svg" draggable={false} className="scroll_arrow" alt="" />
                 </section>
             )}
 
@@ -167,7 +167,7 @@ export default async function FeedPage({
                                         <a key={defi.defi_id} href={`/challenges/${defi.defi_id}`} className="defi_box" style={{ textDecoration: 'none' }}>
                                             {defi.defi_image && (
                                                 // eslint-disable-next-line @next/next/no-img-element
-                                                <img draggable={false} src={`/uploads/defis_img/${defi.defi_image}`} alt={defi.defi_name} className="defi_img" />
+                                                <img src={`/uploads/defis_img/${defi.defi_image}`} draggable={false} alt={defi.defi_name} className="defi_img" />
                                             )}
                                             <div className="defi_info">
                                                 <p className="defi_title">{defi.defi_name}</p>
