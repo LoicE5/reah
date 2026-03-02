@@ -1,5 +1,7 @@
 # Reah
 
+> This project was initially created as a student project, co-engineered with my classmate [Julie](https://github.com/jstm17), originally built in PHP. This repository is a Next.js reboot of that project, hosted on Vercel at [reah-app.vercel.app](https://reah-app.vercel.app/feed) and powered by [Aiven](https://aiven.io)'s managed MySQL database service. The original PHP codebase needed modernization, which motivated this rewrite.
+
 Reah is a French-language platform for short films (*courts-métrages*) and creative challenges (*défis*). Filmmakers — beginners or seasoned — upload their short films, participate in timed challenges, follow other creators, and engage through likes, comments, and saves.
 
 ## Tech stack
