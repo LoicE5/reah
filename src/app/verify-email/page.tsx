@@ -1,10 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 
-export default function VerifyEmailPage() {
+function VerifyEmailContent() {
     const router = useRouter()
     const params = useSearchParams()
     const email = params.get('email') ?? ''
@@ -54,50 +54,57 @@ export default function VerifyEmailPage() {
     }
 
     return (
+        <main className="main_content">
+            {error && <p className="message_false_container">{error}</p>}
+            {success && <p className="message_true_container">{success}</p>}
+
+            <video className="background_video" autoPlay loop muted playsInline>
+                <source src="/sources/video/videobackPT.mp4" type="video/mp4" />
+            </video>
+
+            <form className="form_container" onSubmit={handleSubmit} style={{ gap: 16 }}>
+                <h2 style={{ color: 'white', margin: 0 }}>Vérification de l&apos;e-mail</h2>
+                <p style={{ color: '#aaa', fontSize: '0.9em', margin: 0 }}>
+                    Un code a été envoyé à <strong style={{ color: 'white' }}>{email}</strong>
+                </p>
+
+                <div className="input_container">
+                    <label htmlFor="code">
+                        <span>Code de vérification (6 chiffres)</span>
+                        <input
+                            type="text"
+                            className="input_connexion"
+                            id="code"
+                            value={code}
+                            onChange={event => setCode(event.target.value.replace(/\D/g, '').slice(0, 6))}
+                            maxLength={6}
+                            pattern="\d{6}"
+                            required
+                            style={{ letterSpacing: 8, textAlign: 'center', fontSize: '1.5em' }}
+                        />
+                    </label>
+                </div>
+
+                <button type="submit" className="btn btn_connexion" disabled={loading || code.length < 6}>
+                    {loading ? 'Vérification...' : 'Vérifier'}
+                </button>
+
+                <button type="button" className="link" style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#d60036', fontWeight: 600 }}
+                    onClick={resendCode}>
+                    Renvoyer le code
+                </button>
+            </form>
+        </main>
+    )
+}
+
+export default function VerifyEmailPage() {
+    return (
         <div style={{ background: 'black' }}>
             <Link href="/feed" className="reah_logo" aria-label="REAH" />
-
-            <main className="main_content">
-                {error && <p className="message_false_container">{error}</p>}
-                {success && <p className="message_true_container">{success}</p>}
-
-                <video className="background_video" autoPlay loop muted playsInline>
-                    <source src="/sources/video/videobackPT.mp4" type="video/mp4" />
-                </video>
-
-                <form className="form_container" onSubmit={handleSubmit} style={{ gap: 16 }}>
-                    <h2 style={{ color: 'white', margin: 0 }}>Vérification de l&apos;e-mail</h2>
-                    <p style={{ color: '#aaa', fontSize: '0.9em', margin: 0 }}>
-                        Un code a été envoyé à <strong style={{ color: 'white' }}>{email}</strong>
-                    </p>
-
-                    <div className="input_container">
-                        <label htmlFor="code">
-                            <span>Code de vérification (6 chiffres)</span>
-                            <input
-                                type="text"
-                                className="input_connexion"
-                                id="code"
-                                value={code}
-                                onChange={event => setCode(event.target.value.replace(/\D/g, '').slice(0, 6))}
-                                maxLength={6}
-                                pattern="\d{6}"
-                                required
-                                style={{ letterSpacing: 8, textAlign: 'center', fontSize: '1.5em' }}
-                            />
-                        </label>
-                    </div>
-
-                    <button type="submit" className="btn btn_connexion" disabled={loading || code.length < 6}>
-                        {loading ? 'Vérification...' : 'Vérifier'}
-                    </button>
-
-                    <button type="button" className="link" style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#d60036', fontWeight: 600 }}
-                        onClick={resendCode}>
-                        Renvoyer le code
-                    </button>
-                </form>
-            </main>
+            <Suspense>
+                <VerifyEmailContent />
+            </Suspense>
         </div>
     )
 }
