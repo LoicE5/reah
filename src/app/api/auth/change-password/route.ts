@@ -1,14 +1,14 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { db } from '@/lib/db'
-import { users } from '@/db/schema'
-import { eq } from 'drizzle-orm'
-import { hashPassword, verifyPassword, isValidPassword } from '@/lib/auth'
+import { users, passwordResetTokens } from '@/db/schema'
+import { eq, and, isNull, gt } from 'drizzle-orm'
+import { hashPassword, verifyPassword, isValidPassword, hashResetToken } from '@/lib/auth'
 import { getCurrentUser } from '@/lib/session'
 
 const resetSchema = z.object({
   mode:        z.literal('reset'),
-  email:       z.string().email(),
+  token:       z.string().min(1),
   newPassword: z.string().min(8)
 })
 
@@ -38,15 +38,34 @@ export async function POST(req: Request) {
     const hashed = await hashPassword(parsed.data.newPassword)
 
     if (parsed.data.mode === 'reset') {
-      const [user] = await db
-        .select({ id: users.user_id })
-        .from(users)
-        .where(eq(users.user_email, parsed.data.email))
+      const tokenHash = hashResetToken(parsed.data.token)
+      const now = new Date()
+
+      const [tokenRow] = await db
+        .select({ id: passwordResetTokens.id, user_id: passwordResetTokens.user_id })
+        .from(passwordResetTokens)
+        .where(
+          and(
+            eq(passwordResetTokens.token_hash, tokenHash),
+            gt(passwordResetTokens.expires_at, now),
+            isNull(passwordResetTokens.used_at)
+          )
+        )
         .limit(1)
-      if (!user) {
-        return NextResponse.json({ error: 'Aucun compte trouvé.' }, { status: 404 })
+
+      if (!tokenRow) {
+        return NextResponse.json({ error: 'Lien invalide ou expiré.' }, { status: 400 })
       }
-      await db.update(users).set({ user_password: hashed }).where(eq(users.user_id, user.id))
+
+      // Mark token as used and update password atomically
+      await db.update(passwordResetTokens)
+        .set({ used_at: now })
+        .where(eq(passwordResetTokens.id, tokenRow.id))
+
+      await db.update(users)
+        .set({ user_password: hashed })
+        .where(eq(users.user_id, tokenRow.user_id))
+
     } else {
       const session = await getCurrentUser()
       if (!session) {

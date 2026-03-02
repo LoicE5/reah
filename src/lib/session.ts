@@ -9,9 +9,14 @@ export interface SessionData {
   isLoggedIn: boolean
 }
 
+const sessionSecret = process.env.SESSION_SECRET
+if (!sessionSecret || sessionSecret.length < 32) {
+  throw new Error('SESSION_SECRET env var is required and must be at least 32 characters long.')
+}
+
 export const sessionOptions: SessionOptions = {
   cookieName: 'reah_session',
-  password:   process.env.SESSION_SECRET ?? 'fallback_secret_change_me_in_production_now',
+  password:   sessionSecret,
   cookieOptions: {
     secure:  process.env.NODE_ENV === 'production',
     maxAge:  60 * 60 * 24 * 30, // 30 days — same as PHP

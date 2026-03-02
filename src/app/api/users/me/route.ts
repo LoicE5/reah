@@ -6,6 +6,7 @@ import { getCurrentUser, getSession } from '@/lib/session'
 import { writeFile, mkdir, unlink } from 'fs/promises'
 import { join } from 'path'
 import { randomUUID } from 'crypto'
+import { validateImageUpload, UploadValidationError } from '@/lib/validateUpload'
 
 export async function PATCH(req: Request) {
   const session = await getCurrentUser()
@@ -27,33 +28,47 @@ export async function PATCH(req: Request) {
 
   // Handle avatar upload
   if (avatarFile && avatarFile.size > 0) {
-    const ext = avatarFile.name.split('.').pop() ?? 'jpg'
-    const filename = `${randomUUID()}.${ext}`
-    const dir = join(process.cwd(), 'public/uploads/profile_pictures')
-    await mkdir(dir, { recursive: true })
-    await writeFile(join(dir, filename), Buffer.from(await avatarFile.arrayBuffer()))
-    updates.user_profile_picture = filename
+    try {
+      const { buffer, ext } = await validateImageUpload(avatarFile)
+      const filename = `${randomUUID()}.${ext}`
+      const dir = join(process.cwd(), 'public/uploads/profile_pictures')
+      await mkdir(dir, { recursive: true })
+      await writeFile(join(dir, filename), buffer)
+      updates.user_profile_picture = filename
 
-    // Delete old avatar
-    const [current] = await db.select({ pic: users.user_profile_picture }).from(users).where(eq(users.user_id, session.userId)).limit(1)
-    if (current?.pic) {
-      await unlink(join(dir, current.pic)).catch((error: unknown) => { console.error('[users/me] Could not delete old avatar:', error) })
+      // Delete old avatar
+      const [current] = await db.select({ pic: users.user_profile_picture }).from(users).where(eq(users.user_id, session.userId)).limit(1)
+      if (current?.pic) {
+        await unlink(join(dir, current.pic)).catch((error: unknown) => { console.error('[users/me] Could not delete old avatar:', error) })
+      }
+    } catch (error: unknown) {
+      if (error instanceof UploadValidationError) {
+        return NextResponse.json({ error: error.message }, { status: 400 })
+      }
+      throw error
     }
   }
 
   // Handle banner upload
   if (bannerFile && bannerFile.size > 0) {
-    const ext = bannerFile.name.split('.').pop() ?? 'jpg'
-    const filename = `${randomUUID()}.${ext}`
-    const dir = join(process.cwd(), 'public/uploads/banners')
-    await mkdir(dir, { recursive: true })
-    await writeFile(join(dir, filename), Buffer.from(await bannerFile.arrayBuffer()))
-    updates.user_banner = filename
+    try {
+      const { buffer, ext } = await validateImageUpload(bannerFile)
+      const filename = `${randomUUID()}.${ext}`
+      const dir = join(process.cwd(), 'public/uploads/banners')
+      await mkdir(dir, { recursive: true })
+      await writeFile(join(dir, filename), buffer)
+      updates.user_banner = filename
 
-    // Delete old banner
-    const [current] = await db.select({ banner: users.user_banner }).from(users).where(eq(users.user_id, session.userId)).limit(1)
-    if (current?.banner) {
-      await unlink(join(dir, current.banner)).catch((error: unknown) => { console.error('[users/me] Could not delete old banner:', error) })
+      // Delete old banner
+      const [current] = await db.select({ banner: users.user_banner }).from(users).where(eq(users.user_id, session.userId)).limit(1)
+      if (current?.banner) {
+        await unlink(join(dir, current.banner)).catch((error: unknown) => { console.error('[users/me] Could not delete old banner:', error) })
+      }
+    } catch (error: unknown) {
+      if (error instanceof UploadValidationError) {
+        return NextResponse.json({ error: error.message }, { status: 400 })
+      }
+      throw error
     }
   }
 

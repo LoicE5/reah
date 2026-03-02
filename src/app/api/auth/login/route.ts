@@ -5,6 +5,7 @@ import { users } from '@/db/schema'
 import { eq, or } from 'drizzle-orm'
 import { verifyPassword } from '@/lib/auth'
 import { getSession } from '@/lib/session'
+import { isRateLimited, getClientIp } from '@/lib/rateLimit'
 
 const loginSchema = z.object({
   credential: z.string().min(1, 'Identifiant requis'),
@@ -12,6 +13,9 @@ const loginSchema = z.object({
 })
 
 export async function POST(req: Request) {
+  if (isRateLimited(`login:${getClientIp(req)}`, 10, 15 * 60 * 1000)) {
+    return NextResponse.json({ error: 'Trop de tentatives. Réessaie dans 15 minutes.' }, { status: 429 })
+  }
   try {
     const body   = await req.json()
     const parsed = loginSchema.safeParse(body)

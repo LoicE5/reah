@@ -1,4 +1,4 @@
-import { randomBytes } from 'crypto'
+import { randomBytes, randomInt, createHash } from 'crypto'
 import bcrypt from 'bcryptjs'
 
 /** Generates a random hex string — replaces PHP's func::createString(). */
@@ -8,9 +8,24 @@ export function generateToken(length = 32): string {
     .slice(0, length)
 }
 
-/** Generates a 6-digit email verification code — replaces PHP's generateCode(). */
+/** Generates a cryptographically secure 6-digit email verification code. */
 export function generateVerificationCode(): string {
-  return String(Math.floor(100000 + Math.random() * 900000))
+  return String(randomInt(100000, 1000000))
+}
+
+/**
+ * Generates a password reset token pair.
+ * Returns the raw token (sent to the user via email) and its SHA-256 hash (stored in DB).
+ */
+export function generatePasswordResetToken(): { raw: string; hash: string } {
+  const raw = randomBytes(32).toString('hex')
+  const hash = createHash('sha256').update(raw).digest('hex')
+  return { raw, hash }
+}
+
+/** Hashes a raw password reset token for DB lookup. */
+export function hashResetToken(raw: string): string {
+  return createHash('sha256').update(raw).digest('hex')
 }
 
 /**

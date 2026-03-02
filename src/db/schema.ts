@@ -11,23 +11,24 @@ import {
 import { sql } from 'drizzle-orm'
 
 export const users = mysqlTable('users', {
-  user_id:              int('user_id').autoincrement().primaryKey(),
-  user_username:        varchar('user_username', { length: 50 }).notNull().unique(),
-  user_email:           varchar('user_email', { length: 255 }).notNull().unique(),
-  user_password:        varchar('user_password', { length: 255 }).notNull(),
-  user_lastname:        varchar('user_lastname', { length: 100 }),
-  user_firstname:       varchar('user_firstname', { length: 100 }),
-  user_birthday:        varchar('user_birthday', { length: 20 }),
-  user_status:          tinyint('user_status').default(0),            // 0=unverified, 1=verified
-  user_cgu:             tinyint('user_CGU').default(0),
-  user_email_verify:    varchar('user_email_verify', { length: 10 }), // 6-digit code
-  user_suspended:       tinyint('user_suspended').default(0),
-  user_admin:           tinyint('user_admin').default(0),
-  user_profile_picture: varchar('user_profile_picture', { length: 255 }).default(''),
-  user_banner:          varchar('user_banner', { length: 255 }).default(''),
-  user_name:            varchar('user_name', { length: 100 }).default(''),
-  user_website:         varchar('user_website', { length: 255 }).default(''),
-  user_bio:             text('user_bio'),
+  user_id:                    int('user_id').autoincrement().primaryKey(),
+  user_username:              varchar('user_username', { length: 50 }).notNull().unique(),
+  user_email:                 varchar('user_email', { length: 255 }).notNull().unique(),
+  user_password:              varchar('user_password', { length: 255 }).notNull(),
+  user_lastname:              varchar('user_lastname', { length: 100 }),
+  user_firstname:             varchar('user_firstname', { length: 100 }),
+  user_birthday:              varchar('user_birthday', { length: 20 }),
+  user_status:                tinyint('user_status').default(0),            // 0=unverified, 1=verified
+  user_cgu:                   tinyint('user_CGU').default(0),
+  user_email_verify:          varchar('user_email_verify', { length: 10 }), // 6-digit code
+  user_email_verify_expires:  datetime('user_email_verify_expires'),         // expiry for verify code
+  user_suspended:             tinyint('user_suspended').default(0),
+  user_admin:                 tinyint('user_admin').default(0),
+  user_profile_picture:       varchar('user_profile_picture', { length: 255 }).default(''),
+  user_banner:                varchar('user_banner', { length: 255 }).default(''),
+  user_name:                  varchar('user_name', { length: 100 }).default(''),
+  user_website:               varchar('user_website', { length: 255 }).default(''),
+  user_bio:                   text('user_bio'),
 })
 
 export const sessions = mysqlTable('sessions', {
@@ -97,6 +98,15 @@ export const subscription = mysqlTable('subscription', {
 export const distribution = mysqlTable('distribution', {
   distribution_user_id:  int('distribution_user_id').references(() => users.user_id, { onDelete: 'cascade' }),
   distribution_video_id: int('distribution_video_id').references(() => videos.video_id, { onDelete: 'cascade' }),
+})
+
+export const passwordResetTokens = mysqlTable('password_reset_tokens', {
+  id:         int('id').autoincrement().primaryKey(),
+  user_id:    int('user_id').notNull().references(() => users.user_id, { onDelete: 'cascade' }),
+  token_hash: varchar('token_hash', { length: 64 }).notNull().unique(), // SHA-256 hex of the raw token
+  expires_at: datetime('expires_at').notNull(),
+  used_at:    datetime('used_at'),
+  created_at: datetime('created_at').default(sql`CURRENT_TIMESTAMP`),
 })
 
 // TypeScript types inferred from schema

@@ -7,6 +7,7 @@ import { getCurrentUser } from '@/lib/session'
 import { writeFile, mkdir } from 'fs/promises'
 import { join } from 'path'
 import { randomUUID } from 'crypto'
+import { validateImageUpload, UploadValidationError } from '@/lib/validateUpload'
 
 export async function GET() {
   const rows = await db
@@ -31,11 +32,18 @@ export async function POST(req: Request) {
 
   let imageFilename = ''
   if (imageFile && imageFile.size > 0) {
-    const ext = imageFile.name.split('.').pop() ?? 'jpg'
-    imageFilename = `${randomUUID()}.${ext}`
-    const imagePath = join(process.cwd(), 'public/uploads/defis_img', imageFilename)
-    await mkdir(join(process.cwd(), 'public/uploads/defis_img'), { recursive: true })
-    await writeFile(imagePath, Buffer.from(await imageFile.arrayBuffer()))
+    try {
+      const { buffer, ext } = await validateImageUpload(imageFile)
+      imageFilename = `${randomUUID()}.${ext}`
+      const imagePath = join(process.cwd(), 'public/uploads/defis_img', imageFilename)
+      await mkdir(join(process.cwd(), 'public/uploads/defis_img'), { recursive: true })
+      await writeFile(imagePath, buffer)
+    } catch (error: unknown) {
+      if (error instanceof UploadValidationError) {
+        return NextResponse.json({ error: error.message }, { status: 400 })
+      }
+      throw error
+    }
   }
 
   const [result] = await db.insert(defis).values({

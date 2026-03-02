@@ -5,6 +5,7 @@ import { users } from '@/db/schema'
 import { eq } from 'drizzle-orm'
 import { hashPassword, generateVerificationCode, isValidPassword } from '@/lib/auth'
 import { sendVerificationEmail } from '@/lib/email'
+import { isRateLimited, getClientIp } from '@/lib/rateLimit'
 
 const signupSchema = z.object({
   lastName:  z.string().min(1, 'Nom requis'),
@@ -17,6 +18,9 @@ const signupSchema = z.object({
 })
 
 export async function POST(req: Request) {
+  if (isRateLimited(`signup:${getClientIp(req)}`, 5, 60 * 60 * 1000)) {
+    return NextResponse.json({ error: 'Trop de tentatives. Réessaie dans une heure.' }, { status: 429 })
+  }
   try {
     const body   = await req.json()
     const parsed = signupSchema.safeParse(body)
@@ -55,17 +59,19 @@ export async function POST(req: Request) {
 
     const hashedPassword = await hashPassword(password)
     const verificationCode = generateVerificationCode()
+    const verifyExpires = new Date(Date.now() + 24 * 60 * 60 * 1000) // 24 hours
 
     await db.insert(users).values({
-      user_lastname:     lastName,
-      user_firstname:    firstName,
-      user_username:     username,
-      user_email:        email,
-      user_password:     hashedPassword,
-      user_birthday:     birthday,
-      user_cgu:          cgu ? 1 : 0,
-      user_status:       0,              // unverified
-      user_email_verify: verificationCode
+      user_lastname:               lastName,
+      user_firstname:              firstName,
+      user_username:               username,
+      user_email:                  email,
+      user_password:               hashedPassword,
+      user_birthday:               birthday,
+      user_cgu:                    cgu ? 1 : 0,
+      user_status:                 0,              // unverified
+      user_email_verify:           verificationCode,
+      user_email_verify_expires:   verifyExpires,
     })
 
     // Send verification email (non-blocking on failure — don't block signup)

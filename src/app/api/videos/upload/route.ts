@@ -6,6 +6,7 @@ import { db } from '@/lib/db'
 import { videos } from '@/db/schema'
 import { getCurrentUser } from '@/lib/session'
 import { uploadToVimeo } from '@/lib/vimeo'
+import { validateImageUpload, UploadValidationError } from '@/lib/validateUpload'
 
 // Allow up to 5 minutes for large video uploads
 export const maxDuration = 300
@@ -40,11 +41,19 @@ export async function POST(req: Request) {
   // Upload poster if provided
   let posterFilename = ''
   if (posterFile && posterFile.size > 0) {
-    const ext = posterFile.name.split('.').pop() ?? 'jpg'
-    posterFilename = `${randomUUID()}.${ext}`
-    const posterPath = join(process.cwd(), 'public/uploads/videos_posters', posterFilename)
-    await mkdir(join(process.cwd(), 'public/uploads/videos_posters'), { recursive: true })
-    await writeFile(posterPath, Buffer.from(await posterFile.arrayBuffer()))
+    try {
+      const { buffer, ext } = await validateImageUpload(posterFile)
+      posterFilename = `${randomUUID()}.${ext}`
+      const posterPath = join(process.cwd(), 'public/uploads/videos_posters', posterFilename)
+      await mkdir(join(process.cwd(), 'public/uploads/videos_posters'), { recursive: true })
+      await writeFile(posterPath, buffer)
+    } catch (error: unknown) {
+      if (error instanceof UploadValidationError) {
+        await unlink(tmpPath).catch(() => {})
+        return NextResponse.json({ error: error.message }, { status: 400 })
+      }
+      throw error
+    }
   }
 
   // Upload to Vimeo
