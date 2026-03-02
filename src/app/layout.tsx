@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import '@/styles/fil_actu.css'
 
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 style={{ fontFamily: 'var(--font-montserrat), Montserrat, sans-serif' }}
             >
                 {children}
+                <Analytics />
             </body>
         </html>
     )
