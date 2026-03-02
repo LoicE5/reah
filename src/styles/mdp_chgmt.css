@@ -32,7 +32,7 @@ p{
     width: 30px;
     height: 20px;
     cursor: pointer;
-    background: url(../img/eye_close.svg) center/100% no-repeat;
+    background: url(/sources/img/eye_close.svg) center/100% no-repeat;
 }
 
 @media screen and (max-width: 850px) {
