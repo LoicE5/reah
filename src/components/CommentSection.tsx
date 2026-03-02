@@ -78,7 +78,7 @@ export default function CommentSection({ videoId, currentUserId, isAdmin }: Comm
             {loading ? (
                 <p style={{ color: '#888', textAlign: 'center' }}>Chargement...</p>
             ) : commentList.length === 0 ? (
-                <p style={{ color: '#888', textAlign: 'center', fontSize: '0.9em' }}>Aucun commentaire pour l&aposinstant.</p>
+                <p style={{ color: '#888', textAlign: 'center', fontSize: '0.9em' }}>Aucun commentaire pour l&apos;instant.</p>
             ) : (
                 <div className="comment_list">
                     {commentList.map(comment => (

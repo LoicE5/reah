@@ -66,7 +66,7 @@ export default function VerifyEmailPage() {
                 </video>
 
                 <form className="form_container" onSubmit={handleSubmit} style={{ gap: 16 }}>
-                    <h2 style={{ color: 'white', margin: 0 }}>Vérification de l&apose-mail</h2>
+                    <h2 style={{ color: 'white', margin: 0 }}>Vérification de l&apos;e-mail</h2>
                     <p style={{ color: '#aaa', fontSize: '0.9em', margin: 0 }}>
                         Un code a été envoyé à <strong style={{ color: 'white' }}>{email}</strong>
                     </p>

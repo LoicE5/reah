@@ -8,14 +8,14 @@ import '@/styles/connexion.css'
 function ChangePasswordForm() {
     const searchParams = useSearchParams()
     const router = useRouter()
-    const email = searchParams.get('email') ?? ''
+    const token = searchParams.get('token') ?? ''
 
     const [newPassword, setNewPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [loading, setLoading] = useState(false)
     const [message, setMessage] = useState<{ ok: boolean; text: string } | null>(null)
 
-    if (!email) {
+    if (!token) {
         return (
             <p className="message_false_container">
                 Lien invalide. <a href="/forgot-password">Recommencer</a>
@@ -35,7 +35,7 @@ function ChangePasswordForm() {
             const res = await fetch('/api/auth/change-password', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ mode: 'reset', email, newPassword }),
+                body: JSON.stringify({ mode: 'reset', token, newPassword }),
             })
             const data = await res.json()
             if (res.ok) {
