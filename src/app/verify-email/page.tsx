@@ -54,7 +54,7 @@ export default function VerifyEmailPage() {
     }
 
     return (
-        <body style={{ background: 'black' }}>
+        <div style={{ background: 'black' }}>
             <Link href="/feed" className="reah_logo" aria-label="REAH" />
 
             <main className="main_content">
@@ -98,6 +98,6 @@ export default function VerifyEmailPage() {
                     </button>
                 </form>
             </main>
-        </body>
+        </div>
     )
 }
