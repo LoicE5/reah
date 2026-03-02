@@ -32,8 +32,8 @@ export default function CommentSection({ videoId, currentUserId, isAdmin }: Comm
             .finally(() => setLoading(false))
     }, [videoId])
 
-    async function postComment(e: React.FormEvent) {
-        e.preventDefault()
+    async function postComment(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault()
         if (!content.trim() || posting) return
         setPosting(true)
         try {
@@ -66,7 +66,7 @@ export default function CommentSection({ videoId, currentUserId, isAdmin }: Comm
                         style={{ flex: 1, background: '#1a1a1a', border: '1px solid #333', padding: '8px 12px', borderRadius: 4 }}
                         placeholder="Ajouter un commentaire..."
                         value={content}
-                        onChange={e => setContent(e.target.value)}
+                        onChange={event => setContent(event.target.value)}
                         maxLength={2000}
                     />
                     <button className="btn" type="submit" disabled={posting || !content.trim()} style={{ width: 80 }}>
@@ -88,7 +88,7 @@ export default function CommentSection({ videoId, currentUserId, isAdmin }: Comm
                                 src={comment.user_profile_picture ? `/uploads/profile_pictures/${comment.user_profile_picture}` : '/sources/img/profile_icon.svg'}
                                 alt={comment.user_username ?? ''}
                                 style={{ height: 32, width: 32, borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
-                                onError={e => { (e.target as HTMLImageElement).src = '/sources/img/profile_icon.svg' }}
+                                onError={event => { (event.target as HTMLImageElement).src = '/sources/img/profile_icon.svg' }}
                             />
                             <div style={{ flex: 1 }}>
                                 <span style={{ color: '#d60036', fontWeight: 600, fontSize: '0.85em' }}>

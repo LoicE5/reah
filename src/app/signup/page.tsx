@@ -33,8 +33,8 @@ export default function SignupPage() {
     // Step 1 is valid when all fields are filled
     const step1Valid = lastName.trim() && firstName.trim() && birthDay && birthMonth && birthYear
 
-    async function handleSubmit(e: React.FormEvent) {
-        e.preventDefault()
+    async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault()
         setError('')
 
         if (password !== passwordConfirm) {
@@ -97,7 +97,7 @@ export default function SignupPage() {
                             <label htmlFor="last_name">
                                 <span>Nom</span>
                                 <input type="text" className="input_connexion" id="last_name" value={lastName}
-                                    onChange={e => setLastName(e.target.value)} required />
+                                    onChange={event => setLastName(event.target.value)} required />
                             </label>
                         </div>
 
@@ -105,20 +105,20 @@ export default function SignupPage() {
                             <label htmlFor="first_name">
                                 <span>Prénom</span>
                                 <input type="text" className="input_connexion" id="first_name" value={firstName}
-                                    onChange={e => setFirstName(e.target.value)} required />
+                                    onChange={event => setFirstName(event.target.value)} required />
                             </label>
                         </div>
 
                         <div className="select_container">
-                            <select value={birthDay} onChange={e => setBirthDay(e.target.value)} required>
+                            <select value={birthDay} onChange={event => setBirthDay(event.target.value)} required>
                                 <option value="" disabled>JJ</option>
                                 {DAYS.map(day => <option key={day} value={day}>{String(day).padStart(2, '0')}</option>)}
                             </select>
-                            <select value={birthMonth} onChange={e => setBirthMonth(e.target.value)} required>
+                            <select value={birthMonth} onChange={event => setBirthMonth(event.target.value)} required>
                                 <option value="" disabled>MM</option>
                                 {MONTHS.map(month => <option key={month} value={month}>{String(month).padStart(2, '0')}</option>)}
                             </select>
-                            <select value={birthYear} onChange={e => setBirthYear(e.target.value)} required>
+                            <select value={birthYear} onChange={event => setBirthYear(event.target.value)} required>
                                 <option value="" disabled>AAAA</option>
                                 {YEARS.map(year => <option key={year} value={year}>{year}</option>)}
                             </select>
@@ -154,7 +154,7 @@ export default function SignupPage() {
                             <label htmlFor="email">
                                 <span>E-mail</span>
                                 <input type="email" className="input_connexion" id="email" value={email}
-                                    onChange={e => setEmail(e.target.value)} required />
+                                    onChange={event => setEmail(event.target.value)} required />
                             </label>
                         </div>
 
@@ -162,7 +162,7 @@ export default function SignupPage() {
                             <label htmlFor="username">
                                 <span>Pseudo</span>
                                 <input type="text" className="input_connexion" id="username" value={username}
-                                    onChange={e => setUsername(e.target.value)} required />
+                                    onChange={event => setUsername(event.target.value)} required />
                             </label>
                         </div>
 
@@ -170,7 +170,7 @@ export default function SignupPage() {
                             <label htmlFor="password">
                                 <span>Mot de passe</span>
                                 <input type="password" className="input_connexion" id="password" value={password}
-                                    onChange={e => setPassword(e.target.value)} required minLength={8} />
+                                    onChange={event => setPassword(event.target.value)} required minLength={8} />
                             </label>
                             <p className="mdp_restriction">8 caractères min. • 1 majuscule min.</p>
                         </div>
@@ -179,12 +179,12 @@ export default function SignupPage() {
                             <label htmlFor="password_confirm">
                                 <span>Confirmer le mot de passe</span>
                                 <input type="password" className="input_connexion" id="password_confirm" value={passwordConfirm}
-                                    onChange={e => setPasswordConfirm(e.target.value)} required />
+                                    onChange={event => setPasswordConfirm(event.target.value)} required />
                             </label>
                         </div>
 
                         <div className="checkbox_container">
-                            <input id="cgu" type="checkbox" className="checkbox" checked={cgu} onChange={e => setCgu(e.target.checked)} required />
+                            <input id="cgu" type="checkbox" className="checkbox" checked={cgu} onChange={event => setCgu(event.target.checked)} required />
                             <label htmlFor="cgu" className="checkbox_label">
                                 J&apos;accepte les <Link href="/terms" className="link" target="_blank">CGU</Link>
                             </label>

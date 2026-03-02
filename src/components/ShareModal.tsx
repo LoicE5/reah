@@ -40,7 +40,7 @@ export default function ShareModal({ videoId, title, onClose }: ShareModalProps)
     ]
 
     return (
-        <div className="dark_filter" style={{ display: 'flex', zIndex: 300 }} onClick={e => e.target === e.currentTarget && onClose()}>
+        <div className="dark_filter" style={{ display: 'flex', zIndex: 300 }} onClick={event => event.target === event.currentTarget && onClose()}>
             <div className="pop_up_container share_film_container" style={{ display: 'flex' }}>
                 <div className="pop_up_header">
                     <h2>Partager</h2>

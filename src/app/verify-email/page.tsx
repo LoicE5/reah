@@ -14,8 +14,8 @@ export default function VerifyEmailPage() {
     const [success, setSuccess] = useState('')
     const [loading, setLoading] = useState(false)
 
-    async function handleSubmit(e: React.FormEvent) {
-        e.preventDefault()
+    async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault()
         setError('')
         setLoading(true)
         try {
@@ -79,7 +79,7 @@ export default function VerifyEmailPage() {
                                 className="input_connexion"
                                 id="code"
                                 value={code}
-                                onChange={e => setCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                                onChange={event => setCode(event.target.value.replace(/\D/g, '').slice(0, 6))}
                                 maxLength={6}
                                 pattern="\d{6}"
                                 required

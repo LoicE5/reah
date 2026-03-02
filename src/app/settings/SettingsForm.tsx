@@ -34,8 +34,8 @@ export default function SettingsForm({ user }: { user: UserData }) {
     const [passwordMessage, setPasswordMessage] = useState<{ ok: boolean; text: string } | null>(null)
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
 
-    async function saveProfile(e: React.FormEvent) {
-        e.preventDefault()
+    async function saveProfile(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault()
         setProfileLoading(true)
         setProfileMessage(null)
         const formData = new FormData()
@@ -61,8 +61,8 @@ export default function SettingsForm({ user }: { user: UserData }) {
         }
     }
 
-    async function changePassword(e: React.FormEvent) {
-        e.preventDefault()
+    async function changePassword(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault()
         if (newPassword !== confirmPassword) {
             setPasswordMessage({ ok: false, text: 'Les mots de passe ne correspondent pas.' })
             return
@@ -116,32 +116,32 @@ export default function SettingsForm({ user }: { user: UserData }) {
                 <form onSubmit={saveProfile} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
                     <div className="input_container">
                         <label><span>Nom d'affichage</span>
-                            <input className="input_connexion" value={name} onChange={e => setName(e.target.value)} />
+                            <input className="input_connexion" value={name} onChange={event => setName(event.target.value)} />
                         </label>
                     </div>
                     <div className="input_container">
                         <label><span>Pseudo</span>
-                            <input className="input_connexion" value={username} onChange={e => setUsername(e.target.value)} />
+                            <input className="input_connexion" value={username} onChange={event => setUsername(event.target.value)} />
                         </label>
                     </div>
                     <div className="input_container">
                         <label><span>Bio</span>
                             <textarea style={{ background: 'transparent', border: 'none', borderBottom: '1px solid white', color: 'white', width: '100%', minHeight: 60, fontFamily: 'inherit' }}
-                                value={bio} onChange={e => setBio(e.target.value)} />
+                                value={bio} onChange={event => setBio(event.target.value)} />
                         </label>
                     </div>
                     <div className="input_container">
                         <label><span>Site web</span>
-                            <input className="input_connexion" type="url" value={website} onChange={e => setWebsite(e.target.value)} />
+                            <input className="input_connexion" type="url" value={website} onChange={event => setWebsite(event.target.value)} />
                         </label>
                     </div>
                     <div className="input_container">
                         <span>Photo de profil</span>
-                        <input type="file" accept="image/*" style={{ color: 'white', marginTop: 8 }} onChange={e => setAvatar(e.target.files?.[0] ?? null)} />
+                        <input type="file" accept="image/*" style={{ color: 'white', marginTop: 8 }} onChange={event => setAvatar(event.target.files?.[0] ?? null)} />
                     </div>
                     <div className="input_container">
                         <span>Bannière</span>
-                        <input type="file" accept="image/*" style={{ color: 'white', marginTop: 8 }} onChange={e => setBanner(e.target.files?.[0] ?? null)} />
+                        <input type="file" accept="image/*" style={{ color: 'white', marginTop: 8 }} onChange={event => setBanner(event.target.files?.[0] ?? null)} />
                     </div>
                     <button type="submit" className="btn" disabled={profileLoading}>{profileLoading ? 'Enregistrement...' : 'Enregistrer'}</button>
                 </form>
@@ -159,18 +159,18 @@ export default function SettingsForm({ user }: { user: UserData }) {
                 <form onSubmit={changePassword} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
                     <div className="input_container">
                         <label><span>Mot de passe actuel</span>
-                            <input className="input_connexion" type="password" value={prevPassword} onChange={e => setPrevPassword(e.target.value)} required />
+                            <input className="input_connexion" type="password" value={prevPassword} onChange={event => setPrevPassword(event.target.value)} required />
                         </label>
                     </div>
                     <div className="input_container">
                         <label><span>Nouveau mot de passe</span>
-                            <input className="input_connexion" type="password" value={newPassword} onChange={e => setNewPassword(e.target.value)} required minLength={8} />
+                            <input className="input_connexion" type="password" value={newPassword} onChange={event => setNewPassword(event.target.value)} required minLength={8} />
                         </label>
                         <p className="mdp_restriction">8 caractères min. • 1 majuscule • 1 minuscule</p>
                     </div>
                     <div className="input_container">
                         <label><span>Confirmer</span>
-                            <input className="input_connexion" type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} required />
+                            <input className="input_connexion" type="password" value={confirmPassword} onChange={event => setConfirmPassword(event.target.value)} required />
                         </label>
                     </div>
                     <button type="submit" className="btn change_mdp_btn" disabled={passwordLoading}>{passwordLoading ? '...' : 'Modifier le mot de passe'}</button>

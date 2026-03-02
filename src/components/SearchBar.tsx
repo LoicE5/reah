@@ -39,8 +39,8 @@ export default function SearchBar() {
         }, 300)
     }, [])
 
-    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault()
+    function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault()
         if (query.trim()) {
             setOpen(false)
             router.push(`/search?research=${encodeURIComponent(query)}`)
@@ -55,9 +55,9 @@ export default function SearchBar() {
                     type="text"
                     placeholder="Défis, courts-métrages, utilisateurs..."
                     value={query}
-                    onChange={e => {
-                        setQuery(e.target.value)
-                        search(e.target.value)
+                    onChange={event => {
+                        setQuery(event.target.value)
+                        search(event.target.value)
                     }}
                     onBlur={() => setTimeout(() => setOpen(false), 200)}
                     onFocus={() => results && setOpen(true)}
@@ -67,22 +67,22 @@ export default function SearchBar() {
 
             {open && results && (
                 <div id="search_list">
-                    {results.videos.map(v => (
+                    {results.videos.map(video => (
                         <a
-                            key={v.video_id}
+                            key={video.video_id}
                             className="search_list_result"
-                            href={`/feed?video=${v.video_id}`}
+                            href={`/feed?video=${video.video_id}`}
                             onClick={() => setOpen(false)}
                         >
                             {/* eslint-disable-next-line @next/next/no-img-element */}
-                            {v.video_poster && (
+                            {video.video_poster && (
                                 <img
-                                    src={`/uploads/videos_posters/${v.video_poster}`}
+                                    src={`/uploads/videos_posters/${video.video_poster}`}
                                     alt=""
                                     style={{ height: 30, width: 40, objectFit: 'cover', marginRight: 8 }}
                                 />
                             )}
-                            <span>{v.video_title}</span>
+                            <span>{video.video_title}</span>
                         </a>
                     ))}
                     {results.users.map(user => (
@@ -97,7 +97,7 @@ export default function SearchBar() {
                                 src={user.user_profile_picture ? `/uploads/profile_pictures/${user.user_profile_picture}` : '/sources/img/profile_icon.svg'}
                                 alt=""
                                 style={{ height: 30, width: 30, borderRadius: '50%', marginRight: 8, objectFit: 'cover' }}
-                                onError={e => { (e.target as HTMLImageElement).src = '/sources/img/profile_icon.svg' }}
+                                onError={event => { (event.target as HTMLImageElement).src = '/sources/img/profile_icon.svg' }}
                             />
                             <span>@{user.user_username}</span>
                         </a>

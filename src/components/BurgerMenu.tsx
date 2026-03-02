@@ -19,8 +19,8 @@ export default function BurgerMenu({ isAdmin }: BurgerMenuProps) {
     useEffect(() => {
         (window as unknown as Record<string, unknown>).toggleBurgerMenu = toggle
 
-        function handleClickOutside(e: MouseEvent) {
-            if (openRef.current && menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        function handleClickOutside(event: MouseEvent) {
+            if (openRef.current && menuRef.current && !menuRef.current.contains(event.target as Node)) {
                 close()
             }
         }
@@ -33,18 +33,18 @@ export default function BurgerMenu({ isAdmin }: BurgerMenuProps) {
     }
 
     function open() {
-        const el = menuRef.current
-        if (!el) return
-        el.classList.add('menu_container_click')
-        el.classList.remove('menu_container_click2')
+        const menuElement = menuRef.current
+        if (!menuElement) return
+        menuElement.classList.add('menu_container_click')
+        menuElement.classList.remove('menu_container_click2')
         openRef.current = true
     }
 
     function close() {
-        const el = menuRef.current
-        if (!el) return
-        el.classList.add('menu_container_click2')
-        el.classList.remove('menu_container_click')
+        const menuElement = menuRef.current
+        if (!menuElement) return
+        menuElement.classList.add('menu_container_click2')
+        menuElement.classList.remove('menu_container_click')
         openRef.current = false
     }
 

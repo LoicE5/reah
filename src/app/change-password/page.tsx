@@ -23,8 +23,8 @@ function ChangePasswordForm() {
         )
     }
 
-    async function handleSubmit(e: React.FormEvent) {
-        e.preventDefault()
+    async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault()
         if (newPassword !== confirmPassword) {
             setMessage({ ok: false, text: 'Les mots de passe ne correspondent pas.' })
             return
@@ -84,7 +84,7 @@ function ChangePasswordForm() {
                         autoComplete="new-password"
                         minLength={8}
                         value={newPassword}
-                        onChange={e => setNewPassword(e.target.value)}
+                        onChange={event => setNewPassword(event.target.value)}
                     />
                     <p className="mdp_restriction">8 caractères min. • 1 majuscule • 1 minuscule</p>
                 </label>
@@ -100,7 +100,7 @@ function ChangePasswordForm() {
                         required
                         autoComplete="new-password"
                         value={confirmPassword}
-                        onChange={e => setConfirmPassword(e.target.value)}
+                        onChange={event => setConfirmPassword(event.target.value)}
                     />
                 </label>
             </div>

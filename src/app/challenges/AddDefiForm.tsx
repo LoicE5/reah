@@ -12,8 +12,8 @@ export default function AddDefiForm() {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
 
-    async function handleSubmit(e: React.FormEvent) {
-        e.preventDefault()
+    async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault()
         if (!title.trim()) { setError('Titre requis.'); return }
         setLoading(true)
         setError('')
@@ -44,7 +44,7 @@ export default function AddDefiForm() {
             <button className="btn" onClick={() => setOpen(true)}>Proposer un défi</button>
 
             {open && (
-                <div className="dark_filter" style={{ display: 'flex', zIndex: 300 }} onClick={e => e.target === e.currentTarget && setOpen(false)}>
+                <div className="dark_filter" style={{ display: 'flex', zIndex: 300 }} onClick={event => event.target === event.currentTarget && setOpen(false)}>
                     <div className="pop_up_container" style={{ display: 'flex', width: 400, padding: 30 }}>
                         <div className="pop_up_header">
                             <h2>Proposer un défi</h2>
@@ -56,19 +56,19 @@ export default function AddDefiForm() {
                                 <label htmlFor="defi_title">
                                     <span>Titre du défi</span>
                                     <input type="text" id="defi_title" className="input_connexion" value={title}
-                                        onChange={e => setTitle(e.target.value)} required />
+                                        onChange={event => setTitle(event.target.value)} required />
                                 </label>
                             </div>
                             <div className="input_container">
                                 <label htmlFor="defi_desc">
                                     <span>Contraintes / description</span>
                                     <textarea id="defi_desc" style={{ background: 'transparent', border: 'none', borderBottom: '1px solid white', color: 'white', width: '100%', minHeight: 80, fontFamily: 'inherit', resize: 'vertical' }}
-                                        value={description} onChange={e => setDescription(e.target.value)} />
+                                        value={description} onChange={event => setDescription(event.target.value)} />
                                 </label>
                             </div>
                             <div className="input_container">
                                 <span>Image de couverture</span>
-                                <input type="file" accept="image/*" onChange={e => setImage(e.target.files?.[0] ?? null)}
+                                <input type="file" accept="image/*" onChange={event => setImage(event.target.files?.[0] ?? null)}
                                     style={{ color: 'white', marginTop: 8 }} />
                             </div>
                             <button type="submit" className="btn" disabled={loading}>

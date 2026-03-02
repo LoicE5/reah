@@ -21,8 +21,8 @@ export default function VideoUploadForm({ defiId }: VideoUploadFormProps) {
     const [progress, setProgress] = useState('')
     const [error, setError] = useState('')
 
-    async function handleSubmit(e: React.FormEvent) {
-        e.preventDefault()
+    async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault()
         if (!videoFile || !title.trim()) { setError('Titre et fichier vidéo requis.'); return }
         setError('')
         setUploading(true)
@@ -62,7 +62,7 @@ export default function VideoUploadForm({ defiId }: VideoUploadFormProps) {
             </button>
 
             {open && (
-                <div className="dark_filter" style={{ display: 'flex', zIndex: 300 }} onClick={e => e.target === e.currentTarget && setOpen(false)}>
+                <div className="dark_filter" style={{ display: 'flex', zIndex: 300 }} onClick={event => event.target === event.currentTarget && setOpen(false)}>
                     <div className="pop_up_container upload_container" style={{ display: 'flex', width: 500, maxHeight: '90vh', overflowY: 'auto' }}>
                         <div className="pop_up_header">
                             <h2>Soumettre une vidéo</h2>
@@ -77,7 +77,7 @@ export default function VideoUploadForm({ defiId }: VideoUploadFormProps) {
                                 <label htmlFor="vid_title">
                                     <span>Titre</span>
                                     <input type="text" id="vid_title" className="input_connexion" value={title}
-                                        onChange={e => setTitle(e.target.value)} required />
+                                        onChange={event => setTitle(event.target.value)} required />
                                 </label>
                             </div>
 
@@ -86,29 +86,29 @@ export default function VideoUploadForm({ defiId }: VideoUploadFormProps) {
                                     <span>Synopsis</span>
                                     <textarea id="vid_synopsis"
                                         style={{ background: 'transparent', border: 'none', borderBottom: '1px solid white', color: 'white', width: '100%', minHeight: 60, fontFamily: 'inherit', resize: 'vertical' }}
-                                        value={synopsis} onChange={e => setSynopsis(e.target.value)} />
+                                        value={synopsis} onChange={event => setSynopsis(event.target.value)} />
                                 </label>
                             </div>
 
                             <div className="input_container">
                                 <span>Genre</span>
-                                <select id="genre_select" value={genre} onChange={e => setGenre(e.target.value)}>
+                                <select id="genre_select" value={genre} onChange={event => setGenre(event.target.value)}>
                                     <option value="">Sélectionner un genre</option>
-                                    {GENRES.map(genre => <option key={genre} value={genre}>{genre}</option>)}
+                                    {GENRES.map(genreOption => <option key={genreOption} value={genreOption}>{genreOption}</option>)}
                                 </select>
                             </div>
 
                             <div className="input_container">
                                 <span>Fichier vidéo (MP4, MOV, max 500 Mo)</span>
                                 <input type="file" accept="video/mp4,video/quicktime,video/*"
-                                    onChange={e => setVideoFile(e.target.files?.[0] ?? null)}
+                                    onChange={event => setVideoFile(event.target.files?.[0] ?? null)}
                                     style={{ color: 'white', marginTop: 8 }} required />
                             </div>
 
                             <div className="input_container">
                                 <span>Affiche / thumbnail</span>
                                 <input type="file" accept="image/*"
-                                    onChange={e => setPosterFile(e.target.files?.[0] ?? null)}
+                                    onChange={event => setPosterFile(event.target.files?.[0] ?? null)}
                                     style={{ color: 'white', marginTop: 8 }} />
                             </div>
 

@@ -8,8 +8,8 @@ export default function ForgotPasswordPage() {
     const [loading, setLoading] = useState(false)
     const [message, setMessage] = useState<{ ok: boolean; text: string } | null>(null)
 
-    async function handleSubmit(e: React.FormEvent) {
-        e.preventDefault()
+    async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault()
         setLoading(true)
         setMessage(null)
         try {
@@ -68,7 +68,7 @@ export default function ForgotPasswordPage() {
                             name="email"
                             required
                             value={email}
-                            onChange={e => setEmail(e.target.value)}
+                            onChange={event => setEmail(event.target.value)}
                         />
                     </label>
                 </div>

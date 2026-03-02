@@ -39,18 +39,18 @@ export default function VideoCard({ video, session }: VideoCardProps) {
                         src={`/uploads/videos_posters/${video.video_poster || 'default.jpg'}`}
                         className="video_poster"
                         alt={video.video_title ?? ''}
-                        onError={e => { (e.target as HTMLImageElement).src = '/sources/img/dark_film_icon.svg' }}
+                        onError={event => { (event.target as HTMLImageElement).src = '/sources/img/dark_film_icon.svg' }}
                     />
                     <div
                         className="user_container"
-                        onClick={e => { e.stopPropagation(); window.location.href = `/profile/${video.video_user_id}` }}
+                        onClick={event => { event.stopPropagation(); window.location.href = `/profile/${video.video_user_id}` }}
                     >
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                             src={video.user_profile_picture ? `/uploads/profile_pictures/${video.user_profile_picture}` : '/sources/img/profile_icon.svg'}
                             alt={video.user_username ?? ''}
                             className="pp_profile"
-                            onError={e => { (e.target as HTMLImageElement).src = '/sources/img/profile_icon.svg' }}
+                            onError={event => { (event.target as HTMLImageElement).src = '/sources/img/profile_icon.svg' }}
                         />
                         <p className="pseudo">@{video.user_username}</p>
                     </div>
@@ -68,14 +68,14 @@ export default function VideoCard({ video, session }: VideoCardProps) {
                             </p>
                         </div>
 
-                        <div className="reaction_container" onClick={e => e.stopPropagation()} style={{ justifyContent: 'flex-end', gap: 12 }}>
+                        <div className="reaction_container" onClick={event => event.stopPropagation()} style={{ justifyContent: 'flex-end', gap: 12 }}>
                             <div className="like_container" style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img
                                     src={video.isLiked ? '/sources/img/pop_corn.png' : '/sources/img/pop_corn_icon.svg'}
                                     className="pop_corn_icon"
                                     alt="like"
-                                    onError={e => { (e.target as HTMLImageElement).style.display = 'none' }}
+                                    onError={event => { (event.target as HTMLImageElement).style.display = 'none' }}
                                 />
                                 <p className="pop_corn_number">{video.video_like_number ?? 0}</p>
                             </div>

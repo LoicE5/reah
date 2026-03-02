@@ -16,8 +16,8 @@ function LoginForm() {
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
 
-    async function handleSubmit(e: React.FormEvent) {
-        e.preventDefault()
+    async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault()
         setError('')
         setLoading(true)
         try {
@@ -67,7 +67,7 @@ function LoginForm() {
                             className="input_connexion input_email"
                             id="pseudo"
                             value={credential}
-                            onChange={e => setCredential(e.target.value)}
+                            onChange={event => setCredential(event.target.value)}
                             autoComplete="username"
                             required
                         />
@@ -82,7 +82,7 @@ function LoginForm() {
                             className="input_connexion"
                             id="mdp"
                             value={password}
-                            onChange={e => setPassword(e.target.value)}
+                            onChange={event => setPassword(event.target.value)}
                             autoComplete="current-password"
                             required
                         />

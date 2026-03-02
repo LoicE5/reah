@@ -67,7 +67,7 @@ export default function VideoModal({ videoId, currentUserId, isAdmin, isLoggedIn
             <div
                 className="dark_filter"
                 style={{ display: 'flex', zIndex: 200 }}
-                onClick={e => { if (e.target === e.currentTarget) onClose() }}
+                onClick={event => { if (event.target === event.currentTarget) onClose() }}
             >
                 <div className="pop_up_container film_information_container" style={{ display: 'flex', maxWidth: 900, width: '90vw', maxHeight: '90vh', overflowY: 'auto' }}>
                     <div className="pop_up_header">
@@ -102,7 +102,7 @@ export default function VideoModal({ videoId, currentUserId, isAdmin, isLoggedIn
                                 src={video.user_profile_picture ? `/uploads/profile_pictures/${video.user_profile_picture}` : '/sources/img/profile_icon.svg'}
                                 alt={video.user_username ?? ''}
                                 style={{ height: 36, width: 36, borderRadius: '50%', objectFit: 'cover' }}
-                                onError={e => { (e.target as HTMLImageElement).src = '/sources/img/profile_icon.svg' }}
+                                onError={event => { (event.target as HTMLImageElement).src = '/sources/img/profile_icon.svg' }}
                             />
                             <span style={{ color: '#d60036', fontWeight: 600 }}>@{video.user_username}</span>
                         </a>
