@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import SideMenu from './SideMenu'
 
 interface BurgerMenuProps {
@@ -15,6 +15,30 @@ export default function BurgerMenu({ isAdmin }: BurgerMenuProps) {
     const menuRef = useRef<HTMLDivElement>(null)
     const openRef = useRef(false)
 
+    const open = useCallback(() => {
+        const menuElement = menuRef.current
+        if (!menuElement) return
+        menuElement.classList.add('menu_container_click')
+        menuElement.classList.remove('menu_container_click2')
+        openRef.current = true
+    }, [])
+
+    const close = useCallback(() => {
+        const menuElement = menuRef.current
+        if (!menuElement) return
+        menuElement.classList.add('menu_container_click2')
+        menuElement.classList.remove('menu_container_click')
+        openRef.current = false
+    }, [])
+
+    const toggle = useCallback(() => {
+        if (openRef.current) {
+            close()
+        } else {
+            open()
+        }
+    }, [close, open])
+
     // Expose toggle function globally so the Nav profile photo onclick can call it
     useEffect(() => {
         (window as unknown as Record<string, unknown>).toggleBurgerMenu = toggle
@@ -26,27 +50,7 @@ export default function BurgerMenu({ isAdmin }: BurgerMenuProps) {
         }
         document.addEventListener('mousedown', handleClickOutside)
         return () => document.removeEventListener('mousedown', handleClickOutside)
-    }, [])
-
-    function toggle() {
-        openRef.current ? close() : open()
-    }
-
-    function open() {
-        const menuElement = menuRef.current
-        if (!menuElement) return
-        menuElement.classList.add('menu_container_click')
-        menuElement.classList.remove('menu_container_click2')
-        openRef.current = true
-    }
-
-    function close() {
-        const menuElement = menuRef.current
-        if (!menuElement) return
-        menuElement.classList.add('menu_container_click2')
-        menuElement.classList.remove('menu_container_click')
-        openRef.current = false
-    }
+    }, [close, toggle])
 
     return (
         <div ref={menuRef} className="menu_container">

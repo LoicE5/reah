@@ -115,7 +115,7 @@ export default function SettingsForm({ user }: { user: UserData }) {
                 )}
                 <form onSubmit={saveProfile} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
                     <div className="input_container">
-                        <label><span>Nom d'affichage</span>
+                        <label><span>Nom d&apos;affichage</span>
                             <input className="input_connexion" value={name} onChange={event => setName(event.target.value)} />
                         </label>
                     </div>
