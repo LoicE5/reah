@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.1
+
+### Added
+
+- Secured Vercel Cron endpoint for a daily database keepalive query.
+- `CRON_SECRET` environment variable documentation for authenticated cron execution.
+
 ## 1.0.0
 
 Initial public release of Reah using Next.js — a French short-film and creative-challenge platform.
