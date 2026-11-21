@@ -107,6 +107,7 @@ Open [http://localhost:3000](http://localhost:3000). The root redirects to `/fee
 | `bun run typecheck` | Check TypeScript types |
 | `bun run test:integration` | Run integration tests in a disposable local PostgreSQL cluster |
 | `bun run db` | Start the local PostgreSQL container via Docker Compose |
+| `bun run docker:run` | Start the standalone app image. Requires a repository-root `.env` and a free port 3000. |
 | `bun run db:generate` | Generate Drizzle migration files |
 | `bun run db:migrate` | Apply checked-in Drizzle migrations |
 | `bun run db:seed` | Reset a local development database and load sample data |

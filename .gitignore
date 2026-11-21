@@ -48,6 +48,7 @@ tmp/
 next-env.d.ts
 
 # local database volume data
-/docker/volumes/mysql/*
-/docker/volumes/postgres/*
-!/docker/volumes/postgres/.gitkeep
+docker/volumes/mysql/*
+docker/volumes/postgres/*
+docker/volumes/app/*
+!docker/volumes/**/.gitkeep
