@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server'
-import { z } from 'zod'
 import { db } from '@/lib/db'
 import { defis } from '@/db/schema'
-import { eq, and } from 'drizzle-orm'
+import { eq } from 'drizzle-orm'
 import { getCurrentUser } from '@/lib/session'
 import { writeFile, mkdir } from 'fs/promises'
 import { join } from 'path'
@@ -46,14 +45,14 @@ export async function POST(req: Request) {
     }
   }
 
-  const [result] = await db.insert(defis).values({
+  const [{ defi_id }] = await db.insert(defis).values({
     defi_name:        title.trim(),
     defi_description: description ?? '',
     defi_image:       imageFilename,
     defi_user_id:     session.userId,
     defi_verified:    0,
-    defi_current:     0,
-  })
+    defi_current:     0
+  }).returning({ defi_id: defis.defi_id })
 
-  return NextResponse.json({ ok: true, defi_id: Number(result.insertId) })
+  return NextResponse.json({ ok: true, defi_id })
 }

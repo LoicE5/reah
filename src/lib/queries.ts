@@ -78,7 +78,7 @@ export async function getExploreVideos(limit = 20): Promise<VideoRow[]> {
     .select(videoSelect)
     .from(videos)
     .leftJoin(users, eq(users.user_id, videos.video_user_id))
-    .orderBy(sql`RAND()`)
+    .orderBy(sql`random()`)
     .limit(limit)
   return withCommentCounts(rows)
 }
@@ -107,14 +107,8 @@ export async function getLikedVideoIds(userId: number, videoIds: number[]): Prom
   const rows = await db
     .select({ id: liked.liked_video_id })
     .from(liked)
-    .where(inArray(liked.liked_video_id, videoIds))
-  // Filter to only those belonging to this user
-  const all = await db
-    .select({ id: liked.liked_video_id })
-    .from(liked)
     .where(eq(liked.liked_user_id, userId))
-  const userSet = new Set(all.map(row => row.id))
-  return userSet
+  return new Set(rows.map(row => row.id))
 }
 
 /** IDs of videos saved by a user. */

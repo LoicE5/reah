@@ -45,6 +45,7 @@ seed.prod.ts
 *.tsbuildinfo
 next-env.d.ts
 
-# docker mysql volume data
+# local database volume data
 /docker/volumes/mysql/*
-!/docker/volumes/mysql/.gitkeep
+/docker/volumes/postgres/*
+!/docker/volumes/postgres/.gitkeep

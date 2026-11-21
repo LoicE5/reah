@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Migrated the Drizzle schema and local development setup to PostgreSQL 18.
+- Added an offline MySQL data import and PostgreSQL integration tests.
+
 ## 1.0.1
 
 ### Added
