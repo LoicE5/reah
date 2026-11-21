@@ -1,6 +1,8 @@
 import type { NextConfig } from "next"
+import { PHASE_PRODUCTION_BUILD } from 'next/constants'
 
 const nextConfig: NextConfig = {
+  output: process.env.BUILD_STANDALONE === '1' ? 'standalone' : undefined,
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 'i.vimeocdn.com' },
@@ -38,4 +40,12 @@ const nextConfig: NextConfig = {
   }
 }
 
-export default nextConfig
+export default function configureNext(phase: string): NextConfig {
+  // Next evaluates route modules at build time. Preview builds use no production credentials.
+  if (phase === PHASE_PRODUCTION_BUILD && process.env.VERCEL_ENV === 'preview') {
+    process.env.DATABASE_URL ??= 'postgresql://127.0.0.1:1/reah'
+    process.env.SESSION_SECRET ??= 'reah-preview-build-only-session-secret'
+  }
+
+  return nextConfig
+}

@@ -1,16 +1,22 @@
 {
   "name": "reah-next",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "db": "podman compose -f docker/docker-compose.yml --env-file .env up",
-    "db:generate": "bunx drizzle-kit generate",
-    "db:migrate": "bunx drizzle-kit generate && bunx drizzle-kit migrate",
-    "db:seed": "bun run scripts/seed.ts"
+    "docker:compose": "docker compose -f docker/compose.yaml",
+    "docker:build": "bun run docker:compose build app",
+    "docker:run": "docker run --rm --env-file .env -p 127.0.0.1:3000:3000 ghcr.io/loice5/reah:latest",
+    "compose": "bun run docker:compose --profile app up",
+    "db": "bun run docker:compose up db",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:seed": "bun run scripts/seed.ts",
+    "typecheck": "tsc --noEmit",
+    "test:integration": "bun --no-env-file test tests/postgres.integration.test.ts"
   },
   "dependencies": {
     "@vercel/analytics": "^1.6.1",
@@ -18,9 +24,9 @@
     "bcryptjs": "^3.0.3",
     "drizzle-orm": "^0.45.1",
     "iron-session": "^8.0.4",
-    "mysql2": "^3.18.2",
     "next": "16.1.6",
     "nodemailer": "^8.0.1",
+    "pg": "^8",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "zod": "^4.3.6"
@@ -29,6 +35,7 @@
     "@types/bcryptjs": "^3.0.0",
     "@types/node": "^20.19.35",
     "@types/nodemailer": "^7.0.11",
+    "@types/pg": "^8",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "drizzle-kit": "^0.31.9",

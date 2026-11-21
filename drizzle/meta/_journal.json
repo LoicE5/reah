@@ -1,12 +1,19 @@
 {
   "version": "7",
-  "dialect": "mysql",
+  "dialect": "postgresql",
   "entries": [
     {
       "idx": 0,
-      "version": "5",
-      "when": 1772486183173,
-      "tag": "0000_thin_lorna_dane",
+      "version": "7",
+      "when": 1795270185390,
+      "tag": "0000_postgresql",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1795273108238,
+      "tag": "0001_preserve-source-primary-keys",
       "breakpoints": true
     }
   ]

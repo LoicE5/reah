@@ -1,0 +1,10 @@
+**
+!package.json
+!bun.lock
+!next.config.ts
+!tsconfig.json
+!src/
+!src/**
+!public/
+!public/**
+**/.env*

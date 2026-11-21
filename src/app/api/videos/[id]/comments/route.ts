@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { db } from '@/lib/db'
 import { comments, users } from '@/db/schema'
-import { eq, desc, and } from 'drizzle-orm'
+import { eq, sql } from 'drizzle-orm'
 import { getCurrentUser } from '@/lib/session'
 
 type RouteParams = { params: Promise<{ id: string }> }
@@ -23,7 +23,7 @@ export async function GET(_req: Request, { params }: RouteParams) {
     .from(comments)
     .leftJoin(users, eq(users.user_id, comments.comment_user_id))
     .where(eq(comments.comment_video_id, videoId))
-    .orderBy(desc(comments.comment_date))
+    .orderBy(sql`${comments.comment_date} desc nulls last`)
     .limit(50)
 
   return NextResponse.json(rows)
@@ -41,11 +41,11 @@ export async function POST(req: Request, { params }: RouteParams) {
   const parsed = postSchema.safeParse(body)
   if (!parsed.success) return NextResponse.json({ error: 'Contenu invalide.' }, { status: 400 })
 
-  const [result] = await db.insert(comments).values({
+  const [{ comment_id }] = await db.insert(comments).values({
     comment_content:  parsed.data.content,
     comment_video_id: videoId,
-    comment_user_id:  session.userId,
-  })
+    comment_user_id:  session.userId
+  }).returning({ comment_id: comments.comment_id })
 
-  return NextResponse.json({ ok: true, comment_id: Number(result.insertId) })
+  return NextResponse.json({ ok: true, comment_id })
 }

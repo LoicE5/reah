@@ -1,57 +1,94 @@
 {
-  "version": "5",
-  "dialect": "mysql",
-  "id": "10489f0c-637b-4732-9fe9-d5a19db35e21",
+  "id": "72b7cba3-8ecd-4fe5-b553-149ccfed0752",
   "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
   "tables": {
-    "comments": {
+    "public.comments": {
       "name": "comments",
+      "schema": "",
       "columns": {
         "comment_id": {
           "name": "comment_id",
-          "type": "int",
-          "primaryKey": false,
+          "type": "integer",
+          "primaryKey": true,
           "notNull": true,
-          "autoincrement": true
+          "identity": {
+            "type": "byDefault",
+            "name": "comments_comment_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
         },
         "comment_content": {
           "name": "comment_content",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         },
         "comment_video_id": {
           "name": "comment_video_id",
-          "type": "int",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         },
         "comment_user_id": {
           "name": "comment_user_id",
-          "type": "int",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         },
         "comment_date": {
           "name": "comment_date",
-          "type": "datetime",
+          "type": "timestamp (0) with time zone",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "CURRENT_TIMESTAMP"
+          "default": "now()"
         },
         "comment_report_id": {
           "name": "comment_report_id",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         }
       },
-      "indexes": {},
+      "indexes": {
+        "comment_video_id_idx": {
+          "name": "comment_video_id_idx",
+          "columns": [
+            {
+              "expression": "comment_video_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "comment_user_id_idx": {
+          "name": "comment_user_id_idx",
+          "columns": [
+            {
+              "expression": "comment_user_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
       "foreignKeys": {
         "comments_comment_video_id_videos_video_id_fk": {
           "name": "comments_comment_video_id_videos_video_id_fk",
@@ -80,88 +117,102 @@
           "onUpdate": "no action"
         }
       },
-      "compositePrimaryKeys": {
-        "comments_comment_id": {
-          "name": "comments_comment_id",
-          "columns": [
-            "comment_id"
-          ]
-        }
-      },
+      "compositePrimaryKeys": {},
       "uniqueConstraints": {},
-      "checkConstraint": {}
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     },
-    "defis": {
+    "public.defis": {
       "name": "defis",
+      "schema": "",
       "columns": {
         "defi_id": {
           "name": "defi_id",
-          "type": "int",
-          "primaryKey": false,
+          "type": "integer",
+          "primaryKey": true,
           "notNull": true,
-          "autoincrement": true
+          "identity": {
+            "type": "byDefault",
+            "name": "defis_defi_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
         },
         "defi_name": {
           "name": "defi_name",
           "type": "varchar(255)",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         },
         "defi_description": {
           "name": "defi_description",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         },
         "defi_timestamp": {
           "name": "defi_timestamp",
-          "type": "datetime",
+          "type": "timestamp (0) with time zone",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "CURRENT_TIMESTAMP"
+          "default": "now()"
         },
         "defi_image": {
           "name": "defi_image",
           "type": "varchar(255)",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         },
         "defi_user_id": {
           "name": "defi_user_id",
-          "type": "int",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         },
         "defi_verified": {
           "name": "defi_verified",
-          "type": "tinyint",
+          "type": "smallint",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
           "default": 0
         },
         "defi_current": {
           "name": "defi_current",
-          "type": "tinyint",
+          "type": "smallint",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
           "default": 0
         },
         "defi_date_end": {
           "name": "defi_date_end",
           "type": "varchar(50)",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         }
       },
-      "indexes": {},
+      "indexes": {
+        "defi_user_id_idx": {
+          "name": "defi_user_id_idx",
+          "columns": [
+            {
+              "expression": "defi_user_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
       "foreignKeys": {
         "defis_defi_user_id_users_user_id_fk": {
           "name": "defis_defi_user_id_users_user_id_fk",
@@ -177,36 +228,61 @@
           "onUpdate": "no action"
         }
       },
-      "compositePrimaryKeys": {
-        "defis_defi_id": {
-          "name": "defis_defi_id",
-          "columns": [
-            "defi_id"
-          ]
-        }
-      },
+      "compositePrimaryKeys": {},
       "uniqueConstraints": {},
-      "checkConstraint": {}
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     },
-    "distribution": {
+    "public.distribution": {
       "name": "distribution",
+      "schema": "",
       "columns": {
         "distribution_user_id": {
           "name": "distribution_user_id",
-          "type": "int",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         },
         "distribution_video_id": {
           "name": "distribution_video_id",
-          "type": "int",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         }
       },
-      "indexes": {},
+      "indexes": {
+        "distribution_user_id_idx": {
+          "name": "distribution_user_id_idx",
+          "columns": [
+            {
+              "expression": "distribution_user_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "distribution_video_id_idx": {
+          "name": "distribution_video_id_idx",
+          "columns": [
+            {
+              "expression": "distribution_video_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
       "foreignKeys": {
         "distribution_distribution_user_id_users_user_id_fk": {
           "name": "distribution_distribution_user_id_users_user_id_fk",
@@ -237,27 +313,44 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
-      "checkConstraint": {}
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     },
-    "liked": {
+    "public.liked": {
       "name": "liked",
+      "schema": "",
       "columns": {
         "liked_user_id": {
           "name": "liked_user_id",
-          "type": "int",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         },
         "liked_video_id": {
           "name": "liked_video_id",
-          "type": "int",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         }
       },
-      "indexes": {},
+      "indexes": {
+        "liked_video_id_idx": {
+          "name": "liked_video_id_idx",
+          "columns": [
+            {
+              "expression": "liked_video_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
       "foreignKeys": {
         "liked_liked_user_id_users_user_id_fk": {
           "name": "liked_liked_user_id_users_user_id_fk",
@@ -296,56 +389,80 @@
         }
       },
       "uniqueConstraints": {},
-      "checkConstraint": {}
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     },
-    "password_reset_tokens": {
+    "public.password_reset_tokens": {
       "name": "password_reset_tokens",
+      "schema": "",
       "columns": {
         "id": {
           "name": "id",
-          "type": "int",
-          "primaryKey": false,
+          "type": "integer",
+          "primaryKey": true,
           "notNull": true,
-          "autoincrement": true
+          "identity": {
+            "type": "byDefault",
+            "name": "password_reset_tokens_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
         },
         "user_id": {
           "name": "user_id",
-          "type": "int",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         },
         "token_hash": {
           "name": "token_hash",
           "type": "varchar(64)",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         },
         "expires_at": {
           "name": "expires_at",
-          "type": "datetime",
+          "type": "timestamp (0) with time zone",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         },
         "used_at": {
           "name": "used_at",
-          "type": "datetime",
+          "type": "timestamp (0) with time zone",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         },
         "created_at": {
           "name": "created_at",
-          "type": "datetime",
+          "type": "timestamp (0) with time zone",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "CURRENT_TIMESTAMP"
+          "default": "now()"
         }
       },
-      "indexes": {},
+      "indexes": {
+        "password_reset_tokens_user_id_idx": {
+          "name": "password_reset_tokens_user_id_idx",
+          "columns": [
+            {
+              "expression": "user_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
       "foreignKeys": {
         "password_reset_tokens_user_id_users_user_id_fk": {
           "name": "password_reset_tokens_user_id_users_user_id_fk",
@@ -361,43 +478,54 @@
           "onUpdate": "no action"
         }
       },
-      "compositePrimaryKeys": {
-        "password_reset_tokens_id": {
-          "name": "password_reset_tokens_id",
-          "columns": [
-            "id"
-          ]
-        }
-      },
+      "compositePrimaryKeys": {},
       "uniqueConstraints": {
         "password_reset_tokens_token_hash_unique": {
           "name": "password_reset_tokens_token_hash_unique",
+          "nullsNotDistinct": false,
           "columns": [
             "token_hash"
           ]
         }
       },
-      "checkConstraint": {}
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     },
-    "saved": {
+    "public.saved": {
       "name": "saved",
+      "schema": "",
       "columns": {
         "saved_user_id": {
           "name": "saved_user_id",
-          "type": "int",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         },
         "saved_video_id": {
           "name": "saved_video_id",
-          "type": "int",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         }
       },
-      "indexes": {},
+      "indexes": {
+        "saved_video_id_idx": {
+          "name": "saved_video_id_idx",
+          "columns": [
+            {
+              "expression": "saved_video_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
       "foreignKeys": {
         "saved_saved_user_id_users_user_id_fk": {
           "name": "saved_saved_user_id_users_user_id_fk",
@@ -436,42 +564,57 @@
         }
       },
       "uniqueConstraints": {},
-      "checkConstraint": {}
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     },
-    "sessions": {
+    "public.sessions": {
       "name": "sessions",
+      "schema": "",
       "columns": {
         "sessions_userid": {
           "name": "sessions_userid",
-          "type": "int",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         },
         "sessions_token": {
           "name": "sessions_token",
           "type": "varchar(64)",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         },
         "sessions_serial": {
           "name": "sessions_serial",
           "type": "varchar(64)",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         },
         "sessions_date": {
           "name": "sessions_date",
-          "type": "datetime",
+          "type": "timestamp (0) with time zone",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "CURRENT_TIMESTAMP"
+          "default": "now()"
         }
       },
-      "indexes": {},
+      "indexes": {
+        "sessions_userid_idx": {
+          "name": "sessions_userid_idx",
+          "columns": [
+            {
+              "expression": "sessions_userid",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
       "foreignKeys": {
         "sessions_sessions_userid_users_user_id_fk": {
           "name": "sessions_sessions_userid_users_user_id_fk",
@@ -489,34 +632,76 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
-      "checkConstraint": {}
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     },
-    "subscription": {
+    "public.subscription": {
       "name": "subscription",
+      "schema": "",
       "columns": {
         "subscription_id": {
           "name": "subscription_id",
-          "type": "int",
-          "primaryKey": false,
+          "type": "integer",
+          "primaryKey": true,
           "notNull": true,
-          "autoincrement": true
+          "identity": {
+            "type": "byDefault",
+            "name": "subscription_subscription_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
         },
         "subscription_subscriber_id": {
           "name": "subscription_subscriber_id",
-          "type": "int",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         },
         "subscription_artist_id": {
           "name": "subscription_artist_id",
-          "type": "int",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         }
       },
-      "indexes": {},
+      "indexes": {
+        "subscription_subscriber_id_idx": {
+          "name": "subscription_subscriber_id_idx",
+          "columns": [
+            {
+              "expression": "subscription_subscriber_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "subscription_artist_id_idx": {
+          "name": "subscription_artist_id_idx",
+          "columns": [
+            {
+              "expression": "subscription_artist_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
       "foreignKeys": {
         "subscription_subscription_subscriber_id_users_user_id_fk": {
           "name": "subscription_subscription_subscriber_id_users_user_id_fk",
@@ -545,113 +730,107 @@
           "onUpdate": "no action"
         }
       },
-      "compositePrimaryKeys": {
-        "subscription_subscription_id": {
-          "name": "subscription_subscription_id",
-          "columns": [
-            "subscription_id"
-          ]
-        }
-      },
+      "compositePrimaryKeys": {},
       "uniqueConstraints": {},
-      "checkConstraint": {}
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     },
-    "users": {
+    "public.users": {
       "name": "users",
+      "schema": "",
       "columns": {
         "user_id": {
           "name": "user_id",
-          "type": "int",
-          "primaryKey": false,
+          "type": "integer",
+          "primaryKey": true,
           "notNull": true,
-          "autoincrement": true
+          "identity": {
+            "type": "byDefault",
+            "name": "users_user_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
         },
         "user_username": {
           "name": "user_username",
           "type": "varchar(50)",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         },
         "user_email": {
           "name": "user_email",
           "type": "varchar(255)",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         },
         "user_password": {
           "name": "user_password",
           "type": "varchar(255)",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         },
         "user_lastname": {
           "name": "user_lastname",
           "type": "varchar(100)",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         },
         "user_firstname": {
           "name": "user_firstname",
           "type": "varchar(100)",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         },
         "user_birthday": {
           "name": "user_birthday",
           "type": "varchar(20)",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         },
         "user_status": {
           "name": "user_status",
-          "type": "tinyint",
+          "type": "smallint",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
           "default": 0
         },
-        "user_CGU": {
-          "name": "user_CGU",
-          "type": "tinyint",
+        "user_cgu": {
+          "name": "user_cgu",
+          "type": "smallint",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
           "default": 0
         },
         "user_email_verify": {
           "name": "user_email_verify",
           "type": "varchar(10)",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         },
         "user_email_verify_expires": {
           "name": "user_email_verify_expires",
-          "type": "datetime",
+          "type": "timestamp (0) with time zone",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         },
         "user_suspended": {
           "name": "user_suspended",
-          "type": "tinyint",
+          "type": "smallint",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
           "default": 0
         },
         "user_admin": {
           "name": "user_admin",
-          "type": "tinyint",
+          "type": "smallint",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
           "default": 0
         },
         "user_profile_picture": {
@@ -659,7 +838,6 @@
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
           "default": "''"
         },
         "user_banner": {
@@ -667,7 +845,6 @@
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
           "default": "''"
         },
         "user_name": {
@@ -675,7 +852,6 @@
           "type": "varchar(100)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
           "default": "''"
         },
         "user_website": {
@@ -683,142 +859,167 @@
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
           "default": "''"
         },
         "user_bio": {
           "name": "user_bio",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         }
       },
       "indexes": {},
       "foreignKeys": {},
-      "compositePrimaryKeys": {
-        "users_user_id": {
-          "name": "users_user_id",
-          "columns": [
-            "user_id"
-          ]
-        }
-      },
+      "compositePrimaryKeys": {},
       "uniqueConstraints": {
         "users_user_username_unique": {
           "name": "users_user_username_unique",
+          "nullsNotDistinct": false,
           "columns": [
             "user_username"
           ]
         },
         "users_user_email_unique": {
           "name": "users_user_email_unique",
+          "nullsNotDistinct": false,
           "columns": [
             "user_email"
           ]
         }
       },
-      "checkConstraint": {}
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     },
-    "videos": {
+    "public.videos": {
       "name": "videos",
+      "schema": "",
       "columns": {
         "video_id": {
           "name": "video_id",
-          "type": "int",
-          "primaryKey": false,
+          "type": "integer",
+          "primaryKey": true,
           "notNull": true,
-          "autoincrement": true
+          "identity": {
+            "type": "byDefault",
+            "name": "videos_video_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
         },
         "video_url": {
           "name": "video_url",
           "type": "varchar(255)",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         },
         "video_vimeo_id": {
           "name": "video_vimeo_id",
           "type": "varchar(100)",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         },
         "video_title": {
           "name": "video_title",
           "type": "varchar(255)",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         },
         "video_user_id": {
           "name": "video_user_id",
-          "type": "int",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         },
         "video_synopsis": {
           "name": "video_synopsis",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         },
         "video_poster": {
           "name": "video_poster",
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
           "default": "''"
         },
         "video_genre": {
           "name": "video_genre",
           "type": "varchar(100)",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         },
         "video_defi_id": {
           "name": "video_defi_id",
-          "type": "int",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         },
         "video_duration": {
           "name": "video_duration",
-          "type": "time",
+          "type": "varchar(10)",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         },
         "video_like_number": {
           "name": "video_like_number",
-          "type": "int",
+          "type": "integer",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
           "default": 0
         },
         "video_date": {
           "name": "video_date",
-          "type": "datetime",
+          "type": "timestamp (0) with time zone",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "CURRENT_TIMESTAMP"
+          "default": "now()"
         },
         "video_report_id": {
           "name": "video_report_id",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         }
       },
-      "indexes": {},
+      "indexes": {
+        "video_user_id_idx": {
+          "name": "video_user_id_idx",
+          "columns": [
+            {
+              "expression": "video_user_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "video_defi_id_idx": {
+          "name": "video_defi_id_idx",
+          "columns": [
+            {
+              "expression": "video_defi_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
       "foreignKeys": {
         "videos_video_user_id_users_user_id_fk": {
           "name": "videos_video_user_id_users_user_id_fk",
@@ -847,26 +1048,22 @@
           "onUpdate": "no action"
         }
       },
-      "compositePrimaryKeys": {
-        "videos_video_id": {
-          "name": "videos_video_id",
-          "columns": [
-            "video_id"
-          ]
-        }
-      },
+      "compositePrimaryKeys": {},
       "uniqueConstraints": {},
-      "checkConstraint": {}
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     }
   },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
   "views": {},
   "_meta": {
+    "columns": {},
     "schemas": {},
-    "tables": {},
-    "columns": {}
-  },
-  "internal": {
-    "tables": {},
-    "indexes": {}
+    "tables": {}
   }
 }

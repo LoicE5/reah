@@ -37,6 +37,8 @@ yarn-error.log*
 
 # Misc
 seed.prod.ts
+temp/
+tmp/
 
 # vercel
 .vercel
@@ -45,6 +47,8 @@ seed.prod.ts
 *.tsbuildinfo
 next-env.d.ts
 
-# docker mysql volume data
-/docker/volumes/mysql/*
-!/docker/volumes/mysql/.gitkeep
+# local database volume data
+docker/volumes/mysql/*
+docker/volumes/postgres/*
+docker/volumes/app/*
+!docker/volumes/**/.gitkeep

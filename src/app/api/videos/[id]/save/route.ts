@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { db } from '@/lib/db'
 import { saved } from '@/db/schema'
-import { eq, and, sql } from 'drizzle-orm'
+import { eq, and } from 'drizzle-orm'
 import { getCurrentUser } from '@/lib/session'
 
 type RouteParams = { params: Promise<{ id: string }> }
@@ -14,7 +14,7 @@ export async function POST(_req: Request, { params }: RouteParams) {
 
   await db.insert(saved)
     .values({ saved_user_id: session.userId, saved_video_id: videoId })
-    .onDuplicateKeyUpdate({ set: { saved_user_id: sql`saved_user_id` } })
+    .onConflictDoNothing({ target: [saved.saved_user_id, saved.saved_video_id] })
 
   return NextResponse.json({ ok: true })
 }
