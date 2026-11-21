@@ -2,8 +2,18 @@
 
 ## Unreleased
 
+## 2.0.0
+
+### Changed
+
 - Migrated the Drizzle schema and local development setup to PostgreSQL 18.
+- Deployments now require a PostgreSQL `DATABASE_URL`. Aiven deployments use the service URI and `DATABASE_CA_CERT` for verified TLS.
+- The daily database keepalive now queries PostgreSQL.
+
+### Added
+
 - Added an offline MySQL data import and PostgreSQL integration tests.
+- Added a Bun Alpine Docker image for AMD64 and ARM64, with versioned and `latest` tags published to GHCR.
 
 ## 1.0.1
 

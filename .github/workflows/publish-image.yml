@@ -1,36 +1,127 @@
-name: Publish Docker image
+name: Publish release
 
 on:
-  release:
-    types: [published]
+  push:
+    branches: [main]
+    paths: [package.json]
   workflow_dispatch:
 
 permissions:
   contents: read
-  packages: write
+
+defaults:
+  run:
+    shell: bash
 
 jobs:
-  publish:
+  version:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
     steps:
       - uses: actions/checkout@v4
-      - name: Read package version
-        id: package
-        run: echo "version=$(node -p 'require("./package.json").version')" >> "$GITHUB_OUTPUT"
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Select release version
+        id: version
+        env:
+          PREVIOUS_COMMIT: ${{ github.event.before }}
+        run: |
+          version=$(node -p 'require("./package.json").version')
+          if [[ ! "$version" =~ ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]; then
+            echo 'package.json must specify a release version in MAJOR.MINOR.PATCH format.' >&2
+            exit 1
+          fi
+          if [[ "$GITHUB_EVENT_NAME" == push ]]; then
+            previous=$(git show "$PREVIOUS_COMMIT:package.json" | node -p 'JSON.parse(require("node:fs").readFileSync(0, "utf8")).version')
+            if [[ "$version" == "$previous" ]]; then exit 0; fi
+            if [[ $(printf '%s\n' "$version" "$previous" | sort -V | tail -n 1) != "$version" ]]; then
+              echo 'The release version must increase.' >&2
+              exit 1
+            fi
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+  publish:
+    needs: version
+    if: needs.version.outputs.version != ''
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+    concurrency:
+      group: publish-reah-release
+      cancel-in-progress: false
+    env:
+      RELEASE_VERSION: ${{ needs.version.outputs.version }}
+      RELEASE_TAG: v${{ needs.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Check release and extract notes
+        id: release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          main_version=$(gh api "repos/$GITHUB_REPOSITORY/contents/package.json?ref=main" --jq '.content' \
+            | base64 --decode | node -p 'JSON.parse(require("node:fs").readFileSync(0, "utf8")).version')
+          if [[ "$RELEASE_VERSION" != "$main_version" ]]; then
+            echo 'The release version on main has changed.'
+            exit 0
+          fi
+          draft=$(gh api --paginate "repos/$GITHUB_REPOSITORY/releases?per_page=100" --jq ".[] | select(.tag_name == \"$RELEASE_TAG\") | .draft")
+          if [[ "$draft" == false ]]; then
+            echo "$RELEASE_TAG is already published."
+            exit 0
+          fi
+          if [[ "$draft" == true ]]; then
+            echo "$RELEASE_TAG already has a draft release." >&2
+            exit 1
+          fi
+          if git show-ref --verify --quiet "refs/tags/$RELEASE_TAG" &&
+             [[ $(git rev-parse "refs/tags/$RELEASE_TAG^{commit}") != "$GITHUB_SHA" ]]; then
+            echo "$RELEASE_TAG points to a different commit." >&2
+            exit 1
+          fi
+          awk -v heading="## $RELEASE_VERSION" '
+            $0 == heading { found = 1; next }
+            found && /^## / { exit }
+            found { print }
+          ' CHANGELOG.md > "$RUNNER_TEMP/reah-release-notes.md"
+          if ! grep -q '[^[:space:]]' "$RUNNER_TEMP/reah-release-notes.md"; then
+            echo "CHANGELOG.md needs a non-empty section for $RELEASE_VERSION." >&2
+            exit 1
+          fi
+          echo 'publish=true' >> "$GITHUB_OUTPUT"
       - uses: docker/setup-qemu-action@v3
+        if: steps.release.outputs.publish == 'true'
       - uses: docker/setup-buildx-action@v3
+        if: steps.release.outputs.publish == 'true'
       - uses: docker/login-action@v3
+        if: steps.release.outputs.publish == 'true'
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - uses: docker/build-push-action@v6
+        if: steps.release.outputs.publish == 'true'
         with:
           context: .
           file: docker/Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ghcr.io/loice5/reah:${{ steps.package.outputs.version }}
+            ghcr.io/loice5/reah:${{ env.RELEASE_VERSION }}
             ghcr.io/loice5/reah:latest
           labels: org.opencontainers.image.source=https://github.com/${{ github.repository }}
+      - name: Publish GitHub Release
+        if: success() && steps.release.outputs.publish == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "$RELEASE_TAG" \
+            --notes-file "$RUNNER_TEMP/reah-release-notes.md"
