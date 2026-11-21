@@ -5,7 +5,7 @@ import { join, resolve } from 'node:path'
 import { after, before, test } from 'node:test'
 import { eq } from 'drizzle-orm'
 import { migrate } from 'drizzle-orm/node-postgres/migrator'
-import { comments, defis, liked, passwordResetTokens, saved, sessions, users, videos } from '@/db/schema'
+import { comments, defis, distribution, liked, passwordResetTokens, saved, sessions, users, videos } from '@/db/schema'
 import { hashResetToken, verifyPassword } from '@/lib/auth'
 
 const migration = resolve('scripts/import-mysql.sql')
@@ -144,6 +144,18 @@ test('resumes identities at the exported counter and enforces legacy uniqueness'
       .onConflictDoNothing().returning()
     assert.deepEqual(rows, [])
   }
+})
+
+test('preserves the source primary keys for distributions and sessions', async () => {
+  const duplicateDistribution = await db.insert(distribution)
+    .values({ distribution_user_id: 40, distribution_video_id: 60 })
+    .onConflictDoNothing().returning()
+  assert.deepEqual(duplicateDistribution, [])
+
+  const duplicateSession = await db.insert(sessions)
+    .values({ sessions_userid: 42, sessions_token: 'SYNTHETIC', sessions_serial: 'different-serial' })
+    .onConflictDoNothing().returning()
+  assert.deepEqual(duplicateSession, [])
 })
 
 test('searches case- and accent-insensitively and keeps feed counts numeric', async () => {

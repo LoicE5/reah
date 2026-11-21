@@ -33,7 +33,7 @@ export const users = pgTable('users', {
 
 export const sessions = pgTable('sessions', {
   sessions_userid:  integer('sessions_userid').notNull().references(() => users.user_id, { onDelete: 'cascade' }),
-  sessions_token:   varchar('sessions_token', { length: 64 }).notNull(),
+  sessions_token:   varchar('sessions_token', { length: 64 }).primaryKey(),
   sessions_serial:  varchar('sessions_serial', { length: 64 }).notNull(),
   sessions_date:    timestamp('sessions_date', { withTimezone: true, precision: 0 }).defaultNow()
 }, table => [
@@ -112,10 +112,10 @@ export const subscription = pgTable('subscription', {
 ])
 
 export const distribution = pgTable('distribution', {
-  distribution_user_id:  integer('distribution_user_id').references(() => users.user_id, { onDelete: 'cascade' }),
-  distribution_video_id: integer('distribution_video_id').references(() => videos.video_id, { onDelete: 'cascade' })
+  distribution_user_id:  integer('distribution_user_id').notNull().references(() => users.user_id, { onDelete: 'cascade' }),
+  distribution_video_id: integer('distribution_video_id').notNull().references(() => videos.video_id, { onDelete: 'cascade' })
 }, table => [
-  index('distribution_user_id_idx').on(table.distribution_user_id),
+  primaryKey({ columns: [table.distribution_user_id, table.distribution_video_id] }),
   index('distribution_video_id_idx').on(table.distribution_video_id)
 ])
 

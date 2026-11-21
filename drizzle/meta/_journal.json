@@ -8,6 +8,13 @@
       "when": 1795270185390,
       "tag": "0000_postgresql",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1795273108238,
+      "tag": "0001_preserve-source-primary-keys",
+      "breakpoints": true
     }
   ]
 }
